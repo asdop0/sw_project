@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "/src/App.css";
-import SignApiClient from "../services/SignApiClient";
+import SignApiClient from "../services/auth/SignApiClient";
 
 const SignUp_Modal = ({ show, onClose }) => {
   const [id, setId] = useState('');

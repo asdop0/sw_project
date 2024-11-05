@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // axios 추가
+//import axios from 'axios'; // axios 추가
 
 const MapWithClickableRegions = () => {
   const [hoveredCity, setHoveredCity] = useState(null);
