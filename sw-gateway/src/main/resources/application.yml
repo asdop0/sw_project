@@ -1,0 +1,66 @@
+server:
+  port: 8000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: camping_public
+          uri: http://127.0.0.1:8080/
+          predicates:
+            - Path=/camping/**
+        - id: camping_user
+          uri: http://127.0.0.1:8080/
+          predicates:
+            - Path=/campingBookmark/**, /campingReview/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: camping_admin
+          uri: http://127.0.0.1:8080/
+          predicates:
+            - Path=/admin/**
+          filters:
+            - JwtAuthenticationFilter
+            - JwtAuthorizationFilter
+        - id: board_public
+          uri: http://127.0.0.1:8081/
+          predicates:
+            - Path=/board/list, /board/sort, /board/view
+        - id: board_user
+          uri: http://127.0.0.1:8081/
+          predicates:
+            - Path=/board/add, /board/delete, /comment/**, /message/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: board_admin
+          uri: http://127.0.0.1:8081/
+          predicates:
+            - Path=/admin/**
+          filters:
+            - JwtAuthenticationFilter
+            - JwtAuthorizationFilter
+        - id: store
+          uri: http://127.0.0.1:8082/
+          predicates:
+            - Path=/results,/results/**
+        - id: auth
+          uri: http://127.0.0.1:8083/
+          predicates:
+          - Path=/sign-api/**, /user/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://0.0.0.0:5173"
+            allowedHeaders:
+              - "*"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "OPTIONS"
+      default-filters:
+        - name: Retry
+          args:
+            retries: 3
+            methods: GET,POST
+
+jwt:
+  secret: 5asf46g8asg56hesh8j65j4g23agw874rq564asg56h48ry47sd65g4ag8q
