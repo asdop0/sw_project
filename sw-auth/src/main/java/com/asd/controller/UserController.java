@@ -1,5 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,11 +49,13 @@ public class UserController {
     
     //아이디 찾기
     @GetMapping("/find")
-    public String findById(@RequestParam String nickname) {
+    public Map<String, String> findById(@RequestParam String nickname, @RequestParam String name) throws IllegalArgumentException{
     	logger.info("[findById] findById를 수행합니다.");
-    	String id = userService.findById(nickname);
-    	logger.info("[findById] findById를 완료했습니다.");   	
-    	return id;
+    	String id = userService.findById(nickname, name);
+    	logger.info("[findById] findById를 완료했습니다.");   
+    	Map<String, String> response = new HashMap<>();
+    	response.put("id", id);
+    	return response;
     }
     
     //비밀번호 변경

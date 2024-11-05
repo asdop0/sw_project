@@ -47,13 +47,13 @@ public class SignService {
     }
     
     //로그인
-    public SignInResultDto signIn(String id, String password) throws RuntimeException {
+    public SignInResultDto signIn(String id, String password) throws IllegalArgumentException {
         // TODO Auto-generated method stub
         User user = userRepository.getByUid(id).orElseThrow(() -> 
-    		new IllegalArgumentException("[signIn] 해당 유저를 찾을 수 없습니다.")
+        	new IllegalArgumentException("아이디나 비밀번호가 틀립니다.")
         );
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("아이디나 비밀번호가 틀립니다.");
         }
         if (refreshTokenRepository.getByUser(user).isPresent()) {
         	refreshTokenRepository.deleteByUser(user);

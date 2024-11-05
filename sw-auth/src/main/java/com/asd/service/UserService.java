@@ -2,7 +2,6 @@ package com.asd.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asd.DTO.UserDto;
 import com.asd.model.User;
@@ -42,9 +41,9 @@ public class UserService {
 	}
 	
 	//전달받은 전화번호로 아이디 찾기
-	public String findById(@RequestParam String nickname) {
-		User user = userRepository.getByNickname(nickname).orElseThrow(() -> 
-			new IllegalArgumentException("[findById] 해당 유저를 찾을 수 없습니다.")
+	public String findById(String nickname, String name) {
+		User user = userRepository.getByNicknameAndName(nickname, name).orElseThrow(() -> 
+			new IllegalArgumentException("해당 유저를 찾을 수 없습니다.")
 		);
 		return user.getUid();
 	}

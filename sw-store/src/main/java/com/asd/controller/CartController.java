@@ -60,7 +60,7 @@ public class CartController {
 	}
 	
 	//장바구니 구매
-	@PostMapping("payment")
+	@PostMapping("/payment")
 	public boolean paymentCart(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
 		

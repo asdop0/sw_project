@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asd.DTO.SignInRequestDto;
 import com.asd.DTO.SignInResultDto;
+import com.asd.DTO.SignUpRequestDto;
 import com.asd.DTO.SignUpResultDto;
 import com.asd.service.SignService;
 
@@ -32,12 +35,11 @@ public class SignController {
     
     //로그인
     @PostMapping("/sign-in")
-    public SignInResultDto signIn(@RequestParam(required = true) String id,
-            @RequestParam(required = true) String password) throws RuntimeException {
-        logger.info("[signIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", id);
-        SignInResultDto signInResultDto = signService.signIn(id, password);
+    public SignInResultDto signIn(@RequestBody SignInRequestDto requestDto) throws IllegalArgumentException {
+        logger.info("[signIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", requestDto.getId());
+        SignInResultDto signInResultDto = signService.signIn(requestDto.getId(), requestDto.getPassword());
         if (signInResultDto.getCode() == 0) {
-            logger.info("[signIn] 정상적으로 로그인되었습니다. id : {}, accessToken : {}, refreshToken : {} ", id, signInResultDto.getAccessToken(), signInResultDto.getRefreshToken());
+            logger.info("[signIn] 정상적으로 로그인되었습니다. id : {}, accessToken : {}, refreshToken : {} ", requestDto.getId(), signInResultDto.getAccessToken(), signInResultDto.getRefreshToken());
         }
         return signInResultDto;
     }
@@ -49,16 +51,19 @@ public class SignController {
     
     //회원가입
     @PostMapping("/sign-up")
-    public SignUpResultDto signUp(@RequestParam(required = true) String id,
-            @RequestParam(required = true) String password, @RequestParam(required = true) String name,
-            @RequestParam(required = true) String role, @RequestParam(required = true) String nickname,
-            @RequestParam(required = true) String email) {
-        logger.info("[signUp] 회원가입을 수행합니다. id : {}, password : ****, name : {}, role : {}", id, name, role);
-        if (isInvalidName(name)) {
+    public SignUpResultDto signUp(@RequestBody SignUpRequestDto requestDto) throws IllegalArgumentException{
+        logger.info("[signUp] 회원가입을 수행합니다. id : {}, password : ****, name : {}, role : {}", requestDto.getId(), requestDto.getName(), "user");
+        if (isInvalidName(requestDto.getName())) {
             throw new IllegalArgumentException("해당 이름은 사용할 수 없습니다.");
         }
-        SignUpResultDto signUpResultDto = signService.signUp(id, password, name, role, nickname, email);
-        logger.info("[signUp] 회원가입을 완료했습니다. id : {}", id);
+        if (!signService.uidCheck(requestDto.getId())) {
+        	throw new IllegalArgumentException("해당 아이디는 이미 존재합니다.");
+        }
+        if (!signService.nicknameCheck(requestDto.getName())) {
+        	throw new IllegalArgumentException("해당 닉네임은 이미 존재합니다.");
+        }
+        SignUpResultDto signUpResultDto = signService.signUp(requestDto.getId(), requestDto.getPassword(), requestDto.getName(), "user", requestDto.getNickname(), requestDto.getEmail());
+        logger.info("[signUp] 회원가입을 완료했습니다. id : {}", requestDto.getId());
         return signUpResultDto;
     }
     

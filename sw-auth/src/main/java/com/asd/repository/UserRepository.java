@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 public interface UserRepository extends JpaRepository<User, Long>{
 	Optional<User> getByUid(String uid);
 	Optional<User> getByNickname(String nickname);
+	Optional<User> getByNicknameAndName(String nickname, String name);
 	
 	@Transactional
 	void deleteByUid(String uid);
