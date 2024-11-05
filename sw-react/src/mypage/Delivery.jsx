@@ -53,7 +53,7 @@ const Delivery = () => {
         
         {/* /배송지 저장 test  */}
         {selectedAddress && (
-          <div className="selected-address-box">
+          <div className="selected_address_box">
             <p>{selectedAddress}</p>
           </div>
         )}

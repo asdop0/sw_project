@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // axios 추가
 
 const MapWithClickableRegions = () => {
   const [hoveredCity, setHoveredCity] = useState(null);
+  const [regionData, setRegionData] = useState([]); // 출력할 데이터 상태 추가
+  const [selectedRegion, setSelectedRegion] = useState(null); // 선택된 지역 상태 추가
 
   const handleMouseEnter = (cityName) => {
     setHoveredCity(cityName); // 마우스를 올리면 해당 도시 이름 저장
@@ -10,6 +13,27 @@ const MapWithClickableRegions = () => {
   const handleMouseLeave = () => {
     setHoveredCity(null); // 마우스를 떼면 초기화
   };
+
+   // 클릭 시 API 호출 함수 추가
+   const handleRegionClick = (regionName) => {
+    setSelectedRegion(regionName);
+    console.log(`Fetching data for: ${regionName}`);
+    axios.get(`http://localhost:8080/camping/district?district=${regionName}`) // 백엔드 API 경로에 맞게 수정
+      .then(response => {
+        console.log('Response data:', response.data); // API 응답 확인용 콘솔 로그 추가
+        if (Array.isArray(response.data)) {
+          setRegionData(response.data); // 데이터가 배열이면 설정
+        } else {
+          console.warn('Response data is not an array:', response.data);
+          setRegionData([]); // 데이터가 배열이 아니면 빈 배열로 설정
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching region data:', error); // 에러 핸들링 추가
+        setRegionData([]); // 에러 발생 시 빈 배열로 설정
+      });
+  };
+
 
   const getFillColor = (cityName) => {
     // 도시 위에 마우스를 올렸을 때 색상을 변경
@@ -37,8 +61,12 @@ const MapWithClickableRegions = () => {
         <polygon
           points="179,43,167,47,169,55,163,57,162,68,168,92,174,103,174,117,180,111,188,113,193,118,199,114,207,112,209,100,205,86,209,77,209,70,216,63,218,46,208,42,193,44"
           fill={getFillColor('양구군')}
-          onMouseEnter={() => handleMouseEnter('양구군')}
-          onMouseLeave={handleMouseLeave}
+          // onMouseEnter={() => handleMouseEnter('양구군')}
+          // onMouseLeave={handleMouseLeave}
+          onClick={() => {
+            console.log('양구군 클릭됨'); // 클릭 확인용 콘솔 로그
+            handleRegionClick('양구군'); // 클릭 시 데이터 로드
+          }}
         />
         {/* 철원군 */}
         <polygon
@@ -192,9 +220,13 @@ const MapWithClickableRegions = () => {
           shape="poly"
           coords="179,43,167,47,169,55,163,57,162,68,168,92,174,103,174,117,180,111,188,113,193,118,199,114,207,112,209,100,205,86,209,77,209,70,216,63,218,46,208,42,193,44"
           alt="양구군"
-          href="https://naver.com"
-          onMouseEnter={() => handleMouseEnter('양구군')}
-          onMouseLeave={handleMouseLeave}
+          // href="https://naver.com"
+          // onMouseEnter={() => handleMouseEnter('양구군')}
+          // onMouseLeave={handleMouseLeave}
+          onClick={() => {
+            console.log('양구군 클릭됨');
+            handleRegionClick('양구군');
+          }}
         />
         {/* 철원군 */}
         <area
@@ -370,6 +402,22 @@ const MapWithClickableRegions = () => {
 
         {/* 다른 지역들도 동일하게 추가 */}
       </map>
+
+{/* 선택된 지역의 캠핑 데이터 출력 */}
+{selectedRegion && (
+        <div>
+          <h3>{selectedRegion}의 캠핑장 리스트</h3>
+          {Array.isArray(regionData) && regionData.length > 0 ? (
+            <ul>
+              {regionData.map((camp, index) => (
+                <li key={index}>{camp.name} - {camp.address}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>해당 지역에 캠핑장 데이터가 없습니다.</p>
+          )}
+        </div>
+      )}
     </div>
     
   );

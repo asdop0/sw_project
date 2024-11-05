@@ -14,6 +14,7 @@ const SignUp_Modal = ({ show, onClose }) => {
   }
   //빈칸 있는지 체크해야 함
   //아이디, 닉네임 중복 체크 기능 만들기
+  //중복 체크 기능 했는지
 
   //회원가입
   let handleSignUp = () => {
