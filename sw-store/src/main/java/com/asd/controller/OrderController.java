@@ -1,0 +1,108 @@
+package com.asd.controller;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.asd.DTO.CanceledOrderDto;
+import com.asd.DTO.OrderDetailDto;
+import com.asd.DTO.OrderDto;
+import com.asd.common.OrderStatus;
+import com.asd.model.Address;
+import com.asd.model.Order;
+import com.asd.model.OrderDetail;
+import com.asd.model.Product;
+import com.asd.model.User;
+import com.asd.service.AddressService;
+import com.asd.service.OrderService;
+import com.asd.service.ProductService;
+import com.asd.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/order")
+public class OrderController {
+	private final OrderService orderService;
+	private final UserService userService;
+	private final ProductService productService;
+	private final AddressService addressService;
+	
+	//주문 등록 + 주문 내역 상세 등록
+	@PostMapping("/add")
+	public boolean addOrder(HttpServletRequest request, @RequestParam String product_id,
+			@RequestParam String cnt) {
+		User user = userService.findUser(request); //유저 정보 추출
+		Product product = productService.getProduct(Long.parseLong(product_id)); //상품 정보 추출
+		Address address = addressService.getAddress(user); //배송지 정보 추출
+		
+		Order order = new Order();
+		order.setUser(user);
+		order.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(Integer.parseInt(cnt)))); //상품 가격에 개수를 곱함
+		order.setStatus(OrderStatus.PENDING);
+		order.setDelete(false);
+		
+		OrderDetail orderDetail = new OrderDetail();
+		orderDetail.setProduct(product);
+		orderDetail.setPrice(product.getPrice());
+		orderDetail.setCnt(Integer.parseInt(cnt));
+		orderDetail.setName(address.getName());
+		orderDetail.setAddr(address.getAddr());
+		orderDetail.setPhonenumber(address.getPhonenumber());
+		orderDetail.setReq(address.getReq());
+				
+		orderDetail.setOrder(order);
+		order.setOrderDetail(orderDetail);
+		
+		orderService.addOrder(order);
+		return true;
+	}
+	
+	//주문 취소(환불 개념)
+	@PostMapping("/cancel")
+	public boolean cancelOrder(@RequestParam String order_id) {
+		orderService.cancelOrder(Long.parseLong(order_id));
+		return true;
+	}
+		
+	//주문 내역 삭제
+	@DeleteMapping("/delete") //유저의 입장에서 삭제, 실제 DB에는 주문 데이터가 남아있음
+	public boolean deleteOrder(@RequestParam String order_id) {
+		orderService.deleteOrder(Long.parseLong(order_id));
+		return true;
+	}
+	
+	//주문 내역 전체 리스트 출력
+	@GetMapping("/list")
+	public List<OrderDto> getOrderList(HttpServletRequest request) {
+		User user = userService.findUser(request); //유저 정보 추출
+		return orderService.orderLists(user);
+	}
+	
+	//주문 내역 상세 출력
+	@GetMapping("/view")
+	public OrderDetailDto viewOrderDetail(@RequestParam String order_id) {
+		return orderService.viewOrderDetail(Long.parseLong(order_id));
+	}
+	
+	//취소 내역 전체 리스트 출력
+	@GetMapping("/list/cencel")
+	public List<OrderDto> getCencelList(HttpServletRequest request) {
+		User user = userService.findUser(request); //유저 정보 추출
+		return orderService.cencelLists(user);
+	}
+	
+	//취소 내역 상세 출력
+	@GetMapping("/view/cencel")
+	public CanceledOrderDto viewCencelDetail(@RequestParam String order_id) {
+		return orderService.viewCencelDetail(Long.parseLong(order_id));
+	}
+}
