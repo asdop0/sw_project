@@ -1,0 +1,18 @@
+/* src/store/ImageSlider.css */
+.slider_container {
+  width: 1240px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  top: 120px;
+  z-index: 1;
+}
+
+.slider_image {
+  width: 80%;
+  height: 70%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+  border-radius: 10px;
+}

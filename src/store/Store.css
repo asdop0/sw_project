@@ -1,0 +1,73 @@
+.product_card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+  
+  .product_card:hover {
+    transform: scale(1.05);
+  }
+  
+  .product_details-link {
+    display: block;
+    margin-top: 8px;
+    color: #00f;
+    text-decoration: underline;
+  }
+  .store_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .product_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .product_detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .product_image {
+    width: 150px;
+    height:  150px;
+    border-radius: 10px;
+  }
+  
+  .product_name {
+    font-size: 16px;
+    margin: 16px 0;
+    /* font-family: 'IBM Plex Sans KR', serif;
+    font-weight: 700; */
+  }
+  
+  .product_price {
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+  }
+
+.category_filter button {
+    position: relative;
+    z-index: 2; /* 슬라이드보다 높은 z-index */
+    margin: 1%;
+  }
+  
+
+.product_list {
+  display: flex;
+  flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
+  justify-content: space-around;
+}
+
+.product_card_wrapper {
+  flex: 0 0 23%; /* 한 줄에 4개가 들어가도록 크기 조정 */
+  margin: 1%; /* 카드 사이의 간격을 위한 마진 */
+}

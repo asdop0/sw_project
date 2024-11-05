@@ -1,0 +1,864 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.background {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.background .div-5 {
+  background-color: #bcddf5;
+  height: 115px;
+  position: absolute;
+  width: 2140px;
+  top: 10px;    /* 상단바 위치 조정 */
+}
+.background-5{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+
+}
+.background-5 .bottombar{
+  background-color: #cccccc;
+  height: 115px;
+  position: absolute;
+  bottom: 0px;
+  width: 2140px;
+}
+
+
+.background .list-3 {
+  height: 54px;
+  left: 331px;
+  position: absolute;
+  top: 50px;
+  width: 800px;
+}
+.background .skon {
+  height: 54px;
+  right: 1100px;
+  position: absolute;
+  bottom: -3px;
+  width: 33px;
+}
+.background .item-7 {
+  height: 54px;
+  left: 63px;
+  position: absolute;
+  top: 0;
+  width: 33px;
+}
+
+.background .link-45 {
+  height: 54px;
+  position: relative;
+}
+
+.background .total {
+  color: #ffffff;
+  font-family: "Noto Sans KR", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  height: 21px;
+  left: 130px;
+  letter-spacing: -0.12px;
+  line-height: 54px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+  width: 33px;
+}
+
+.background .item-9 {
+  height: 54px;
+  left: 380px;
+  position: absolute;
+  top: 0;
+  width: 82px;
+}
+
+
+.background .camp {
+  color: #ffffff;
+  font-family: "Noto Sans KR", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  height: 21px;
+  left: 0;
+  letter-spacing: -0.12px;
+  line-height: 54px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+  width: 82px;
+}
+
+
+.background .item-11 {
+  height: 54px;
+  left: 580px;
+  position: absolute;
+  top: 0;
+  width: 66px;
+}
+
+/* 중고장터 캠핑정보 */
+.background .used_store {
+  color: #ffffff;
+  font-family: "Noto Sans KR", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  height: 21px;
+  left: 0;
+  letter-spacing: -0.12px;
+  line-height: 54px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+  width: 66px;
+}
+
+
+.background .overlap-group-6 {
+  height: 61px;
+  position: relative;
+  top: -7px;
+}
+
+.background .link-46 {
+  height: 54px;
+  left: 0;
+  position: absolute;
+  top: 7px;
+  width: 66px;
+}
+
+.background .top-new-svg-2 {
+  height: 100px;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  width: 100px;
+}
+
+.background .item-13 {
+  height: 54px;
+  left: 780px;
+  position: absolute;
+  top: 0;
+  width: 66px;
+}
+
+
+.background .store {
+  color: #ffffff;
+  font-family: "Noto Sans KR", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  height: 21px;
+  left: 0;
+  letter-spacing: -0.12px;
+  line-height: 54px;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+  width: 66px;
+}
+
+.background .element-png-wrapper {
+  height: 28px;
+  left: 120px;
+  position: absolute;
+  top: 77px;
+  width: 172px;
+}
+
+
+.background .list-4 {
+  height: 40px;
+  left: 1132px;
+  position: absolute;
+  top: 15px;
+  width: 289px;
+}
+
+.background .item-link-6 {
+  height: 40px;
+  left: 8px;
+  position: absolute;
+  top: 0;
+  width: 34px;
+}
+
+.background .text-wrapper-92 {
+  color: #cccccc;
+  font-family: "Roboto", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  height: 14px;
+  left: 0;
+  letter-spacing: -0.12px;
+  line-height: 31px;
+  position: absolute;
+  top: 7px;
+  white-space: nowrap;
+  width: 34px;
+}
+
+.background .item-link-7 {
+  height: 40px;
+  left: 260px;
+  position: absolute;
+  top: 0;
+  width: 44px;
+}
+
+.background .text-wrapper-93 {
+  color: #ffffff;
+  font-family: "Roboto", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 14px;
+  left: 0;
+  letter-spacing: -0.12px;
+  line-height: 31px;
+  position: absolute;
+  top: 3px;
+  white-space: nowrap;
+  width: 44px;
+}
+
+.background .item-link-8 {
+  color: #ffffff;
+  height: 40px;
+  left: 330px;
+  position: absolute;
+  top: 0;
+  width: 70px;
+}
+
+
+.background .item-link-9 {
+  height: 40px;
+  left: 460px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+} 
+
+.background .login_text{
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 20px;
+  position: absolute;
+  right: 10px;
+  width: 100px;
+}
+
+.background .sign_up_text{
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 20px;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+}
+
+.map{
+  height: 400px;
+  right: 500px;
+  position: absolute;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.BackImg .map1{
+  position:relative; 
+  left: 80px;
+  bottom: 240px;
+  border-radius: 7%;
+}
+
+.BackImg .map2{
+  position:relative; 
+  left: 180px;
+  bottom: 240px;
+  border-radius: 7%;
+}
+
+.BackImg .map3{
+  position:relative; 
+  left: 280px;
+  bottom: 240px;
+  border-radius: 7%;
+}
+
+
+
+
+/* login */
+
+.login {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.login .div {
+  background-color: #ffffff;
+  height: 1024px;
+  position: relative;
+  width: 1440px;
+}
+
+.login .login_id_box {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 371px;
+  width: 351px;
+  border-radius: 5px;
+  border: 1px #000;
+  box-shadow: inset 2px 2px #c7c3c3;
+  
+}
+
+.login .login_password_box {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 511px;
+  width: 351px;
+  border-radius: 5px;
+  border: 1px   #000;
+  box-shadow: inset 2px 2px #c7c3c3;
+}
+
+.login .overlap-group {
+  height: 51px;
+  left: 522px;
+  position: absolute;
+  top: 613px;
+  width: 405px;
+}
+
+.login .rectangle-3 {
+  background-color: #f1f1f1;
+  height: 51px;
+  left: 4px;
+  position: absolute;
+  top: 0;
+  width: 351px;
+  border-radius: 10px;
+}
+
+
+
+
+
+.login .login_button {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 19px;
+  width: 351px;
+  
+}
+
+.login .login_id {
+  color: #554b4b;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 508px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 330px;
+  white-space: nowrap;
+  width: 86px;
+}
+
+.login .loginicon{
+  width: 30px;
+  position: absolute;
+  left: 840px;
+  bottom: 607px;
+}
+
+.login .login_password {
+  color: #554b4b;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 514px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 472px;
+  width: 86px;
+}
+
+.login .passwordicon{
+  width: 30px;
+  position: absolute;
+  left: 840px;
+  bottom: 466px;
+}
+
+.login .login_signup {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 510px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 752px;
+  width: 96px;
+}
+
+.login .find_id {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 645px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 753px;
+  width: 114px;
+}
+
+.login .find_password {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 765px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 753px;
+  width: 130px;
+}
+
+/* test */
+
+.login .text-wrapper-7{
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 765px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 1003px;
+  width: 130px;
+}
+
+/* test */
+
+
+
+.login .line {
+  height: 40px;
+  left: 630px;
+  object-fit: cover;
+  position: absolute;
+  top: 740px;
+  width: 1px;
+}
+
+.login .img {
+  height: 40px;
+  left: 764px;
+  object-fit: cover;
+  position: absolute;
+  top: 740px;
+  width: 1px;
+}
+
+/* login */
+
+
+
+
+/* sign_up */
+
+.Sign_up {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.Sign_up .Sign {
+  background-color: #ffffff;
+  height: 1024px;
+  position: relative;
+  width: 1440px;
+}
+
+.Sign_up .name {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 161px;
+  width: 401px;
+  border-radius: 5px;
+  border: 1px #000;
+  
+}
+
+.Sign_up .email {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 281px;
+  width: 401px;
+  border-radius: 5px;
+  border: 1px #000;
+}
+
+.Sign_up .id {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 401px;
+  width: 401px;
+  border-radius: 5px;
+  border: 1px #000;
+}
+
+.Sign_up .password {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 521px;
+  width: 401px;
+  border-radius: 5px;
+  border: 1px #000;
+}
+
+.Sign_up .passwordcheck {
+  background-color: #f1f1f1;
+  height: 59px;
+  left: 523px;
+  position: absolute;
+  top: 641px;
+  width: 401px;
+  border-radius: 5px;
+  border: 1px  #000;
+}
+
+/* .sign_up .overlap-group2 {
+  height: 51px;
+  left: 522px;
+  position: absolute;
+  top: 613px;
+  width: 405px;
+}
+
+.sign_up .Sign2 {
+  background-color: #f1f1f1;
+  height: 51px;
+  left: 4px;
+  position: absolute;
+  top: 0;
+  width: 401px;
+}
+
+.sign_up .text-wrapper {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 19px;
+  width: 402px;
+} */
+
+.Sign_up .text-wrapper-2 {
+  color: #554b4b;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 495px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 131px;
+  white-space: nowrap;
+  width: 86px;
+}
+
+.Sign_up .text-wrapper-3 {
+  color: #554b4b;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 502px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 256px;
+  width: 86px;
+}
+
+.Sign_up .text-wrapper-4 {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 502px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 378px;
+  width: 86px;
+}
+
+.Sign_up .text-wrapper-5 {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 502px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 501px;
+  width: 102px;
+}
+
+.Sign_up .text-wrapper-6 {
+  color: #000000;
+  font-family: "ABeeZee", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 502px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 619px;
+  width: 140px;
+}
+
+.Sign_up .signbutton{
+  position: center;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  bottom: 260px;
+  width: 140px;
+}
+
+/* sign_up */
+
+
+
+
+/* 마이페이지 텍스트 스타일 */
+.mypage-text {
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 20px;
+  position: absolute;
+  right: 15px;
+  width: 100px;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 150px;
+  top: 50px; /* 마이페이지 버튼의 위치에 맞춰 조정 */
+  right: 0;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* 마이페이지 dropdown */
+
+/* 아이디 찾기 modal */
+.Id_Modal_backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Id_Modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  left : 80px;
+}
+
+.Id_Modal-content input {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.Id_Modal-content button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+/* 아이디 찾기 modal */
+
+/* 비밀번호 찾기 modal */
+.Password_Modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Password_Modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  left : 80px;
+}
+
+.Password_Modal-content input {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.Password_Modal-content button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+/* 비밀번호 찾기 modal */
+
+/* 회원가입 찾기 modal */
+.SignUp_Modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SignUp_Modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  left : 80px;
+}
+
+.SignUp_Modal-content input {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.SignUp_Modal-content button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+/* 회원가입 찾기 modal */
+
+
+/* App.css 또는 Background.css 파일 */
+.store-background-hidden .background {
+  display: none;
+}
