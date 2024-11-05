@@ -38,10 +38,23 @@ spring:
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
-        - id: store
+        - id: store_public
           uri: http://127.0.0.1:8082/
           predicates:
-            - Path=/results,/results/**
+            - Path=/product/**
+        - id: store_user
+          uri: http://127.0.0.1:8082/
+          predicates:
+            - Path=/category/**, /productBookmark/**, /productReview/**, /address/**, /cart/**, /order/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: store_admin
+          uri: http://127.0.0.1:8082/
+          predicates:
+            - Path=/category/**, /admin/**
+          filters:
+            - JwtAuthenticationFilter
+            - JwtAuthorizationFilter
         - id: auth
           uri: http://127.0.0.1:8083/
           predicates:
