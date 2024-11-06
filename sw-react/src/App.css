@@ -862,3 +862,10 @@
 .store-background-hidden .background {
   display: none;
 }
+
+.id_check_button{
+  position: relative;
+  bottom: 0px;
+  background-color: transparent;
+  left: 1px;
+}

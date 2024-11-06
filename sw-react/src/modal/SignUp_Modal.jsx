@@ -12,8 +12,11 @@ const SignUp_Modal = ({ show, onClose }) => {
   if (!show) {
     return null;
   }
+  // 1. 아이디, 닉네임 중복 체크 기능 만들기
+  //  -- 중복체크 누르면 중복 체크 완료(초록색)
+  
   //빈칸 있는지 체크해야 함
-  //아이디, 닉네임 중복 체크 기능 만들기
+  
   //중복 체크 기능 했는지
 
   //회원가입
@@ -41,7 +44,10 @@ const SignUp_Modal = ({ show, onClose }) => {
       <div className="SignUp_Modal-content">
         <h2>회원가입</h2>
         <p>회원가입을 위해 아래 정보를 입력해주세요.</p>
-        <input placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)}/>
+        <input placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)}
+        style={{ marginBottom: '0', width: 'calc(100% - 97px)', display: 'inline-block' }}
+        />
+        <button className="id_check_button">확인</button>
         <input placeholder="비밀번호" type="password"  value={password} onChange={(e) => setPassword(e.target.value)}/>
         <input placeholder="이름" value={name} onChange={(e) => setName(e.target.value)}/>
         <input placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)}/>

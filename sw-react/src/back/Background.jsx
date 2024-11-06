@@ -25,17 +25,13 @@ export const Background = () => {
       <div className="div-5">
         <div className="list-3">
   
-          <div className="item-7">
-            <div className="link-45">
-              <div className="total" 
-              onClick={navigateToHome} // 클릭 시 메인 페이지로 이동
-                style={{ cursor: "pointer" }} >전체</div>
-            </div>
-          </div>
-
+          
           <div className="item-9">
             <div className="link-45">
-              <div className="camp">캠핑장</div>
+              <div className="camp"
+              onClick={navigateToHome} // 클릭 시 메인 페이지로 이동
+              style={{ cursor: "pointer" }}>캠핑장
+              </div>
             </div>
           </div>
 
@@ -75,7 +71,7 @@ export const Background = () => {
                 <Link to="/mypage">
                   <div className="dropdown-item">나의 정보</div>
                 </Link>
-                  <div className="dropdown-item">찜한 목록</div>
+                  <div className="dropdown-item">쪽지함</div>
                 <Link to="/login" >
                   <div className="dropdown-item">로그인</div>
                 </Link>
