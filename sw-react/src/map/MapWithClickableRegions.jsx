@@ -71,7 +71,7 @@ const MapWithClickableRegions = () => {
       {/* SVG 오버레이 */}
       <svg
         width="480px" height="357px"  // 이미지와 동일한 크기로 설정
-        style={{ position: 'absolute', top: '47', left: '0', pointerEvents: 'none' }}
+        style={{ position: 'absolute', top: '47', left: '42', pointerEvents: 'none', width :'100%', height: '100%' }}
       >
         {/* 양구군 */}
         <polygon

@@ -14,7 +14,7 @@ const DropDownMyPage = () => {
           <Link to="/">찜한 목록</Link>
         </li>
         <li>
-          <Link to="/login">로그인</Link>
+          <Link to="/login" >로그인</Link>
         </li>
       </ul>
     </div>

@@ -43,11 +43,12 @@
   width: 800px;
 }
 .background .skon {
-  height: 54px;
-  right: 1100px;
-  position: absolute;
-  bottom: -3px;
+  
+  position: relative;
+  top:1px;
+  right: 700px;
   width: 33px;
+  height: 54px;
 }
 .background .item-7 {
   height: 54px;
@@ -283,9 +284,10 @@
 }
 
 .map{
-  height: 400px;
-  right: 500px;
-  position: absolute;
+  position: relative;
+  height: 480px;
+  right: 375px;
+  margin: auto;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -316,9 +318,9 @@
 }
 
 .category_Latest {
-  position: absolute;
-  top:200px;
-  right: 1040px;
+  position: relative;
+  bottom: 520px;
+  left: 155px;
   font-size: 16px;
   width: 80px;
   height: 25px;
@@ -328,6 +330,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: "Noto Sans KR", Helvetica, sans-serif;
+  
 }
 
 
