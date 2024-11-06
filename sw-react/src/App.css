@@ -842,12 +842,14 @@
   text-align: center;
   position: relative;
   left : 80px;
+  
 }
 
 .SignUp_Modal-content input {
   width: 90%;
   margin-top: 10px;
   padding: 8px;
+  margin-bottom: 13px;
 }
 
 .SignUp_Modal-content button {
@@ -864,8 +866,21 @@
 }
 
 .id_check_button{
-  position: relative;
-  bottom: 0px;
-  background-color: transparent;
-  left: 1px;
+    position: absolute; 
+    right : 27px; 
+    top: 128px;
+    transform: 'translateY(-50%)'; 
+    padding: '6px 12px';
+    background-color: transparent;
+    color: #3bbaf1;
+}
+
+.nickname_check_button{
+  position: absolute; 
+    right : 27px; 
+    bottom: 143px;
+    transform: 'translateY(-50%)'; 
+    padding: '6px 12px';
+    background-color: transparent;
+    color: #3bbaf1;
 }
