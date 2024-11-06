@@ -83,7 +83,7 @@ public class OrderService {
 	
 	//해당 유저의 취소 내역 조회
 	public List<OrderDto> cencelLists(User user) {
-		List<Order> orders = orderRepository.findAllByUserAndDeleteFalseAndStatusCancelled(user);
+		List<Order> orders = orderRepository.findAllByUserAndDeleteFalseAndStatus(user, OrderStatus.CANCELLED);
 		List<OrderDto> orderDtos = new ArrayList<>();
 		for(Order order : orders) {
             orderDtos.add(OrderDto.toDto(order));

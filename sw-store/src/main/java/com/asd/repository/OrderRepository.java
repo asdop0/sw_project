@@ -10,6 +10,6 @@ import com.asd.model.User;
 
 public interface OrderRepository extends JpaRepository<Order, Long>{
 	List<Order> findAllByUserAndDeleteFalse(User user);
-	List<Order> findAllByUserAndDeleteFalseAndStatusCancelled(User user);
+	List<Order> findAllByUserAndDeleteFalseAndStatus(User user, OrderStatus status);
 	List<Order> findByStatus(OrderStatus status);
 }
