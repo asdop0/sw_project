@@ -9,10 +9,10 @@ const SignUp_Modal = ({ show, onClose }) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
-  const [idError, setIdError] = useState(''); // 오류 메시지 상태 추가
-  const [idOK, setIdOk] = useState('');
+  const [idMessage, setIdMessage] = useState(''); // 출력용
+  const [idOK, setIdOk] = useState(''); //사용 가능 여부 판단용
 
-  const [nicknameError, setNicknameError] = useState(''); 
+  const [nicknameMessage, setNicknameMessage] = useState(''); 
   const [nicknameOK, setNicknameOk] = useState('');
 
   if (!show) {
@@ -22,8 +22,6 @@ const SignUp_Modal = ({ show, onClose }) => {
   //  -- 중복체크 누르면 중복 체크 완료(초록색)
   
   //빈칸 있는지 체크해야 함
-  
-  //중복 체크 기능 했는지
 
   //회원가입
   let handleSignUp = () => {
@@ -46,18 +44,25 @@ const SignUp_Modal = ({ show, onClose }) => {
   };
   // 아이디 중복 확인 함수
   const checkIdDuplication = () => {
-    SignApiClient.uidCheck(id)
-      .then(response => response.json())
-      .then(data => {
-        if (data.exists) {
-          setIdError("중복된 아이디입니다.");
-          setIdOk(''); // 오류 메시지가 있으면 성공 메시지 초기화
-        } else {
-          setIdOk("사용 가능한 아이디입니다."); 
-          setIdError(''); // 성공 메시지가 있으면 오류 메시지 초기화
-        }
-      })
-      .catch(error => {
+    SignApiClient.uidCheck(id).then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //json.message를 통해 오류가 뭔지 확인 가능
+            console.log(json.message);
+          } else {
+            //중복 요청 성공
+            if(json.check === "true") {
+              setIdMessage("사용 가능한 아이디입니다."); 
+              setIdOk(true);
+            } else {
+              setIdMessage("중복된 아이디입니다.");
+              setIdOk(false); 
+            }
+          }
+        });
+      }
+    }).catch(error => {
         console.error("Error checking ID:", error);
         setIdError("아이디 확인 중 오류가 발생했습니다."); 
       });
@@ -65,20 +70,27 @@ const SignUp_Modal = ({ show, onClose }) => {
 
   // 닉네임 중복 확인 함수
   const checkNicknameDuplication = () => {
-    SignApiClient.nicknameCheck(nickname)
-      .then(response => response.json())
-      .then(data => {
-        if (data.exists) {
-          setNicknameError("중복된 닉네임입니다.");
-          setNicknameOk(''); // 오류 메시지가 있으면 성공 메시지 초기화
-        } else {
-          setNicknameOk("사용 가능한 닉네임입니다."); 
-          setNicknameError(''); // 성공 메시지가 있으면 오류 메시지 초기화
-        }
-      })
-      .catch(error => {
+    SignApiClient.nicknameCheck(nickname).then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //json.message를 통해 오류가 뭔지 확인 가능
+            console.log(json.message);
+          } else {
+            //중복 요청 성공
+            if(json.check === "true") {
+              setNicknameMessage("사용 가능한 닉네임입니다."); 
+              setNicknameOk(true);
+            } else {
+              setNicknameMessage("중복된 닉네임입니다.");
+              setNicknameOk(false); 
+            }
+          }
+        });
+      }
+    }).catch(error => {
         console.error("Error checking ID:", error);
-        setNicknameError("닉네임 확인 중 오류가 발생했습니다."); 
+        setIdError("닉네임 확인 중 오류가 발생했습니다."); 
       });
   };
 
@@ -93,12 +105,12 @@ const SignUp_Modal = ({ show, onClose }) => {
         <button className="id_check_button" onClick={checkIdDuplication}>확인</button>
         {idOK && (
             <p style={{ color: 'green', fontSize: '13px' }}>
-              {idOK}
+              {idMessage}
             </p>
           )}
-        {idError && (
+        {!idOK && (
             <p style={{ color: 'red', fontSize: '13px' }}>
-              {idError}
+              {idMessage}
             </p>
           )}
         <input placeholder="비밀번호" type="password"  value={password} onChange={(e) => setPassword(e.target.value)}/>
@@ -107,12 +119,12 @@ const SignUp_Modal = ({ show, onClose }) => {
         <button className="nickname_check_button" onClick={checkNicknameDuplication} >확인</button>
         {nicknameOK && (
             <p style={{ color: 'green', fontSize: '13px' }}>
-              {nicknameOK}
+              {nicknameMessage}
             </p>
           )}
-        {nicknameError && (
+        {!nicknameOK && (
             <p style={{ color: 'red', fontSize: '13px' }}>
-              {nicknameError}
+              {nicknameMessage}
             </p>
           )}
 

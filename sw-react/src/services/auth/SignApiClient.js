@@ -19,7 +19,7 @@ class SignApiClient {
             body: JSON.stringify({id, password})
         });
     } 
-    //회원가입 id, password, name, nickname, email
+    //회원가입
     static signUp(id, password, name, nickname, email) {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.UP, {
             method: 'POST',
@@ -42,12 +42,18 @@ class SignApiClient {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.REFRESH + "?userId=" + userId);
     }
 
+    //아이디 중복 체크
     static uidCheck(uid) {
-        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.UID + "?uid=" + uid);
+        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.UID + "?uid=" + uid, {
+            method: 'POST'
+        });
     }
 
+    //닉네임 중복 체크
     static nicknameCheck(nickname) {
-        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.NICKNAME + "?nickname=" + nickname);
+        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.NICKNAME + "?nickname=" + nickname, {
+            method: 'POST'
+        });
     }
 }
 
