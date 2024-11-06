@@ -12,12 +12,17 @@ export const Background = () => {
   
   // 회원가입 버튼 클릭 시 Login 페이지로 이동하고, signup 상태를 전달
   const handleSignUpClick = () => {
+    setShowDropdown(false); // 드롭다운 닫기
     navigate("/login", { state: { showSignUp: true } });
   };
   
   // 클릭 시 메인 페이지로 이동하는 함수
   const navigateToHome = () => {
     window.location.href = "http://localhost:5173/";
+  };
+  
+  const handleLinkClick = () => {
+    setShowDropdown(false); // 드롭다운 닫기
   };
 
   return (
@@ -69,11 +74,11 @@ export const Background = () => {
             {showDropdown && (
               <div className="dropdown-menu">
                 <Link to="/mypage">
-                  <div className="dropdown-item">나의 정보</div>
+                  <div className="dropdown-item" onClick={handleLinkClick}>나의 정보</div>
                 </Link>
-                  <div className="dropdown-item">쪽지함</div>
+                  <div className="dropdown-item" onClick={handleLinkClick}>쪽지함</div>
                 <Link to="/login" >
-                  <div className="dropdown-item">로그인</div>
+                  <div className="dropdown-item" onClick={handleLinkClick}>로그인</div>
                 </Link>
               </div>
             )}
