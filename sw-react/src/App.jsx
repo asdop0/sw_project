@@ -8,6 +8,7 @@ import BackImg from "./back/BackImg";
 import BottomBar from "./bottombar/BottomBar";
 import Store from "./store/Store";
 import MyPage from "./mypage/MyPage";
+import ProductDetail from "./store/ProductDetail";
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/store" element={<Store/>} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         {/* <Route path="/sign_up" element={<Sign_up />} /> */}
       </Routes>
       <Background /> 
