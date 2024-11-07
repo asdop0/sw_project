@@ -42,7 +42,8 @@ export const Background = () => {
 
           <div className="item-11">
             <div className="link-45">
-              <div className="used_store">중고 장터</div>
+              {/* <div className="used_store">중고 장터</div> */}
+              <Link to="/used_store" className="used_store">중고장터</Link>
             </div>
           </div>
 

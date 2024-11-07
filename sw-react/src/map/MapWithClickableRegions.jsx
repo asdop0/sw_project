@@ -57,6 +57,7 @@ const MapWithClickableRegions = () => {
   }, [selectedRegion]);
 
   return (
+    
     <div className="map" style={{ position: 'relative' }}>
       <h3 className="cm1">Map </h3> 
 
@@ -70,8 +71,8 @@ const MapWithClickableRegions = () => {
 
       {/* SVG 오버레이 */}
       <svg
-        width="480px" height="357px"  // 이미지와 동일한 크기로 설정
-        style={{ position: 'absolute', top: '47', left: '42', pointerEvents: 'none', width :'100%', height: '100%' }}
+          // 이미지와 동일한 크기로 설정
+        style={{ position: 'absolute', top: '47', left: '42', pointerEvents: 'none',width:"480px", height:"357px" }}
       >
         {/* 양구군 */}
         <polygon
@@ -367,7 +368,7 @@ const MapWithClickableRegions = () => {
       </map>
 
       {/* 선택된 지역의 캠핑 데이터 출력 */}
-      {selectedRegion && (
+       {selectedRegion && (
         <div>
           <h3>{selectedRegion}의 캠핑장 리스트</h3>
           {Array.isArray(regionData) && regionData.length > 0 ? (
@@ -380,7 +381,7 @@ const MapWithClickableRegions = () => {
             <p>해당 지역에 캠핑장 데이터가 없습니다.</p>
           )}
         </div>
-      )}
+      )} 
     </div>
     
   );

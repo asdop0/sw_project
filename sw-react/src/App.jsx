@@ -9,7 +9,7 @@ import BottomBar from "./bottombar/BottomBar";
 import Store from "./store/Store";
 import MyPage from "./mypage/MyPage";
 import ProductDetail from "./store/ProductDetail";
-
+import Used_store from "./used_store/Used_store";
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
         <Route path="/store" element={<Store/>} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="./used_store" element={<Used_store />} />
         {/* <Route path="/sign_up" element={<Sign_up />} /> */}
       </Routes>
       <Background /> 

@@ -1,37 +1,19 @@
-import React, { useState, useEffect } from "react";
+// src/components/ProductDetail.jsx
+import React from "react";
 import { useParams } from "react-router-dom";
 import "./Store.css";
-import ProductApiClient from "../services/store/ProductApiClient";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  
-  //api 호출
-  useEffect(() => {
-    ProductApiClient.viewProduct(id).then(res => {
-      if(res.ok) {
-        res.json().then(json => {
-          if(json.code === "401") {
-            //요청 오류
-            console.log(json.message);
-          } else {
-            //상품 데이터 불러오기 성공
-            setProduct(json);
-          }
-        });
-      }
-    });
-  }, []);
+  // 실제 프로젝트에서는 상품 데이터를 API로부터 가져옵니다.
+  const product = { id: id, name: `상품 ${id}`, price: id * 10000, image: `product${id}.jpg`, description: `상품 ${id}의 설명` };
 
   return (
-    product ? (
-      <div className="product_detail">
-        {/* <img src={product.image} alt={product.name} className="product_image" /> */}
-        <h2 className="product_name">{product.name}</h2>
-        <p className="product_price">{product.price} 원</p>
-      </div>
-    ) : null
+    <div className="product_detail">
+      <img src={product.image} alt={product.name} className="product_image" />
+      <h2 className="product_name">{product.name}</h2>
+      <p className="product_price">{product.price} 원</p>
+    </div>
   );
 };
 

@@ -15,6 +15,8 @@ const SignUp_Modal = ({ show, onClose }) => {
   const [nicknameMessage, setNicknameMessage] = useState(''); 
   const [nicknameOK, setNicknameOk] = useState('');
 
+  const [nicknamePositionChanged, setNicknamePositionChanged] = useState(false);
+
   if (!show) {
     return null;
   }
@@ -66,6 +68,7 @@ const SignUp_Modal = ({ show, onClose }) => {
         console.error("Error checking ID:", error);
         setIdError("아이디 확인 중 오류가 발생했습니다."); 
       });
+      setNicknamePositionChanged(true);
   };
 
   // 닉네임 중복 확인 함수
@@ -116,7 +119,7 @@ const SignUp_Modal = ({ show, onClose }) => {
         <input placeholder="비밀번호" type="password"  value={password} onChange={(e) => setPassword(e.target.value)}/>
         <input placeholder="이름" value={name} onChange={(e) => setName(e.target.value)}/>
         <input placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)}/>
-        <button className="nickname_check_button" onClick={checkNicknameDuplication} >확인</button>
+        <button className={`nickname_check_button ${nicknamePositionChanged ? 'moved' : ''}`} onClick={checkNicknameDuplication} >확인</button>
         {nicknameOK && (
             <p style={{ color: 'green', fontSize: '13px' }}>
               {nicknameMessage}
