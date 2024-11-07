@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Background from "./back/Background";
 import Login from "./Login";
@@ -13,7 +13,7 @@ import ProductDetail from "./store/ProductDetail";
 
 
 function App() {
-
+  const [selectedRegion, setSelectedRegion] = useState("강원도");
   
   return (
     <Router>
@@ -27,7 +27,7 @@ function App() {
 
       {/* Routes 설정 */}
       <Routes>
-        <Route path="/" element={<> <Background /> <MapWithClickableRegions /> <BackImg /> <BottomBar /> </>} />
+        <Route path="/" element={<> <Background /> <MapWithClickableRegions /> <BackImg selectedRegion={selectedRegion}/> <BottomBar /> </>} />
         <Route path="/login" element={<Login />} />
         <Route path="/store" element={<Store/>} />
         <Route path="/mypage" element={<MyPage />} />
