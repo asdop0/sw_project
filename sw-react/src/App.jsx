@@ -13,7 +13,7 @@ import Used_store from "./used_store/Used_store";
 
 
 function App() {
-  const [selectedRegion, setSelectedRegion] = useState("강원도");
+  const [selectedRegion, setSelectedRegion] = useState('강원도');
   
   return (
     <Router>

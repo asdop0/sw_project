@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CampingApiClient from "../services/camping/CampingApiClient";
 
 const MapWithClickableRegions = () => {
   const [hoveredCity, setHoveredCity] = useState(null);
-  const [regionData, setRegionData] = useState(null); // 출력할 데이터 상태 추가
   const [selectedRegion, setSelectedRegion] = useState('강원도'); // 선택된 지역 상태 추가
 
   const handleMouseEnter = (cityName) => {
@@ -22,39 +20,6 @@ const MapWithClickableRegions = () => {
     // 도시 위에 마우스를 올렸을 때 색상을 변경
     return hoveredCity === cityName ? 'rgba(120, 130, 140, 0.5)' : 'transparent';
   };
-
-  //api 호출
-  useEffect(() => {
-    if(selectedRegion === '강원도') {
-      CampingApiClient.getCampingList().then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              setRegionData(json);
-            }
-          });
-        }
-      });
-    } else {
-      CampingApiClient.getDistrictList(selectedRegion).then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              setRegionData(json);
-            }
-          });
-        }
-      });
-    }
-  }, [selectedRegion]);
 
   return (
     
@@ -371,15 +336,6 @@ const MapWithClickableRegions = () => {
        {selectedRegion && (
         <div>
           <h3>{selectedRegion}의 캠핑장 리스트</h3>
-          {Array.isArray(regionData) && regionData.length > 0 ? (
-            <ul>
-              {regionData.map((camp, index) => (
-                <li key={index}>{camp.name} - {camp.address}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>해당 지역에 캠핑장 데이터가 없습니다.</p>
-          )}
         </div>
       )} 
     </div>

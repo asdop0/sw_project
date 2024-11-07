@@ -1,12 +1,48 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import "/src/App.css";
+import CampingApiClient from "../services/camping/CampingApiClient";
+import CampingCard from "../camping/CampingCard";
 
-export const BackImg = () => {
+export const BackImg = ({selectedRegion}) => {
   const [selectedOption, setSelectedOption] = useState('최신');
+  const [regionData, setRegionData] = useState(null); // 출력할 데이터 상태 추가
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
+  //api 호출
+  useEffect(() => {
+    if(selectedRegion === '강원도') {
+      CampingApiClient.getCampingList().then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+              //요청 오류
+              console.log(json.message);
+            } else {
+              //캠핑장 데이터 불러오기 성공
+              setRegionData(json);
+            }
+          });
+        }
+      });
+    } else {
+      CampingApiClient.getDistrictList(selectedRegion).then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+              //요청 오류
+              console.log(json.message);
+            } else {
+              //캠핑장 데이터 불러오기 성공
+              setRegionData(json);
+            }
+          });
+        }
+      });
+    }
+  }, [selectedRegion]);
 
   return (
     <div className="BackImg">
@@ -19,34 +55,13 @@ export const BackImg = () => {
       <option value="후기순">후기순</option>
       <option value="댓글순">댓글순</option>
     </select>
-      <img className="map1"
-        src="" // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '150px' }}  // 이미지 크기 설정
-        
-      />
-      <img className="map2"
-        src="" // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '150px' }}  // 이미지 크기 설정
-      />
-      <img className="map3"
-        src="" // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '150px' }}  // 이미지 크기 설정
-      />
-      {/* <img className="map4"
-        src="/map1.png  " // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '120px' }}  // 이미지 크기 설정
-      />
-      <img className="map5"
-        src="map2.png" // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '120px' }}  // 이미지 크기 설정
-      />
-      <img className="map6"
-        src="map3.png" // 이미지 경로에 맞게 설정
-        style={{ width: '161px', height: '120px' }}  // 이미지 크기 설정
-      /> */}
-      {/* <div className="category">
-        <button>최신</button>
-      </div> */}
+      <div className="camping_list">
+        {regionData && regionData.map((camping) => (
+          <div className="product_card_wrapper" key={camping.id}>
+          <CampingCard key={camping.id} camping={camping} />
+          </div>
+        ))}
+      </div>
     </div>
   
     
