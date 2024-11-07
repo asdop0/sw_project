@@ -12,13 +12,13 @@ class CampingApiClient {
             method: 'GET'
         });
     } 
-    //지역 캠핑장 조회
+    //지역 캠핑장 조회 미완
     static getDistrictList(district) {
         return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.DISTRICT + "?district=" + district, {
             method: 'GET'
         });
     } 
-    //조건에 따른 캠핑장 조회
+    //조건에 따른 캠핑장 조회 미완
     static getSortList(id, password) {
         return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.IN, {
             method: 'POST',
@@ -28,7 +28,7 @@ class CampingApiClient {
             body: JSON.stringify({id, password})
         });
     } 
-    //캠핑장 상세정보
+    //캠핑장 상세정보 미완
     static viewCamping(id, password) {
         return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.IN, {
             method: 'POST',

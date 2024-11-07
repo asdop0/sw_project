@@ -30,14 +30,17 @@ class SignApiClient {
         });
     }
 
+    //미완
     static signOut() {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.OUT + "?userId=" + userId);
     }
 
+    //미완
     static delete() {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.DELETE + "?userId=" + userId);
     }
 
+    //미완
     static refresh() {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.REFRESH + "?userId=" + userId);
     }
