@@ -67,7 +67,7 @@ public class AddressController {
 	@GetMapping("/list")
 	public List<AddressDto> getAddressList(HttpServletRequest request) {
 		User user = userService.findUser(request);
-		return addressService.addressLists(user);
+		return addressService.addressList(user);
 	}
 	
 	//배송지 상세정보

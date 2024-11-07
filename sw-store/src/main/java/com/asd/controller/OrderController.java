@@ -15,7 +15,7 @@ import com.asd.DTO.OrderDetailDto;
 import com.asd.DTO.OrderDto;
 import com.asd.common.OrderStatus;
 import com.asd.model.Address;
-import com.asd.model.Order;
+import com.asd.model.OrderTable;
 import com.asd.model.OrderDetail;
 import com.asd.model.Product;
 import com.asd.model.User;
@@ -44,11 +44,11 @@ public class OrderController {
 		Product product = productService.getProduct(Long.parseLong(product_id)); //상품 정보 추출
 		Address address = addressService.getAddress(user); //배송지 정보 추출
 		
-		Order order = new Order();
+		OrderTable order = new OrderTable();
 		order.setUser(user);
 		order.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(Integer.parseInt(cnt)))); //상품 가격에 개수를 곱함
 		order.setStatus(OrderStatus.PENDING);
-		order.setDelete(false);
+		order.setRemove(false);
 		
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setProduct(product);
@@ -84,7 +84,7 @@ public class OrderController {
 	@GetMapping("/list")
 	public List<OrderDto> getOrderList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
-		return orderService.orderLists(user);
+		return orderService.orderList(user);
 	}
 	
 	//주문 내역 상세 출력
@@ -97,7 +97,7 @@ public class OrderController {
 	@GetMapping("/list/cencel")
 	public List<OrderDto> getCencelList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
-		return orderService.cencelLists(user);
+		return orderService.cencelList(user);
 	}
 	
 	//취소 내역 상세 출력

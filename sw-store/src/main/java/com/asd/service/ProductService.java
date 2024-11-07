@@ -20,7 +20,7 @@ public class ProductService {
 	private final ProductRepository productRepository;
 	
 	//상품 전체 리스트 출력
-	public List<ProductListDto> productLists() {
+	public List<ProductListDto> productList() {
 		List<Product> products = productRepository.findAllByStatusFalse();	
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {
@@ -42,7 +42,7 @@ public class ProductService {
 	}
 	
 	//해당 카테고리의 상품을 최신순으로 출력
-	public List<ProductListDto> updateLists(Category category) {
+	public List<ProductListDto> updateList(Category category) {
 		List<Product> products = productRepository.findProductOrderByWriteDate(category);
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {
@@ -53,7 +53,7 @@ public class ProductService {
 	}
 	
 	//해당 카테고리의 상품을 후기가 많은 순으로 출력
-	public List<ProductListDto> reviewLists(Category category) {
+	public List<ProductListDto> reviewList(Category category) {
 		List<Product> products = productRepository.findProductOrderByReviewCount(category);
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {
@@ -64,7 +64,7 @@ public class ProductService {
 	}
 	
 	//해당 카테고리의 상품을 즐겨찾기가 많은 순으로 출력
-	public List<ProductListDto> bookmartLists(Category category) {
+	public List<ProductListDto> bookmartList(Category category) {
 		List<Product> products = productRepository.findProductOrderByBookmarkCount(category);
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {
@@ -75,7 +75,7 @@ public class ProductService {
 	}
 	
 	//해당 카테고리의 상품을 판매량이 많은 순으로 출력
-	public List<ProductListDto> totalSalesLists(Category category) {
+	public List<ProductListDto> totalSalesList(Category category) {
 		List<Product> products = productRepository.findProductOrderByTotalSalesCount(category);
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {

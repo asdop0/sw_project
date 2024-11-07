@@ -24,7 +24,7 @@ public class ProductController {
 	//상품 전체 리스트 조회
 	@GetMapping("/list")
 	public List<ProductListDto> getProductList() {
-		return productService.productLists();
+		return productService.productList();
 	}
 	
 	//해당 카테고리의 상품 리스트 조회
@@ -38,13 +38,13 @@ public class ProductController {
 	public List<ProductListDto> getSortList(@RequestParam String category_id, @RequestParam String condition) {
 		switch(condition) {
 		case "update" : //최신순
-			return productService.updateLists(categoryService.getCategory(Long.parseLong(category_id)));
+			return productService.updateList(categoryService.getCategory(Long.parseLong(category_id)));
 		case "review" : //후기순
-			return productService.reviewLists(categoryService.getCategory(Long.parseLong(category_id)));
+			return productService.reviewList(categoryService.getCategory(Long.parseLong(category_id)));
 		case "bookmart" : //즐겨찾기순
-			return productService.bookmartLists(categoryService.getCategory(Long.parseLong(category_id)));
+			return productService.bookmartList(categoryService.getCategory(Long.parseLong(category_id)));
 		case "totalSales" : //판매량순
-			return productService.totalSalesLists(categoryService.getCategory(Long.parseLong(category_id)));
+			return productService.totalSalesList(categoryService.getCategory(Long.parseLong(category_id)));
 		default :
 			return productService.categoryList(categoryService.getCategory(Long.parseLong(category_id)));
 		}

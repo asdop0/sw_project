@@ -20,8 +20,8 @@ public class BookmarkService {
 	private final ProductBookmarkRepository productBookmarkRepository;
 	
 	//해당 유저의 북마크 리스트 조회
-	public List<ProductListDto> bookmarkLists(User user) {
-		List<Product> products = productBookmarkRepository.findByBookmarkLists(user);
+	public List<ProductListDto> bookmarkList(User user) {
+		List<Product> products = productBookmarkRepository.findByBookmarkList(user);
 		List<ProductListDto> productListDtos = new ArrayList<>();
 		for(Product product : products) {
 			productListDtos.add(ProductListDto.toDto(product));

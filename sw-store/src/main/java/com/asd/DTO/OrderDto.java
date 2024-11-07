@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.asd.common.OrderStatus;
-import com.asd.model.Order;
+import com.asd.model.OrderTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class OrderDto {
 	private OrderStatus status;
 	private LocalDateTime writeDate;
 	
-	public static OrderDto toDto(Order order) {
+	public static OrderDto toDto(OrderTable order) {
         return new OrderDto(
         		order.getId(),
         		order.getOrderDetail().getProduct().getName(),

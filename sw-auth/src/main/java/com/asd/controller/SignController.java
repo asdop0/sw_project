@@ -111,23 +111,28 @@ public class SignController {
     }
     
     //아이디 중복 체크
-    @PostMapping("uidCheck") //중복된 아이디가 있으면 false 반환, 없으면 true 반환
-    public boolean uidCheck(@RequestParam String uid) {
+    @PostMapping("/uidCheck") //중복된 아이디가 있으면 false 반환, 없으면 true 반환
+    public Map<String, String> uidCheck(@RequestParam String uid) {
     	logger.info("[uidCheck] uidCheck을 수행합니다.");
+    	Map<String, String> response = new HashMap<>();
     	boolean bool = signService.uidCheck(uid);
+    	response.put("check", String.valueOf(bool));
     	logger.info("[uidCheck] uidCheck을 완료했습니다.");
-    	return bool;
+    	return response;
     }
     
     //닉네임 중복 체크
-    @PostMapping("nicknameCheck") //중복된 닉네임이 있으면 false 반환, 없으면 true 반환
-    public boolean nicknameCheck(@RequestParam String nickname) {
+    @PostMapping("/nicknameCheck") //중복된 닉네임이 있으면 false 반환, 없으면 true 반환
+    public Map<String, String> nicknameCheck(@RequestParam String nickname) {
     	logger.info("[nicknameCheck] nicknameCheck을 수행합니다.");
+    	Map<String, String> response = new HashMap<>();
     	if (isInvalidName(nickname)) {
-            return false;
+    		response.put("check", "false");
+            return response;
         }
     	boolean bool = signService.nicknameCheck(nickname);
+    	response.put("check", String.valueOf(bool));
     	logger.info("[nicknameCheck] nicknameCheck을 완료했습니다.");
-    	return bool;
+    	return response;
     }
 }

@@ -13,7 +13,7 @@ import com.asd.model.User;
 
 public interface CampingBookmarkRepository extends JpaRepository<CampingBookmark, Long>{
 	@Query("SELECT s FROM com.asd.model.Camping s WHERE s = (SELECT c.camping b FROM com.asd.model.CampingBookmark c WHERE c.user = :user)")
-	List<Camping> findByBookmarkLists(@Param("user") User user);
+	List<Camping> findByBookmarkList(@Param("user") User user);
 	
 	Optional<CampingBookmark> findByUserAndCamping(User user, Camping camping);
 }

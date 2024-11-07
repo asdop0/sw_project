@@ -55,8 +55,8 @@ public class AddressService {
 	}
 	
 	//배송지 전체 리스트 출력
-	public List<AddressDto> addressLists(User user) {
-		List<Address> addresses = addressRepository.findByAddressLists(user);	
+	public List<AddressDto> addressList(User user) {
+		List<Address> addresses = addressRepository.findByAddressList(user);	
 		List<AddressDto> addressDtos = new ArrayList<>();
 		for(Address address : addresses) {
 			addressDtos.add(AddressDto.toDto(address));

@@ -12,8 +12,8 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	Optional<Board> findById(Long id);
 	
 	@Query("SELECT b FROM com.asd.model.Board b ORDER BY count DESC")
-	List<Board> findByViewLists();
+	List<Board> findByViewList();
 			
 	@Query("SELECT b FROM com.asd.model.Board b LEFT JOIN b.comments c GROUP BY b ORDER BY COUNT(c) DESC")
-	List<Board> findByCommentLists();
+	List<Board> findByCommentList();
 }

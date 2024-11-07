@@ -1,7 +1,12 @@
 package com.asd.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.asd.DTO.CategoryDto;
 import com.asd.model.Category;
 import com.asd.repository.CategoryRepository;
 
@@ -39,5 +44,16 @@ public class CategoryService {
 		category_.setName(category.getName());
 		
 		categoryRepository.save(category_);		
+	}
+	
+	//카테고리 목록 출력
+	public List<CategoryDto> categoryList() {
+		List<Category> categorys = categoryRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));	
+		List<CategoryDto> categoryDtos = new ArrayList<>();
+		for(Category category : categorys) {
+			categoryDtos.add(CategoryDto.toDto(category));
+        }
+		
+		return categoryDtos;
 	}
 }

@@ -56,7 +56,7 @@ public class CartController {
 	@GetMapping("/list")
 	public List<CartDto> getCartList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
-		return cartService.cartLists(user);
+		return cartService.cartList(user);
 	}
 	
 	//장바구니 구매

@@ -1,6 +1,7 @@
 package com.asd.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,6 +41,7 @@ public class AdminController {
 	    } catch (NumberFormatException e) {
 	        throw new IllegalArgumentException("Invalid price format: " + price, e);
 	    }
+	    product.setWriteDate(LocalDateTime.now());
 		product.setCnt(Integer.parseInt(cnt));
 		product.setCategory(categoryService.getCategory(Long.parseLong(category)));
 		product.setTotalSales(0L);
@@ -86,13 +88,13 @@ public class AdminController {
 	//전체 주문 내역 출력
 	@GetMapping("/orderList")
 	public List<OrderDto> getFullOrderList() {
-		return orderService.fullOrderLists();
+		return orderService.fullOrderList();
 	}
 	
 	//결제 대기 목록 출력
 	@GetMapping("/pendingList")
 	public List<OrderDto> getPendingList() {
-		return orderService.PendingLists();
+		return orderService.PendingList();
 	}
 	
 	//결제 완료 

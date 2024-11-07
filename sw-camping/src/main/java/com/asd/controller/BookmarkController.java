@@ -32,7 +32,7 @@ public class BookmarkController {
 	@GetMapping("/list")
 	public List<CampingListDto> getBookmarkList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
-		return bookmarkService.bookmarkLists(user);
+		return bookmarkService.bookmarkList(user);
 	}
 	
 	//즐겨찾기 추가

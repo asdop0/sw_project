@@ -11,7 +11,7 @@ import com.asd.DTO.CartDto;
 import com.asd.common.OrderStatus;
 import com.asd.model.Address;
 import com.asd.model.Cart;
-import com.asd.model.Order;
+import com.asd.model.OrderTable;
 import com.asd.model.OrderDetail;
 import com.asd.model.Product;
 import com.asd.model.User;
@@ -37,8 +37,8 @@ public class CartService {
 	}
 	
 	//장바구니 전체 리스트 출력
-	public List<CartDto> cartLists(User user) {
-		List<Cart> carts = cartRepository.findByCartLists(user);
+	public List<CartDto> cartList(User user) {
+		List<Cart> carts = cartRepository.findByCartList(user);
 		List<CartDto> cartDtos = new ArrayList<>();
 		for (Cart cart : carts) {
 			cartDtos.add(CartDto.toDto(cart));
@@ -49,17 +49,17 @@ public class CartService {
 	//장바구니 구매
 	@Transactional
 	public void paymentCart(User user) {
-		List<Cart> carts = cartRepository.findByCartLists(user);
+		List<Cart> carts = cartRepository.findByCartList(user);
 		
 		for (Cart cart : carts) {
 			Product product = cart.getProduct(); //상품 정보 추출
 			Address address = addressService.getAddress(user); //배송지 정보 추출
 			
-			Order order = new Order();
+			OrderTable order = new OrderTable();
 			order.setUser(user);
 			order.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(cart.getCnt()))); //상품 가격에 개수를 곱함
 			order.setStatus(OrderStatus.PENDING);
-			order.setDelete(false);
+			order.setRemove(false);
 			
 			OrderDetail orderDetail = new OrderDetail();
 			orderDetail.setProduct(product);

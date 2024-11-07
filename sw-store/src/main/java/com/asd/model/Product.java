@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,11 +38,10 @@ public class Product {
 	private Integer cnt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="Category_id")
+	@JoinColumn(name="category_id")
 	private Category category;
 	
-	@CreationTimestamp
-	@Column(name="write_date")
+	@Column(name = "write_date", updatable = false, insertable = true, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime writeDate;
 	
 	@Column(name="update_date")

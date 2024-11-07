@@ -22,8 +22,8 @@ public class BookmarkService {
 	private final CampingRepository campingRepository;
 	
 	//해당 유저의 북마크 리스트 조회
-	public List<CampingListDto> bookmarkLists(User user) {
-		List<Camping> bookmarks = campingBookmarkRepository.findByBookmarkLists(user);
+	public List<CampingListDto> bookmarkList(User user) {
+		List<Camping> bookmarks = campingBookmarkRepository.findByBookmarkList(user);
 		List<CampingListDto> bookmarkListDtos = new ArrayList<>();
 		for(Camping bookmark : bookmarks) {
 			bookmarkListDtos.add(CampingListDto.toDto(bookmark));

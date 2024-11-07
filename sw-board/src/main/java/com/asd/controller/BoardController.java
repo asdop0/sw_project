@@ -29,7 +29,7 @@ public class BoardController {
 	//게시글 전체 조회
 	@GetMapping("/list")
 	public List<BoardListDto> getBoardList() {
-		return boardService.boardLists();
+		return boardService.boardList();
 	}
 	
 	//조건에 따른 정렬
@@ -37,11 +37,11 @@ public class BoardController {
 	public List<BoardListDto> getSortList(@RequestParam String condition) {
 		switch(condition) {
 		case "view" : //조회순
-			return boardService.viewLists();
+			return boardService.viewList();
 		case "comment" : //댓글순
-			return boardService.commentLists();
+			return boardService.commentList();
 		default : //최신순
-			return boardService.boardLists();
+			return boardService.boardList();
 		}
 	}
 	

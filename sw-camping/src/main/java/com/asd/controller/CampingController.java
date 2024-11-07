@@ -22,13 +22,13 @@ public class CampingController {
 	//캠핑장 전체 리스트 조회
 	@GetMapping("/list")
 	public List<CampingListDto> getCampingList() {
-		return campingService.campingLists();
+		return campingService.campingList();
 	}
 	
 	//해당 지역의 캠핑장 리스트 조회
 	@GetMapping("/district")
 	public List<CampingListDto> getDistrictList(@RequestParam String district) {
-		return campingService.districtLists(district);
+		return campingService.districtList(district);
 	}
 	
 	//조건에 따른 정렬
@@ -36,13 +36,13 @@ public class CampingController {
 	public List<CampingListDto> getSortList(@RequestParam String district, @RequestParam String condition) {
 		switch(condition) {
 		case "update" : //최신순
-			return campingService.updateLists(district);
+			return campingService.updateList(district);
 		case "review" : //후기순
-			return campingService.reviewLists(district);
+			return campingService.reviewList(district);
 		case "bookmart" : //즐겨찾기순
-			return campingService.bookmartLists(district);
+			return campingService.bookmartList(district);
 		default :
-			return campingService.districtLists(district);
+			return campingService.districtList(district);
 		}
 	}
 	

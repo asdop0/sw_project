@@ -19,7 +19,7 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 	
 	//게시글 전체 리스트 출력
-	public List<BoardListDto> boardLists() {
+	public List<BoardListDto> boardList() {
 		List<Board> boards = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 		List<BoardListDto> boardListDtos = new ArrayList<>();
 		for(Board board : boards) {
@@ -30,8 +30,8 @@ public class BoardService {
 	}
 	
 	//게시글을 조회순으로 출력
-	public List<BoardListDto> viewLists() {
-		List<Board> boards = boardRepository.findByViewLists();
+	public List<BoardListDto> viewList() {
+		List<Board> boards = boardRepository.findByViewList();
 		List<BoardListDto> boardListDtos = new ArrayList<>();
 		for(Board board : boards) {
 			boardListDtos.add(BoardListDto.toDto(board));
@@ -41,8 +41,8 @@ public class BoardService {
 	}
 	
 	//게시글을 댓글순으로 출력
-	public List<BoardListDto> commentLists() {
-		List<Board> boards = boardRepository.findByCommentLists();
+	public List<BoardListDto> commentList() {
+		List<Board> boards = boardRepository.findByCommentList();
 		List<BoardListDto> boardListDtos = new ArrayList<>();
 		for(Board board : boards) {
 			boardListDtos.add(BoardListDto.toDto(board));

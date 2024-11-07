@@ -19,7 +19,7 @@ public class CampingService {
 	private final CampingRepository campingRepository;
 	
 	//캠핑장 전체 리스트 출력
-	public List<CampingListDto> campingLists() {
+	public List<CampingListDto> campingList() {
 		List<Camping> campings = campingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));	
 		List<CampingListDto> campingListDtos = new ArrayList<>();
 		for(Camping camping : campings) {
@@ -30,7 +30,7 @@ public class CampingService {
 	}
 	
 	//해당 구역의 캠핑장 리스트 출력
-	public List<CampingListDto> districtLists(String district) {
+	public List<CampingListDto> districtList(String district) {
 		List<Camping> campings = campingRepository.findByDistrict(district);
 		List<CampingListDto> campingListDtos = new ArrayList<>();
 		for(Camping camping : campings) {
@@ -41,7 +41,7 @@ public class CampingService {
 	}
 	
 	//해당 구역의 캠핑장을 최신순으로 출력
-	public List<CampingListDto> updateLists(String district) {
+	public List<CampingListDto> updateList(String district) {
 		List<Camping> campings = campingRepository.findCampingOrderByWriteDate(district);
 		List<CampingListDto> campingListDtos = new ArrayList<>();
 		for(Camping camping : campings) {
@@ -52,7 +52,7 @@ public class CampingService {
 	}
 	
 	//해당 구역의 캠핑장을 후기가 많은 순으로 출력
-	public List<CampingListDto> reviewLists(String district) {
+	public List<CampingListDto> reviewList(String district) {
 		List<Camping> campings = campingRepository.findCampingOrderByReviewCount(district);
 		List<CampingListDto> campingListDtos = new ArrayList<>();
 		for(Camping camping : campings) {
@@ -63,7 +63,7 @@ public class CampingService {
 	}
 	
 	//해당 구역의 캠핑장을 즐겨찾기가 많은 순으로 출력
-	public List<CampingListDto> bookmartLists(String district) {
+	public List<CampingListDto> bookmartList(String district) {
 		List<Camping> campings = campingRepository.findCampingOrderByBookmarkCount(district);
 		List<CampingListDto> campingListDtos = new ArrayList<>();
 		for(Camping camping : campings) {
