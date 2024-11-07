@@ -32,7 +32,7 @@ function App() {
         <Route path="/store" element={<Store/>} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="./used_store" element={<Used_store />} />
+        <Route path="/used_store" element={<Used_store />} />
         {/* <Route path="/sign_up" element={<Sign_up />} /> */}
       </Routes>
       <Background /> 
