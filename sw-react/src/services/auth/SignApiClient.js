@@ -30,16 +30,37 @@ class SignApiClient {
         });
     }
 
-    static signOut() {
-        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.OUT + "?userId=" + userId);
+    //로그아웃
+    static signOut(refreshToken) {
+        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.OUT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': refreshToken
+            }
+        });
     }
 
-    static delete() {
-        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.DELETE + "?userId=" + userId);
+    //회원탈퇴
+    static delete(refreshToken) {
+        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.DELETE, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': refreshToken
+            }
+        });
     }
 
-    static refresh() {
-        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.REFRESH + "?userId=" + userId);
+    //AccessToken 재발급
+    static refresh(refreshToken) {
+        return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.REFRESH, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': refreshToken
+            }
+        });
     }
 
     //아이디 중복 체크

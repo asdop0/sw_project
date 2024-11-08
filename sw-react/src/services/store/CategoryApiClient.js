@@ -1,27 +1,49 @@
 class CategoryApiClient {
     static SERVER_URL = "http://localhost:8000";
-    static API = "/product";
+    static API = "/category";
+    static ADD = "/add";
+    static MODIFY = "/modify";
+    static DELETE = "/delete";
     static LIST = "/list";
-    static CATEGORY = "/category";
-    static SORT = "/sort";
-    static VIEW = "/view";
 
-    //전체 상품 조회 미완
-    static getProductList() {
+    //카테고리 추가
+    static addCategory(accessToken, name) {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.ADD + "?name=" + name, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            },
+        });
+    } 
+    //카테고리 수정
+    static modifyCategory(accessToken, category_id, name) {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.MODIFY + "?category_id=" + category_id + "&name=" + name, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            },
+        });
+    } 
+    //카테고리 삭제
+    static deleteCategory(accessToken, category_id) {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.DELETE + "?category_id=" + category_id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            },
+        });
+    } 
+    //카테고리 리스트 조회
+    static getCategoryList(accessToken) {
         return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.LIST, {
-            method: 'GET'
-        });
-    } 
-    //카테고리에 따른 조회 미완
-    static getCategoryList(category_id) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.CATEGORY + "?category_id=" + category_id, {
-            method: 'GET'
-        });
-    } 
-    //카테고리 내에 조건에 따른 조회 미완
-    static getSortList(category_id, condition) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.SORT + "?category_id=" + category_id + "&condition=" + condition, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            },
         });
     } 
 }

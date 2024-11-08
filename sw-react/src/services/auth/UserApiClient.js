@@ -6,25 +6,25 @@ class UserApiClient {
     static FIND = "/find";
     static PASSWORD = "/modify/password";
     
-    //유저 정보 조회 미완
-    static getUserInfo(id, password) {
+    //유저 정보 조회
+    static getUserInfo(accessToken) {
         return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.INFO, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id, password})
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            }
         });
     } 
 
-    //유저 정보 수정 미완
-    static modifyUserInfo(id, password) {
-        return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.MODIFY, {
+    //닉네임 변경
+    static modifyNickname(accessToken, nickname) {
+        return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.MODIFY + "?nickname=" + nickname, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id, password})
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            }
         });
     } 
 
@@ -35,14 +35,15 @@ class UserApiClient {
         });
     } 
 
-    //비밀번호 변경 미완
-    static modifyPassword(password, newPassword) {
+    //비밀번호 변경
+    static modifyPassword(refreshToken, password, newPassword) {
         return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.PASSWORD, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': refreshToken
             },
-            body: JSON.stringify({id, password})
+            body: JSON.stringify({password, newPassword})
         });
     } 
 }
