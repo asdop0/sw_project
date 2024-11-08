@@ -1,5 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +29,7 @@ public class ReviewController {
 	
 	//후기 등록
 	@PostMapping("/add")
-	public boolean addReview(HttpServletRequest request, @RequestParam String camping_id, @RequestParam String content) {
+	public Map<String, String> addReview(HttpServletRequest request, @RequestParam String camping_id, @RequestParam String content) {
 		User user = userService.findUser(request); //유저 정보 추출
 		
 		CampingReview campingReview = new CampingReview(); //후기 정보 삽입
@@ -37,13 +40,17 @@ public class ReviewController {
 		camping.addCampingReview(campingReview);
 
 		campingService.addCamping(camping); //cascade를 통한 후기 저장
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//후기 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteReview(@RequestParam String review_id) {
+	public Map<String, String> deleteReview(@RequestParam String review_id) {
 		reviewService.deleteReview(Long.parseLong(review_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 }

@@ -1,6 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +55,7 @@ public class BoardController {
 	
 	//게시글 추가
 	@PostMapping("/add")
-	public boolean addBoard(HttpServletRequest request, @RequestParam String title, 
+	public Map<String, String> addBoard(HttpServletRequest request, @RequestParam String title, 
 			@RequestParam String content) {
 		User user = userService.findUser(request); //유저 정보 추출
 		Board board = new Board(); //게시글 정보 삽입
@@ -64,14 +66,18 @@ public class BoardController {
 		
 		boardService.addBoard(board);
 
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//게시글 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteBoard(@RequestParam String board_id) {
+	public Map<String, String> deleteBoard(@RequestParam String board_id) {
 		boardService.deleteBoard(Long.parseLong(board_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 }

@@ -1,7 +1,9 @@
 package com.asd.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,7 @@ public class OrderController {
 	
 	//주문 등록 + 주문 내역 상세 등록
 	@PostMapping("/add")
-	public boolean addOrder(HttpServletRequest request, @RequestParam String product_id,
+	public Map<String, String> addOrder(HttpServletRequest request, @RequestParam String product_id,
 			@RequestParam String cnt) {
 		User user = userService.findUser(request); //유저 정보 추출
 		Product product = productService.getProduct(Long.parseLong(product_id)); //상품 정보 추출
@@ -63,21 +65,27 @@ public class OrderController {
 		order.setOrderDetail(orderDetail);
 		
 		orderService.addOrder(order);
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//주문 취소(환불 개념)
 	@PostMapping("/cancel")
-	public boolean cancelOrder(@RequestParam String order_id) {
+	public Map<String, String> cancelOrder(@RequestParam String order_id) {
 		orderService.cancelOrder(Long.parseLong(order_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 		
 	//주문 내역 삭제
 	@DeleteMapping("/delete") //유저의 입장에서 삭제, 실제 DB에는 주문 데이터가 남아있음
-	public boolean deleteOrder(@RequestParam String order_id) {
+	public Map<String, String> deleteOrder(@RequestParam String order_id) {
 		orderService.deleteOrder(Long.parseLong(order_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//주문 내역 전체 리스트 출력

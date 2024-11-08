@@ -2,16 +2,20 @@ package com.asd.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asd.DTO.OrderDto;
+import com.asd.DTO.ProductRequestDto;
 import com.asd.model.Product;
 import com.asd.service.CategoryService;
 import com.asd.service.OrderService;
@@ -22,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/productAdmin")
 public class AdminController {
 	private final ProductService productService;
 	private final ReviewService reviewService;
@@ -31,58 +35,64 @@ public class AdminController {
 	
 	//상품 등록
 	@PostMapping("/add")
-	public boolean addProduct(@RequestParam String name, @RequestParam String description, @RequestParam String price 
-			, @RequestParam String cnt, @RequestParam String category) {
+	public Map<String, String> addProduct(@RequestBody ProductRequestDto productRequestDto) {
 		Product product = new Product(); //상품 정보 삽입
-		product.setName(name);
-		product.setDescription(description);
+		product.setName(productRequestDto.getName());
+		product.setDescription(productRequestDto.getDescription());
 	    try {
-	    	product.setPrice(new BigDecimal(price));
+	    	product.setPrice(new BigDecimal(productRequestDto.getPrice()));
 	    } catch (NumberFormatException e) {
-	        throw new IllegalArgumentException("Invalid price format: " + price, e);
+	        throw new IllegalArgumentException("Invalid price format: " + productRequestDto.getPrice(), e);
 	    }
 	    product.setWriteDate(LocalDateTime.now());
-		product.setCnt(Integer.parseInt(cnt));
-		product.setCategory(categoryService.getCategory(Long.parseLong(category)));
+		product.setCnt(Integer.parseInt(productRequestDto.getCnt()));
+		product.setCategory(categoryService.getCategory(Long.parseLong(productRequestDto.getCategory())));
 		product.setTotalSales(0L);
 		
 		productService.addProduct(product);
 		
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//상품 정보 수정
 	@PostMapping("/modify")
-	public boolean modifyProduct(@RequestParam String product_id, @RequestParam String name, @RequestParam String description,
-			@RequestParam String price, @RequestParam String cnt, @RequestParam String category) {
+	public Map<String, String> modifyProduct(@RequestBody ProductRequestDto productRequestDto) {
 		Product product = new Product(); //상품 수정 정보 삽입
-		product.setId(Long.parseLong(product_id));
-		product.setName(name);
-		product.setDescription(description);
+		product.setId(Long.parseLong(productRequestDto.getId()));
+		product.setName(productRequestDto.getName());
+		product.setDescription(productRequestDto.getDescription());
 		try {
-	    	product.setPrice(new BigDecimal(price));
+	    	product.setPrice(new BigDecimal(productRequestDto.getPrice()));
 	    } catch (NumberFormatException e) {
-	        throw new IllegalArgumentException("Invalid price format: " + price, e);
+	        throw new IllegalArgumentException("Invalid price format: " + productRequestDto.getPrice(), e);
 	    }
-		product.setCnt(Integer.parseInt(cnt));
-		product.setCategory(categoryService.getCategory(Long.parseLong(category)));
+		product.setCnt(Integer.parseInt(productRequestDto.getCnt()));
+		product.setCategory(categoryService.getCategory(Long.parseLong(productRequestDto.getCategory())));
 		
 		productService.modifyProduct(product);
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//상품 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteProduct(@RequestParam String product_id) {
-			productService.deleteProduct(Long.parseLong(product_id));
-		return true;
+	public Map<String, String> deleteProduct(@RequestParam String product_id) {
+		productService.deleteProduct(Long.parseLong(product_id));
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//후기 삭제
 	@DeleteMapping("/delete/review")
-	public boolean deleteReview(@RequestParam String review_id) {
+	public Map<String, String> deleteReview(@RequestParam String review_id) {
 		reviewService.deleteReview(Long.parseLong(review_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//전체 주문 내역 출력
@@ -99,9 +109,11 @@ public class AdminController {
 	
 	//결제 완료 
 	@PostMapping("/approval")
-	public boolean approvalOrder(@RequestParam String order_id) {
+	public Map<String, String> approvalOrder(@RequestParam String order_id) {
 		orderService.approvalOrder(Long.parseLong(order_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 }

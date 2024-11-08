@@ -17,7 +17,7 @@ spring:
         - id: camping_admin
           uri: http://127.0.0.1:8080/
           predicates:
-            - Path=/admin/**
+            - Path=/campingAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
@@ -34,7 +34,7 @@ spring:
         - id: board_admin
           uri: http://127.0.0.1:8081/
           predicates:
-            - Path=/admin/**
+            - Path=/boardAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
@@ -51,7 +51,7 @@ spring:
         - id: store_admin
           uri: http://127.0.0.1:8082/
           predicates:
-            - Path=/category/**, /admin/**
+            - Path=/category/**, /productAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter

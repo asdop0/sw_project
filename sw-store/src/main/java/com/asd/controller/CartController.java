@@ -1,7 +1,9 @@
 package com.asd.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class CartController {
 	
 	//장바구니 등록
 	@PostMapping("/add")
-	public boolean addCart(HttpServletRequest request, @RequestParam String product_id, @RequestParam String cnt) {
+	public Map<String, String> addCart(HttpServletRequest request, @RequestParam String product_id, @RequestParam String cnt) {
 		User user = userService.findUser(request); //유저 정보 추출
 		Product product = productService.getProduct(Long.parseLong(product_id));
 		Cart cart = new Cart(); //장바구니 정보 삽입
@@ -42,14 +44,18 @@ public class CartController {
 		cart.setCnt(Integer.parseInt(cnt));
 		
 		cartService.addCart(cart);
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//장바구니 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteCart(@RequestParam String cart_id) {
+	public Map<String, String> deleteCart(@RequestParam String cart_id) {
 		cartService.deleteCart(Long.parseLong(cart_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//장바구니 출력
@@ -61,10 +67,12 @@ public class CartController {
 	
 	//장바구니 구매
 	@PostMapping("/payment")
-	public boolean paymentCart(HttpServletRequest request) {
+	public Map<String, String> paymentCart(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
 		
 		cartService.paymentCart(user);
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 }

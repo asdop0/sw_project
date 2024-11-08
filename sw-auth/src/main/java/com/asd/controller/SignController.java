@@ -103,11 +103,13 @@ public class SignController {
     
     //회원탈퇴
     @DeleteMapping("/delete")
-    public boolean delete(HttpServletRequest request) {
+    public Map<String, String> delete(HttpServletRequest request) {
     	logger.info("[delete] delete을 수행합니다.");
+    	Map<String, String> response = new HashMap<>();
     	signService.delete(request);
     	logger.info("[delete] delete을 완료했습니다.");
-    	return true;
+    	response.put("check", "true");
+    	return response;
     }
     
     //아이디 중복 체크

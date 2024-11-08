@@ -1,5 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +29,7 @@ public class CommentController {
 	
 	//댓글 등록
 	@PostMapping("/add")
-	public boolean addComment(HttpServletRequest request, @RequestParam String board_id
+	public Map<String, String> addComment(HttpServletRequest request, @RequestParam String board_id
 			, @RequestParam String i_comment) {
 		User user = userService.findUser(request); //유저 정보 추출
 		
@@ -39,13 +42,17 @@ public class CommentController {
 		
 		boardService.addBoard(board); //cascade를 통한 comment 저장
 		
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//댓글 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteComment(@RequestParam String comment_id) {
+	public Map<String, String> deleteComment(@RequestParam String comment_id) {
 		commentService.deleteComment(Long.parseLong(comment_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 }

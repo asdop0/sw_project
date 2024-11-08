@@ -1,6 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,7 @@ public class MessageController {
 
     //쪽지 작성
     @PostMapping("/write")
-    public boolean writeMessage(HttpServletRequest request, @RequestParam String title, 
+    public Map<String, String> writeMessage(HttpServletRequest request, @RequestParam String title, 
     		@RequestParam String content, @RequestParam String receive) {
     	User sender = userService.findUser(request); //보낸 유저 정보 추출
         User receiver = userService.findByNickname(receive); //받을 유저 정보 추출
@@ -42,7 +44,9 @@ public class MessageController {
         
         messageService.wirteMessage(message);
         
-        return true;
+        Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
     }
 
     //받은 쪽지함 조회
@@ -63,19 +67,23 @@ public class MessageController {
 
     //받은 쪽지 삭제
     @DeleteMapping("/received/delete")
-    public boolean deleteReceivedMessage(HttpServletRequest request, @RequestParam String message_id) {
+    public Map<String, String> deleteReceivedMessage(HttpServletRequest request, @RequestParam String message_id) {
     	User user = userService.findUser(request); //유저 정보 추출
     	messageService.deleteMessageByReceiver(Long.parseLong(message_id), user);
     	
-        return true;
+    	Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
     }
     
     //보낸 쪽지 삭제
     @DeleteMapping("/sent/delete")
-    public boolean deleteSentMessage(HttpServletRequest request, @RequestParam String message_id) {
+    public Map<String, String> deleteSentMessage(HttpServletRequest request, @RequestParam String message_id) {
     	User user = userService.findUser(request); //유저 정보 추출
     	messageService.deleteMessageBySender(Long.parseLong(message_id), user);
 
-        return true;
+    	Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
     }
 }

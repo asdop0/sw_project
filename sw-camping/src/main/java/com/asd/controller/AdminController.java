@@ -1,13 +1,17 @@
 package com.asd.controller;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asd.DTO.CampingRequestDto;
 import com.asd.model.Camping;
 import com.asd.service.CampingService;
 import com.asd.service.ReviewService;
@@ -16,55 +20,59 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/campingAdmin")
 public class AdminController {
 	private final CampingService campingService;
 	private final ReviewService reviewService;
 	
 	//캠핑장 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteCamping(@RequestParam String camping_id) {
+	public Map<String, String> deleteCamping(@RequestParam String camping_id) {
 		campingService.deleteCamping(Long.parseLong(camping_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//캠핑장 등록
 	@PostMapping("/add")
-	public boolean addCamping(@RequestParam String name, @RequestParam String address, @RequestParam String district 
-			, @RequestParam String homepage, @RequestParam String latitude, @RequestParam String longitude
-			, @RequestParam String phonenumber) {
+	public Map<String, String> addCamping(@RequestParam String name, @RequestBody CampingRequestDto campingRequestDto) {
 		Camping camping = new Camping(); //캠핑장 정보 삽입
-		camping.setName(name);
-		camping.setAddress(address);
-		camping.setDistrict(district);
-		camping.setHomepage(homepage);
-		camping.setLatitude(Integer.parseInt(latitude));
+		camping.setName(campingRequestDto.getName());
+		camping.setAddress(campingRequestDto.getAddress());
+		camping.setDistrict(campingRequestDto.getDistrict());
+		camping.setHomepage(campingRequestDto.getHomepage());
+		camping.setLatitude(Double.parseDouble(campingRequestDto.getLatitude()));
 		camping.setWriteDate(LocalDateTime.now());
-		camping.setLongitude(Integer.parseInt(longitude));
-		camping.setPhonenumber(phonenumber);
+		camping.setLongitude(Double.parseDouble(campingRequestDto.getLongitude()));
+		camping.setPhonenumber(campingRequestDto.getPhonenumber());
 		
 		campingService.addCamping(camping);
-		
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//캠핑장 정보 수정
 	@PostMapping("/modify")
-	public boolean modifyCamping(@RequestParam String camping_id, @RequestParam String name
-			, @RequestParam String homepage, @RequestParam String phonenumber) {
+	public Map<String, String> modifyCamping(@RequestBody CampingRequestDto campingRequestDto) {
 		Camping camping = new Camping(); //캠핑장 수정 정보 삽입
-		camping.setId(Long.parseLong(camping_id));	
-		camping.setName(name);
-		camping.setHomepage(homepage);
-		camping.setPhonenumber(phonenumber);
+		camping.setId(Long.parseLong(campingRequestDto.getId()));	
+		camping.setName(campingRequestDto.getName());
+		camping.setHomepage(campingRequestDto.getHomepage());
+		camping.setPhonenumber(campingRequestDto.getPhonenumber());
 		campingService.modifyCamping(camping);
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//후기 삭제
 	@DeleteMapping("/delete/review")
-	public boolean deleteReview(@RequestParam String review_id) {
+	public Map<String, String> deleteReview(@RequestParam String review_id) {
 		reviewService.deleteReview(Long.parseLong(review_id));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 }

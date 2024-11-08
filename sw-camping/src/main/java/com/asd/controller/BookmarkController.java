@@ -1,6 +1,8 @@
 package com.asd.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class BookmarkController {
 	
 	//즐겨찾기 추가
 	@PostMapping("/add")
-	public boolean addBookmark(HttpServletRequest request, @RequestParam String camping_id) {
+	public Map<String, String> addBookmark(HttpServletRequest request, @RequestParam String camping_id) {
 		User user = userService.findUser(request); //유저 정보 추출
 		
 		CampingBookmark campingBookmark = new CampingBookmark(); //즐겨찾기 정보 삽입
@@ -47,14 +49,18 @@ public class BookmarkController {
 		camping.addCampingBookmark(campingBookmark);
 		
 		campingService.addCamping(camping); //cascade를 통한 즐겨찾기 저장
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 	
 	//즐겨찾기 삭제
 	@DeleteMapping("/delete")
-	public boolean deleteBookmark(HttpServletRequest request, @RequestParam String camping_id) {
+	public Map<String, String> deleteBookmark(HttpServletRequest request, @RequestParam String camping_id) {
 		User user = userService.findUser(request); //유저 정보 추출
 		bookmarkService.deleteBookmark(user, campingService.getCamping(Long.parseLong(camping_id)));
-		return true;
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
 	}
 }

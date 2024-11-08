@@ -33,8 +33,6 @@ public class UserService {
     	User user_ = userRepository.getByUid(jwtTokenProvider.getUsername(token)).orElseThrow(() -> 
     		new IllegalArgumentException("[modifyUserInfo] 해당 유저를 찾을 수 없습니다.")
     	);
-		
-    	user_.setName(user.getName());
     	user_.setNickname(user.getNickname());
 		
     	userRepository.save(user_);		
