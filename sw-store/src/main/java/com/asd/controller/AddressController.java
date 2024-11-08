@@ -93,4 +93,11 @@ public class AddressController {
 		response.put("check", "true");
     	return response;
 	}
+	
+	//기본 배송지 출력
+	@GetMapping("/get")
+	public AddressDto getAddress(HttpServletRequest request) {
+		User user = userService.findUser(request);
+		return AddressDto.toDto(addressService.getAddress(user));
+	}
 }

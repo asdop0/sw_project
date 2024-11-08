@@ -7,6 +7,7 @@ class AddressApiClient {
     static LIST = "/list";
     static VIEW = "/view";
     static CHOICE = "/choice";
+    static GET_ADDRESS = "/get";
 
     //배송지 추가
     static addAddress(accessToken, name, addr, phonenumber, req) {
@@ -62,6 +63,16 @@ class AddressApiClient {
     static choiceAddress(accessToken, address_id) {
         return fetch(AddressApiClient.SERVER_URL + AddressApiClient.API + AddressApiClient.CHOICE + "?address_id=" + address_id, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            },
+        });
+    } 
+    //기본 배송지 출력
+    static getAddress(accessToken) {
+        return fetch(AddressApiClient.SERVER_URL + AddressApiClient.API + AddressApiClient.GET_ADDRESS, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
