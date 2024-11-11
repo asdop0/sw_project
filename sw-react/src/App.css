@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -286,32 +286,12 @@
 .map{
   position: relative;
   height: 480px;
-  right: 375px;
+  right: 545px;
   margin: auto;
   
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.BackImg .map1{
-  position:relative; 
-  left: 80px;
-  bottom: 240px;
-  border-radius: 7%;
-}
-
-.BackImg .map2{
-  position:relative; 
-  left: 180px;
-  bottom: 240px;
-  border-radius: 7%;
-}
-
-.BackImg .map3{
-  position:relative; 
-  left: 280px;
-  bottom: 240px;
-  border-radius: 7%;
-}
+  
 
 .image-section {
   position: relative;
@@ -906,4 +886,19 @@
     background-color: transparent;
     color: #3bbaf1;
 }
+.nickname_check_button.moved {
+  transform: translateX(30px); /* 원하는 위치로 이동 */
+}
 
+.camping_list{
+  position: relative;
+  bottom: 520px;
+  left: 65%;
+  flex-wrap: wrap; /* 줄바꿈을 가능하게 설정 */
+  justify-content: flex-start; /* 왼쪽 정렬 (필요에 따라 center로 변경 가능) */
+  max-height: 600px; /* 스크롤 영역의 최대 높이 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  padding: 10px; /* 스크롤 영역의 패딩 */
+  display: flex;
+  flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */  
+}

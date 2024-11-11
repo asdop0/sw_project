@@ -18,7 +18,7 @@ const Adress_Modal = ({ show, onClose,
           }
           {/* /배송지 저장 test  */}
 
-          if (onClose) {
+          if (onClose) {  
             onClose();
           }
         },
