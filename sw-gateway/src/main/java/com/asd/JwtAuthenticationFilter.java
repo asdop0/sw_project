@@ -2,7 +2,6 @@ package com.asd;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Date;
 
 import javax.crypto.SecretKey;
 
@@ -15,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -50,12 +51,20 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             String token = exchange.getRequest().getHeaders().getFirst("X-AUTH-TOKEN");
             logger.info("[filter] token 값 추출 완료. token : {}", token);
             logger.info("[doFilterInternal] token 값 유효성 체크 시작");
-
-            if (token != null && validateToken(token)) {
-                logger.info("[doFilterInternal] token 값 유효성 체크 완료");
-                // JWT가 유효하면 추가로 필요한 로직을 작성할 수 있습니다.
+            
+            if (token != null) {
+                int validationStatus = validateToken(token);
+                if (validationStatus == 1) {
+                    logger.info("[doFilterInternal] token 값 유효성 체크 완료");
+                } else if (validationStatus == -1) {
+                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED); // 401 상태 코드 설정
+                    return exchange.getResponse().setComplete(); // 요청을 차단하고 응답을 완료
+                } else if (validationStatus == -2) {
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN); // 403 상태 코드 설정
+                    return exchange.getResponse().setComplete(); // 요청을 차단하고 응답을 완료
+                }
             } else {
-            	exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED); // 401 상태 코드 설정
+                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED); // 401 상태 코드 설정
                 return exchange.getResponse().setComplete(); // 요청을 차단하고 응답을 완료
             }
 
@@ -63,15 +72,25 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
         };
     }
     
-    public boolean validateToken(String token) {
+    public int validateToken(String token) {
         logger.info("[validateToken] 토큰 유효 체크 시작");
         try {
-            Jws<Claims> claims = Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token);
+            Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token);
             logger.info("[validateToken] 토큰 유효 체크 완료");
-            return !claims.getPayload().getExpiration().before(new Date());
+            return 1; // 유효한 토큰의 경우 1 반환
+        }catch (ExpiredJwtException e) {
+            // 만료된 토큰은 무시하고 서명만 확인
+            logger.info("[validateToken] 토큰이 만료되었지만 서명은 유효합니다.", e.getMessage());
+            return -2;
+        } catch (JwtException e) {
+            // 서명 검증 실패 및 기타 JWT 관련 예외
+            logger.error("[validateToken] 유효하지 않은 토큰입니다: {}", e.getMessage());
+            return -1; // 유효하지 않은 토큰의 경우 -1 반환
+
         } catch (Exception e) {
-            logger.info("[validateToken] 토큰 유효 체크 예외 발생");
-            return false;
+            // 그 외 예외
+            logger.error("[validateToken] 토큰 검증 중 예상치 못한 오류 발생: {}", e.getMessage());
+            return -1;
         }
     }
 }
