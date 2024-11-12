@@ -36,7 +36,7 @@ public class AdminController {
 	
 	//캠핑장 등록
 	@PostMapping("/add")
-	public Map<String, String> addCamping(@RequestParam String name, @RequestBody CampingRequestDto campingRequestDto) {
+	public Map<String, String> addCamping(@RequestBody CampingRequestDto campingRequestDto) {
 		Camping camping = new Camping(); //캠핑장 정보 삽입
 		camping.setName(campingRequestDto.getName());
 		camping.setAddress(campingRequestDto.getAddress());

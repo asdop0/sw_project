@@ -51,4 +51,10 @@ public class CampingController {
 	public CampingDetailDto viewCamping(@RequestParam String camping_id) {
 		return campingService.viewCamping(Long.parseLong(camping_id));
 	}
+	
+	//캠핑장 검색
+	@GetMapping("/search")
+	public List<CampingListDto> getSearchCampingList(@RequestParam String search) {
+		return campingService.searchCamping(search);
+	}
 }

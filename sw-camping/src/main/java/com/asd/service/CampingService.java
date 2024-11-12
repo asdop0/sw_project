@@ -3,20 +3,27 @@ package com.asd.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.asd.DTO.CampingDetailDto;
 import com.asd.DTO.CampingListDto;
 import com.asd.model.Camping;
-import com.asd.repository.CampingRepository;
+import com.asd.model.CampingElasticsearch;
+import com.asd.repository.CampingElasticsearchRepository;
+import com.asd.repository.CampingJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class CampingService {
-	private final CampingRepository campingRepository;
+	private final CampingJpaRepository campingRepository;
+	private final CampingElasticsearchRepository campingElasticsearchRepository;
+	
+	private Logger logger = LoggerFactory.getLogger(CampingService.class);
 	
 	//캠핑장 전체 리스트 출력
 	public List<CampingListDto> campingList() {
@@ -110,5 +117,25 @@ public class CampingService {
     		new IllegalArgumentException("[viewCamping] 캠핑장을 찾을 수 없습니다.")
 		);
 		return camping;
+	}
+	
+	//캠핑장 검색
+	public List<CampingListDto> searchCamping(String search) {
+		logger.info("[searchCamping] 검색 서비스 시작. 검색어: {}", search);
+		List<CampingElasticsearch> campingElasticsearchs = campingElasticsearchRepository.searchByMultiMatch(search);
+		logger.info("[searchCamping] 검색 서비스 시작. 검색어: {}", campingElasticsearchs);
+		List<CampingListDto> campingListDtos = new ArrayList<>();
+		for(CampingElasticsearch campingElasticsearch : campingElasticsearchs) {
+			Camping camping = new Camping();
+			camping.setId(campingElasticsearch.getId());
+			camping.setName(campingElasticsearch.getName());
+			camping.setAddress(campingElasticsearch.getAddress());
+			camping.setLatitude(campingElasticsearch.getLatitude());
+			camping.setLongitude(campingElasticsearch.getLongitude());
+			camping.setWriteDate(campingElasticsearch.getWriteDate());
+			campingListDtos.add(CampingListDto.toDto(camping));
+        }
+		
+		return campingListDtos;
 	}
 }

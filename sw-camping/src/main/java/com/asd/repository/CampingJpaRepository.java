@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.asd.model.Camping;
 
-public interface CampingRepository extends JpaRepository<Camping, Long>{
+public interface CampingJpaRepository extends JpaRepository<Camping, Long>{
 	List<Camping> findByDistrict(String district);
 	
 	@Query("SELECT s FROM com.asd.model.Camping s WHERE s.district = :district ORDER BY writeDate DESC")
