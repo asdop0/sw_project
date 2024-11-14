@@ -13,14 +13,14 @@ pipeline {
             steps {
                 script {
                     // sw-auth 디렉토리의 변경사항 확인
-                    def changes = sh(script: "git diff --name-only HEAD~1 HEAD | grep '^sw-auth/'", returnStdout: true).trim()
-                    if (changes) {
-                        currentBuild.result = 'SUCCESS'
-                        echo 'Changes detected in sw-auth. Proceeding with build and deploy.'
-                    } else {
-                        echo 'No changes in sw-auth. Skipping build and deploy.'
-                        currentBuild.result = 'SUCCESS'
-                    }
+                    def changes = sh(script: "git diff --name-only HEAD~1 HEAD | grep -q '^sw-auth/'", returnStatus: true)
+					if (changes == 0) {
+						currentBuild.result = 'SUCCESS'
+						echo 'Changes detected in sw-auth. Proceeding with build and deploy.'
+					} else {
+						echo 'No changes in sw-auth. Skipping build and deploy.'
+						currentBuild.result = 'SUCCESS'
+					}
                 }
             }
         }
