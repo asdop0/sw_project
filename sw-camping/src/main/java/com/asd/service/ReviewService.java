@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.asd.model.Camping;
 import com.asd.model.CampingReview;
-import com.asd.repository.CampingJpaRepository;
+import com.asd.repository.CampingRepository;
 import com.asd.repository.CampingReviewRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ReviewService {
 	private final CampingReviewRepository campingReviewRepository;
-	private final CampingJpaRepository campingRepository;
+	private final CampingRepository campingRepository;
 	
 	//지정된 후기 삭제
 	@Transactional

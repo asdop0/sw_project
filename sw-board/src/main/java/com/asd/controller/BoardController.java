@@ -80,4 +80,9 @@ public class BoardController {
     	return response;
 	}
 	
+	//게시글 검색
+	@GetMapping("/search")
+	public List<BoardListDto> getSearchBoardList(@RequestParam String search) {
+		return boardService.searchBoard(search);
+	}
 }

@@ -55,4 +55,10 @@ public class ProductController {
 	public ProductDetailDto viewProduct(@RequestParam String product_id) {
 		return productService.viewProduct(Long.parseLong(product_id));
 	}
+	
+	//상품 검색
+	@GetMapping("/search")
+	public List<ProductListDto> getSearchProductList(@RequestParam String search) {
+		return productService.searchProduct(search);
+	}
 }

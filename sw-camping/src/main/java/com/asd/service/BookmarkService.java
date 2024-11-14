@@ -11,7 +11,7 @@ import com.asd.model.Camping;
 import com.asd.model.CampingBookmark;
 import com.asd.model.User;
 import com.asd.repository.CampingBookmarkRepository;
-import com.asd.repository.CampingJpaRepository;
+import com.asd.repository.CampingRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class BookmarkService {
 	private final CampingBookmarkRepository campingBookmarkRepository;
-	private final CampingJpaRepository campingRepository;
+	private final CampingRepository campingRepository;
 	
 	//해당 유저의 북마크 리스트 조회
 	public List<CampingListDto> bookmarkList(User user) {

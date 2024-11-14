@@ -12,7 +12,7 @@ import com.asd.model.ProductBookmark;
 import com.asd.model.User;
 
 public interface ProductBookmarkRepository extends JpaRepository<ProductBookmark, Long>{
-	@Query("SELECT s FROM com.asd.model.Product s WHERE s = (SELECT c.product b FROM com.asd.model.ProductBookmark c WHERE c.user = :user)")
+	@Query("SELECT p FROM Product p WHERE p = (SELECT b.product bp FROM ProductBookmark b WHERE b.user = :user)")
 	List<Product> findByBookmarkList(@Param("user") User user);
 	
 	Optional<ProductBookmark> findByUserAndProduct(User user, Product product);
