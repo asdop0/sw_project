@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // GitHub에서 코드 클론
-                git branch: 'main', credentialsId: 'github_credentials', url: '{REPOSITORY URL}'
+                git branch: 'main', credentialsId: 'github_credentials', url: 'https://github.com/asdop0/sw_project.git'
             }
         }
 
