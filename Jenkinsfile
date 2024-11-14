@@ -1,15 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        GIT_REPO_URL = 'https://github.com/asdop0/sw_project.git'
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 // GitHub에서 코드 클론
-                git url: "${GIT_REPO_URL}"
+                git branch: 'main', credentialsId: 'github_credentials', url: '{REPOSITORY URL}'
             }
         }
 
