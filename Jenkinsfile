@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // GitHub에서 코드 클론
-                git branch: 'main', credentialsId: 'github_credentials', url: 'https://github.com/asdop0/sw_project.git'
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
             }
         }
 
@@ -32,6 +32,7 @@ pipeline {
             steps {
                 echo 'Building and Testing sw-auth...'
                 dir('sw-auth') {
+					sh 'chmod +x ./mvnw'
                     sh './mvnw clean package'
                     sh './mvnw test'
                 }
@@ -73,6 +74,7 @@ pipeline {
             steps {
                 echo 'Building and Testing sw-board...'
                 dir('sw-board') {
+					sh 'chmod +x ./mvnw'
                     sh './mvnw clean package'
                     sh './mvnw test'
                 }
@@ -114,6 +116,7 @@ pipeline {
             steps {
                 echo 'Building and Testing sw-camping...'
                 dir('sw-camping') {
+					sh 'chmod +x ./mvnw'
                     sh './mvnw clean package'
                     sh './mvnw test'
                 }
@@ -155,6 +158,7 @@ pipeline {
             steps {
                 echo 'Building and Testing sw-store...'
                 dir('sw-store') {
+					sh 'chmod +x ./mvnw'
                     sh './mvnw clean package'
                     sh './mvnw test'
                 }
@@ -196,6 +200,7 @@ pipeline {
             steps {
                 echo 'Building and Testing sw-gateway...'
                 dir('sw-gateway') {
+					sh 'chmod +x ./mvnw'
                     sh './mvnw clean package'
                     sh './mvnw test'
                 }
