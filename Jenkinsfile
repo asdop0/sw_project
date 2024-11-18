@@ -30,11 +30,6 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            when { 
-                expression {
-                    env.TARGET_SERVICE == "specific-service" || env.TARGET_SERVICE == "all-services"
-                }
-            }
             steps {
                 script {
                     env.TRIGGER_CAUSE = currentBuild.getBuildCauses()[0].shortDescription
