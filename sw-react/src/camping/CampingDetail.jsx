@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Store.css";
+import "./Camping.css";
+import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
 
 const CampingDetail = () => {
@@ -24,12 +25,51 @@ const CampingDetail = () => {
     });
   }, []);
 
+  const createGoogleMapUrl = () => {
+  if (camping && camping.latitude && camping.longitude) {
+    const url = `https://www.google.com/maps?q=${camping.latitude},${camping.longitude}`;
+    console.log("Generated URL:", url);
+    return url;
+  }
+  return "#";
+};
   return (
     camping ? (
       <div className="camping_detail">
         {/* <img src={camping.image} alt={camping.name} className="camping_image" /> */}
-        <h2 className="camping_name">{camping.name}</h2>
-        <p className="camping_address">{camping.address}</p>
+        
+        <img className="campingImg" 
+          src="/트리앤캠프스토리.png">
+        </img>
+
+        <h2 className="camping_name">
+          {camping.name}
+        </h2>
+
+        <p className="camping_address">
+          <img  className="marker" src="/marker.png"></img>
+          {camping.address}
+        </p>
+        
+        <p className="camping_number">
+          <img className="call" src="/call.png"></img>
+          {camping.phonenumber}
+        </p>
+
+        <p className="korea_gocamping">
+          <img className="check" src="/check.png"></img>
+          관광사업자로 등록된 인증 캠핑장 <a href="https://gocamping.or.kr/">바로가기</a>
+        </p>
+        
+
+        <p className="camping_icon">
+          <a href={camping.homepage} target="_blank">
+           <img className="book" src="/book.png" />
+          </a>
+          <a href={createGoogleMapUrl()} target="_blank" >
+            <img className="findway" src="/findway.png"  />
+          </a>
+        </p>
       </div>
     ) : null
   );

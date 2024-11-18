@@ -77,7 +77,11 @@ export const Background = () => {
                 <Link to="/mypage">
                   <div className="dropdown-item" onClick={handleLinkClick}>나의 정보</div>
                 </Link>
+
+                <Link to="/note">
                   <div className="dropdown-item" onClick={handleLinkClick}>쪽지함</div>
+                </Link>
+       
                 <Link to="/login" >
                   <div className="dropdown-item" onClick={handleLinkClick}>로그인</div>
                 </Link>

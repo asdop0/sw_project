@@ -300,8 +300,8 @@
 
 .category_Latest {
   position: relative;
-  bottom: 520px;
-  left: 155px;
+  bottom: 550px;
+  left: 35px;
   font-size: 16px;
   width: 80px;
   height: 25px;
@@ -861,6 +861,42 @@
 }
 /* 회원가입 찾기 modal */
 
+/* 배송지 정보 입력 modal */
+.Input_information-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Input_information-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  left : 80px;
+}
+
+.Input_information-content input {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.Input_information-content button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+/* 배송지 정보 입력 modal */
+
 
 /* App.css 또는 Background.css 파일 */
 .store-background-hidden .background {
@@ -901,4 +937,20 @@
   padding: 10px; /* 스크롤 영역의 패딩 */
   display: flex;
   flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */  
+}
+
+.adressSearch{
+  border-radius: 3%;
+  background-color:transparent;
+  position: relative;
+  top: 92px;
+  left: 127px;
+}
+
+.add_delivery_button2{
+  position: absolute;
+  width: 70%;
+  text-align: center;
+  left: 930px;
+  top: 40px;
 }

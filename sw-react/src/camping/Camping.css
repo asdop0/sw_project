@@ -34,6 +34,30 @@
     padding: 20px;
     text-align: center;
   }
+
+  .camping_detail .camping_name{
+    text-align: left;
+    margin-left: 160px;
+    font-size: 18px;
+  }
+
+  .camping_detail .camping_address{
+    text-align: left;
+    margin-left: 160px;
+  }
+
+  .camping_detail .camping_number{
+    text-align: left;
+    margin-left: 160px;
+  }
+  
+  .camping_detail .korea_gocamping{
+    text-align: left;
+    margin-left: 160px;
+  }
+  
+
+  
   
   .camping_image {
     width: 150px;
@@ -76,4 +100,29 @@
   position: relative;
   bottom:500px;
   left: 330px;
+}
+
+.campingImg {
+  width: 480px;
+  border-radius: 10px;
+}
+
+.marker{
+  width: 30px;
+}
+
+.call{
+  width: 30px;
+}
+
+.check{
+  width: 30px;
+}
+
+.book{
+  width: 100px;
+}
+
+.findway{
+  width: 100px;
 }

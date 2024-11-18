@@ -41,6 +41,8 @@ const MapWithClickableRegions = () => {
           });
         }
       });
+    } else if (selectedRegion === '태백시') {
+      setRegionData([]); // 태백시는 캠핑 데이터 없음
     } else {
       CampingApiClient.getDistrictList(selectedRegion).then(res => {
         if(res.ok) {
@@ -362,8 +364,8 @@ const MapWithClickableRegions = () => {
           coords="370,266,363,271,358,280,359,287,360,293,357,302,356,315,353,322,360,328,365,323,374,328,381,331,381,322,387,321,387,313,390,307,384,304,376,302,373,293,371,286,375,281,372,275,375,272"
           alt="태백시"
           onMouseEnter={() => handleMouseEnter('태백시')}
-          // onMouseLeave={handleMouseLeave}
-          // onClick={() => setSelectedRegion('태백시')}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => setSelectedRegion('태백시')}
           // onClick={(alert("정보 없음"))}
         />
 
@@ -376,11 +378,20 @@ const MapWithClickableRegions = () => {
         </div>
       )} 
       <div className="camping_list">
-        {regionData && regionData.map((camping) => (
+        {/* {regionData && regionData.map((camping) => (
           <div className="product_card_wrapper" key={camping.id}>
           <CampingCard key={camping.id} camping={camping} />
           </div>
-        ))}
+        ))} */}
+        {selectedRegion === '태백시' ? (
+          <p>데이터 없음</p> // 태백시의 경우 데이터 없음 표시
+        ) : regionData && regionData.length > 0 ? (
+          regionData.map((camping) => (
+            <div className="product_card_wrapper" key={camping.id}>
+              <CampingCard key={camping.id} camping={camping} />
+            </div>
+          ))
+        ) : null}
       </div>
     </div>
     
