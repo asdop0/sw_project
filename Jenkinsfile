@@ -113,6 +113,7 @@ pipeline {
             echo 'Pipeline execution finished.'
         }
         success {
+            echo "TARGET_SERVICE is now: ${env.TARGET_SERVICE}"
             echo 'Pipeline executed successfully!'
         }
         failure {
