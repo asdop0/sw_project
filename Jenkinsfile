@@ -88,6 +88,7 @@ pipeline {
                     if (env.TRIGGER_CAUSE.contains("GitHub push")) {
                         echo "Triggered by GitHub Push"
                     } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
+                        echo "Triggered by Manual Build"
                         withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_PASSWORD')]) {
                             sh """
                             echo $DOCKER_PASSWORD | docker login -u cmuname --password-stdin
