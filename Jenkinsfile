@@ -11,7 +11,7 @@ pipeline {
                 script {
                     env.TRIGGER_CAUSE = currentBuild.getBuildCauses()[0].shortDescription
                     if (env.TRIGGER_CAUSE.contains("GitHub push")) {
-                        env.TARGET_SERVICE = "specific-service"
+                        ${TARGET_SERVICE} = "specific-service"
                         echo "Triggered by GitHub Push"
                     } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
                         env.TARGET_SERVICE = "all-services"
@@ -19,7 +19,7 @@ pipeline {
                     } else {
                         echo env.TRIGGER_CAUSE
                     }
-                    echo "TARGET_SERVICE is now: ${env.TARGET_SERVICE}"
+                    echo "TARGET_SERVICE is now: ${TARGET_SERVICE}"
                 }
             }
         }
