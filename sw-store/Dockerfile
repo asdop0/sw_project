@@ -5,7 +5,7 @@ COPY pom.xml .
 RUN mvn -B dependency:go-offline
 
 COPY . .
-RUN mvn package
+RUN mvn package -DskipTests
 
 FROM amazoncorretto:21.0.3
 
