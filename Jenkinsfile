@@ -17,7 +17,7 @@ pipeline {
                         env.TARGET_SERVICE = "all-services"
                         echo "Triggered by Manual Build"
                     } else {
-                        echo env.TARGET_SERVICE
+                        echo env.TRIGGER_CAUSE
                     }
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            when {
+            when { 
                 expression {
                     env.TARGET_SERVICE == "specific-service" || env.TARGET_SERVICE == "all-services"
                 }
