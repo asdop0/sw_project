@@ -11,7 +11,7 @@ import com.asd.model.Address;
 import com.asd.model.User;
 
 public interface AddressRepository extends JpaRepository<Address, Long>{
-	@Query("SELECT s FROM com.asd.model.Address s WHERE s.user = :user")
+	@Query("SELECT a FROM Address a WHERE a.user = :user")
 	List<Address> findByAddressList(@Param("user") User user);
 	
 	Optional<Address> findById(Long id);

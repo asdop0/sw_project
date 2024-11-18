@@ -5,69 +5,70 @@ spring:
     gateway:
       routes:
         - id: camping_public
-          uri: http://127.0.0.1:8080/
+          uri: http://camping-container:8081/
           predicates:
             - Path=/camping/**
         - id: camping_user
-          uri: http://127.0.0.1:8080/
+          uri: http://camping-container:8081/
           predicates:
             - Path=/campingBookmark/**, /campingReview/**
           filters:
             - JwtAuthenticationFilter
         - id: camping_admin
-          uri: http://127.0.0.1:8080/
+          uri: http://camping-container:8081/
           predicates:
             - Path=/campingAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
         - id: board_public
-          uri: http://127.0.0.1:8081/
+          uri: http://board_container:8082/
           predicates:
             - Path=/board/list, /board/sort, /board/view
         - id: board_user
-          uri: http://127.0.0.1:8081/
+          uri: http://board_container:8082/
           predicates:
             - Path=/board/add, /board/delete, /comment/**, /message/**
           filters:
             - JwtAuthenticationFilter
         - id: board_admin
-          uri: http://127.0.0.1:8081/
+          uri: http://board_container:8082/
           predicates:
             - Path=/boardAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
         - id: store_public
-          uri: http://127.0.0.1:8082/
+          uri: http://store_container:8083/
           predicates:
             - Path=/product/**
         - id: store_user
-          uri: http://127.0.0.1:8082/
+          uri: http://store_container:8083/
           predicates:
             - Path=/category/**, /productBookmark/**, /productReview/**, /address/**, /cart/**, /order/**
           filters:
             - JwtAuthenticationFilter
         - id: store_admin
-          uri: http://127.0.0.1:8082/
+          uri: http://store_container:8083/
           predicates:
             - Path=/category/**, /productAdmin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
         - id: auth
-          uri: http://127.0.0.1:8083/
+          uri: http://auth_container:8084/
           predicates:
           - Path=/sign-api/**, /user/**
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:5173"
+            allowedOrigins: "http://react-container:5173"
             allowedHeaders:
               - "*"
             allowedMethods:
               - "GET"
               - "POST"
+              - "DELETE"
               - "OPTIONS"
       default-filters:
         - name: Retry

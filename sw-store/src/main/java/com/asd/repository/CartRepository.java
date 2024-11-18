@@ -10,6 +10,6 @@ import com.asd.model.Cart;
 import com.asd.model.User;
 
 public interface CartRepository extends JpaRepository<Cart, Long>{
-	@Query("SELECT s FROM com.asd.model.Cart s WHERE s.user = :user")
+	@Query("SELECT c FROM Cart c WHERE c.user = :user")
 	List<Cart> findByCartList(@Param("user") User user);
 }

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	private final CampingService campingService;
 	private final ReviewService reviewService;
+	private Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	//캠핑장 삭제
 	@DeleteMapping("/delete")
@@ -31,12 +34,13 @@ public class AdminController {
 		campingService.deleteCamping(Long.parseLong(camping_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteCamping] {} 캠핑장이 삭제되었습니다.", camping_id);
     	return response;
 	}
 	
 	//캠핑장 등록
 	@PostMapping("/add")
-	public Map<String, String> addCamping(@RequestParam String name, @RequestBody CampingRequestDto campingRequestDto) {
+	public Map<String, String> addCamping(@RequestBody CampingRequestDto campingRequestDto) {
 		Camping camping = new Camping(); //캠핑장 정보 삽입
 		camping.setName(campingRequestDto.getName());
 		camping.setAddress(campingRequestDto.getAddress());
@@ -50,6 +54,7 @@ public class AdminController {
 		campingService.addCamping(camping);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[addCamping] {} 캠핑장이 등록되었습니다.", campingRequestDto.getName());
     	return response;
 	}
 	
@@ -64,6 +69,7 @@ public class AdminController {
 		campingService.modifyCamping(camping);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[modifyCamping] {} 캠핑장이 수정되었습니다.", campingRequestDto.getId());
     	return response;
 	}
 	
@@ -73,6 +79,7 @@ public class AdminController {
 		reviewService.deleteReview(Long.parseLong(review_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteReview] 관리자에 의해 {} 후기가 삭제되었습니다.", review_id);
     	return response;
 	}
 }

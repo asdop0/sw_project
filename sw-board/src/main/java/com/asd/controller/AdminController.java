@@ -3,6 +3,8 @@ package com.asd.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	private final BoardService boardService;
 	private final CommentService commentService;
+	private Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	//게시글 삭제
 	@DeleteMapping("/deleteBoard")
@@ -26,6 +29,7 @@ public class AdminController {
 		boardService.deleteBoard(Long.parseLong(board_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteBoard] 관리자가 게시글을 삭제했습니다.");
     	return response;
 	}
 	
@@ -35,6 +39,7 @@ public class AdminController {
 		commentService.deleteComment(Long.parseLong(comment_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteComment] 관리자가 댓글을 삭제했습니다.");
     	return response;
 	}
 }

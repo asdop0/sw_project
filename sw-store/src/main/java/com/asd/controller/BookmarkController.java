@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,11 +31,13 @@ public class BookmarkController {
 	private final UserService userService;
 	private final ProductService productService;
 	private final BookmarkService bookmarkService;
+	private Logger logger = LoggerFactory.getLogger(BookmarkController.class);
 	
 	//즐겨찾기 리스트 조회
 	@GetMapping("/list")
 	public List<ProductListDto> bookmarkList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
+		logger.info("[getBookmarkList] 즐겨찾기 기능을 수행합니다.");
 		return bookmarkService.bookmarkList(user);
 	}
 	

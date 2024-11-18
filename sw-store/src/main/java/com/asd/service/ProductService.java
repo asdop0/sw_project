@@ -2,8 +2,13 @@ package com.asd.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.asd.DTO.ProductDetailDto;
@@ -18,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ProductService {
 	private final ProductRepository productRepository;
+	
+	private Logger logger = LoggerFactory.getLogger(ProductService.class);
 	
 	//상품 전체 리스트 출력
 	public List<ProductListDto> productList() {
@@ -129,5 +136,50 @@ public class ProductService {
 		product_.setUpdateDate(LocalDateTime.now());
 		
 		productRepository.save(product_);		
+	}
+	
+	//상품 검색
+	public List<ProductListDto> searchProduct(String search) {
+		String[] keywords = search.split("\\s+");
+		HashMap<Product, Integer> map = new HashMap<>();
+		int count = 0;
+		
+		for (String keyword : keywords) { //입력된 검색어 앞부분 7개만
+			if(count == 7) {
+				break;
+			}
+			logger.info("검색어: {}", keyword);
+			List<Product> products = productRepository.findByNameOrDescriptionOrCategoryNameContaining(keyword);
+			for (Product product : products) { //자주 등장하는 결과물 체크
+				int importance = 0;
+			    
+			    if (product.getName().contains(keyword)) { //이름에서 발견된 결과이면 중요도가 높음
+			        importance = 3;
+			    }
+			    
+			    if (product.getCategory().getName().contains(keyword)) {
+			        importance = Math.max(importance, 2);
+			    }
+			    
+			    if (product.getDescription().contains(keyword)) {
+			        importance = Math.max(importance, 1);
+			    }
+
+			    map.put(product, map.getOrDefault(product, 0) + importance);
+			}
+			count++;
+		}
+		
+		List<Product> products = map.entrySet().stream() //검색어가 많은 순으로 정렬된 리스트
+	            .sorted((entry1, entry2) -> entry2.getValue() - entry1.getValue()) // value 기준 내림차순 정렬
+	            .map(Map.Entry::getKey) // Camping 객체만 추출
+	            .collect(Collectors.toList());
+        
+		List<ProductListDto> productListDtos = new ArrayList<>();
+		for(Product product : products) {
+			productListDtos.add(ProductListDto.toDto(product));
+        }
+		
+		return productListDtos;
 	}
 }

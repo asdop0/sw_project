@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	private final BoardService boardService;
 	private final UserService userService;
+	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	//게시글 전체 조회
 	@GetMapping("/list")
@@ -37,6 +40,7 @@ public class BoardController {
 	//조건에 따른 정렬
 	@GetMapping("/sort")
 	public List<BoardListDto> getSortList(@RequestParam String condition) {
+		logger.info("[getSortList] {}로 조회했습니다.", condition);
 		switch(condition) {
 		case "view" : //조회순
 			return boardService.viewList();
@@ -68,6 +72,7 @@ public class BoardController {
 
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[addBoard] {} 사용자가 {} 게시글을 생성했습니다.", user.getId(), title);
     	return response;
 	}
 	
@@ -77,7 +82,14 @@ public class BoardController {
 		boardService.deleteBoard(Long.parseLong(board_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteBoard] 사용자가 {}번 게시글을 삭제했습니다.", board_id);
     	return response;
 	}
 	
+	//게시글 검색
+	@GetMapping("/search")
+	public List<BoardListDto> getSearchBoardList(@RequestParam String search) {
+		logger.info("[getSearchBoardList] 사용자가 {}을 검색하였습니다.", search);
+		return boardService.searchBoard(search);
+	}
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,7 @@ public class MessageController {
 
     private final MessageService messageService;
     private final UserService userService;
+    private Logger logger = LoggerFactory.getLogger(MessageController.class);
 
     //쪽지 작성
     @PostMapping("/write")
@@ -46,6 +49,7 @@ public class MessageController {
         
         Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[writeMessage] {} 사용자가 {} 사용자에게 발신.", sender.getId(), receiver.getId());
     	return response;
     }
 

@@ -3,6 +3,8 @@ package com.asd.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ public class ReviewController {
 	private final CampingService campingService;
 	private final UserService userService;
 	private final ReviewService reviewService;
+	private Logger logger = LoggerFactory.getLogger(ReviewController.class);
 	
 	//후기 등록
 	@PostMapping("/add")
@@ -42,6 +45,7 @@ public class ReviewController {
 		campingService.addCamping(camping); //cascade를 통한 후기 저장
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[addReview] {} 사용자가 {} 캠핑의 후기를 작성했습니다.", user.getId(), camping_id);
     	return response;
 	}
 	
@@ -51,6 +55,7 @@ public class ReviewController {
 		reviewService.deleteReview(Long.parseLong(review_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteReview] 사용자가 {} 후기를 삭제합니다.", review_id);
     	return response;
 	}
 }

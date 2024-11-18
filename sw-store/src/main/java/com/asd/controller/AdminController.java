@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +34,7 @@ public class AdminController {
 	private final ReviewService reviewService;
 	private final OrderService orderService;
 	private final CategoryService categoryService;
+	private Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	//상품 등록
 	@PostMapping("/add")
@@ -53,6 +56,7 @@ public class AdminController {
 		
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[addProduct] 관리자가 {} 상품을 추가했습니다.", productRequestDto.getName());
     	return response;
 	}
 	
@@ -74,6 +78,7 @@ public class AdminController {
 		productService.modifyProduct(product);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[modifyProduct] 관리자가 {} 상품을 수정했습니다.", productRequestDto.getId());
     	return response;
 	}
 	
@@ -83,6 +88,7 @@ public class AdminController {
 		productService.deleteProduct(Long.parseLong(product_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteProduct] 관리자가 {} 상품을 삭제했습니다.", product_id);
     	return response;
 	}
 	
@@ -92,6 +98,7 @@ public class AdminController {
 		reviewService.deleteReview(Long.parseLong(review_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[deleteReview] 관리자가 {} 후기를 삭제했습니다.", review_id);
     	return response;
 	}
 	
@@ -113,6 +120,7 @@ public class AdminController {
 		orderService.approvalOrder(Long.parseLong(order_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[approvalOrder] 관리자가 {} 주문을 승인했습니다.", order_id);
     	return response;
 	}
 	

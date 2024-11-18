@@ -22,4 +22,7 @@ public interface CampingRepository extends JpaRepository<Camping, Long>{
 	List<Camping> findCampingOrderByBookmarkCount(@Param("district") String district);
 	
 	Optional<Camping> findById(Long id);
+	
+	@Query("SELECT c FROM Camping c WHERE c.name LIKE %?1% OR c.address LIKE %?1%")
+    List<Camping> findByNameOrAddressContaining(String keyword);
 }
