@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        TARGET_SERVICE = ""
+        DOCKERHUB_CREDENTIALS = credentials('docker-token')
     }
 
     stages {
@@ -28,6 +28,12 @@ pipeline {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
             }
         }
+
+        stage('Docker Login'){
+          steps{
+              bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+          }
+      }
 
         stage('Build Docker Image') {
             steps {
@@ -57,15 +63,13 @@ pipeline {
                     if (env.TRIGGER_CAUSE.contains("GitHub push")) {
                         echo "Triggered by GitHub Push"
                     } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
-                        withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_PASSWORD')]) {
-                            bat "echo $DOCKER_PASSWORD | docker login -u cmuname --password-stdin"
-                            bat "docker push cmuname/sw-docker/sw-camping-image:latest"
-                            bat "docker push cmuname/sw-docker/sw-board-image:latest"
-                            bat "docker push cmuname/sw-docker/sw-store-image:latest"
-                            bat "docker push cmuname/sw-docker/sw-auth-image:latest"
-                            bat "docker push cmuname/sw-docker/sw-gateway-image:latest"
-                            bat "docker push cmuname/sw-docker/sw-react-image:latest"
-                        }
+                        bat "echo $DOCKER_PASSWORD | docker login -u cmuname --password-stdin"
+                        bat "docker push cmuname/sw-docker/sw-camping-image:latest"
+                        bat "docker push cmuname/sw-docker/sw-board-image:latest"
+                        bat "docker push cmuname/sw-docker/sw-store-image:latest"
+                        bat "docker push cmuname/sw-docker/sw-auth-image:latest"
+                        bat "docker push cmuname/sw-docker/sw-gateway-image:latest"
+                        bat "docker push cmuname/sw-docker/sw-react-image:latest"
                         echo "Triggered by Manual Build"
                     } else {
                         echo env.TRIGGER_CAUSE
@@ -82,15 +86,13 @@ pipeline {
                         echo "Triggered by GitHub Push"
                     } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
                         echo "Triggered by Manual Build"
-                        withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_PASSWORD')]) {
-                            bat "echo $DOCKER_PASSWORD | docker login -u cmuname --password-stdin"
-                            bat "docker pull cmuname/sw-docker/sw-camping-image:latest"
-                            bat "docker pull cmuname/sw-docker/sw-board-image:latest"
-                            bat "docker pull cmuname/sw-docker/sw-store-image:latest"
-                            bat "docker pull cmuname/sw-docker/sw-auth-image:latest"
-                            bat "docker pull cmuname/sw-docker/sw-gateway-image:latest"
-                            bat "docker pull cmuname/sw-docker/sw-react-image:latest"
-                        }
+                        bat "echo $DOCKER_PASSWORD | docker login -u cmuname --password-stdin"
+                        bat "docker pull cmuname/sw-docker/sw-camping-image:latest"
+                        bat "docker pull cmuname/sw-docker/sw-board-image:latest"
+                        bat "docker pull cmuname/sw-docker/sw-store-image:latest"
+                        bat "docker pull cmuname/sw-docker/sw-auth-image:latest"
+                        bat "docker pull cmuname/sw-docker/sw-gateway-image:latest"
+                        bat "docker pull cmuname/sw-docker/sw-react-image:latest"
                         echo "Triggered by Manual Build"
                     } else {
                         echo env.TRIGGER_CAUSE
@@ -100,16 +102,17 @@ pipeline {
         }
 
         stage('Run Docker Compose') {
-            when {
-                expression {
-                    env.TARGET_SERVICE == "all-services"
-                }
-            }
             steps {
-                sh """
-                docker-compose down || true
-                docker-compose up -d
-                """
+                script {
+                    env.TRIGGER_CAUSE = currentBuild.getBuildCauses()[0].shortDescription
+                    if (env.TRIGGER_CAUSE.contains("GitHub push")) {
+                        echo "Triggered by GitHub Push"
+                    } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
+                        bat "docker-compose up -d"
+                    } else {
+                        echo env.TRIGGER_CAUSE
+                    }
+                }
             }
         }
     }
@@ -119,7 +122,6 @@ pipeline {
             echo 'Pipeline execution finished.'
         }
         success {
-            echo "TARGET_SERVICE is now: ${env.TARGET_SERVICE}"
             echo 'Pipeline executed successfully!'
         }
         failure {
