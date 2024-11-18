@@ -19,6 +19,7 @@ pipeline {
                     } else {
                         echo env.TRIGGER_CAUSE
                     }
+                    echo "TARGET_SERVICE is now: ${env.TARGET_SERVICE}"
                 }
             }
         }
