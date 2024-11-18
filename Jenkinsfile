@@ -14,10 +14,10 @@ pipeline {
                         env.TARGET_SERVICE = "specific-service"
                         echo "Triggered by GitHub Push"
                     } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
-                        env.TARGET_SERVICE = "all-service"
+                        env.TARGET_SERVICE = "all-services"
                         echo "Triggered by Manual Build"
                     } else {
-                        echo "Triggered by Other Causes"
+                        echo env.TARGET_SERVICE
                     }
                 }
             }
