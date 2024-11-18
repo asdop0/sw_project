@@ -1,0 +1,65 @@
+services:
+  camping:
+    image: sw-camping-image:latest
+    container_name: camping-container
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - C:\asd\logs:/app/logs
+    networks:
+      - backend
+
+  board:
+    image: sw-board-image:latest
+    container_name: board-container
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    volumes:
+      - C:\asd\logs:/app/logs
+    networks:
+      - backend
+
+  store:
+    image: sw-store-image:latest
+    container_name: store-container
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    volumes:
+      - C:\asd\logs:/app/logs
+    networks:
+      - backend
+
+  auth:
+    image: sw-auth-image:latest
+    container_name: auth-container
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+        - C:\asd\logs:/app/logs
+    networks:
+      - backend
+
+  gateway:
+    image: sw-gateway-image:latest
+    container_name: gateway-container
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - frontend
+      - backend
+
+  react:
+    image: sw-react-image:latest
+    container_name: react-container
+    ports:
+      - "5173:5173"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - frontend
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
