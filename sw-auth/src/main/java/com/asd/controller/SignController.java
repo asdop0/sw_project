@@ -86,28 +86,22 @@ public class SignController {
     //리프레쉬 토큰을 통한 액세스 토큰 재발급
     @PostMapping("/refresh")
     public SignInResultDto refresh(HttpServletRequest request) {
-    	logger.info("[refresh] accessToken 재발급을 수행합니다.");
     	SignInResultDto SignInResultDto = signService.refresh(request);
-    	logger.info("[refresh] accessToken 재발급을 완료했습니다.");
     	return SignInResultDto;
     }
     
     //로그아웃
     @PostMapping("/sign-out")
     public boolean signOut(HttpServletRequest request) {
-    	logger.info("[signOut] signOut을 수행합니다.");
     	signService.signOut(request);
-    	logger.info("[signOut] signOut을 완료했습니다.");
     	return true;
     }
     
     //회원탈퇴
     @DeleteMapping("/delete")
     public Map<String, String> delete(HttpServletRequest request) {
-    	logger.info("[delete] delete을 수행합니다.");
     	Map<String, String> response = new HashMap<>();
     	signService.delete(request);
-    	logger.info("[delete] delete을 완료했습니다.");
     	response.put("check", "true");
     	return response;
     }
@@ -115,18 +109,15 @@ public class SignController {
     //아이디 중복 체크
     @PostMapping("/uidCheck") //중복된 아이디가 있으면 false 반환, 없으면 true 반환
     public Map<String, String> uidCheck(@RequestParam String uid) {
-    	logger.info("[uidCheck] uidCheck을 수행합니다.");
     	Map<String, String> response = new HashMap<>();
     	boolean bool = signService.uidCheck(uid);
     	response.put("check", String.valueOf(bool));
-    	logger.info("[uidCheck] uidCheck을 완료했습니다.");
     	return response;
     }
     
     //닉네임 중복 체크
     @PostMapping("/nicknameCheck") //중복된 닉네임이 있으면 false 반환, 없으면 true 반환
     public Map<String, String> nicknameCheck(@RequestParam String nickname) {
-    	logger.info("[nicknameCheck] nicknameCheck을 수행합니다.");
     	Map<String, String> response = new HashMap<>();
     	if (isInvalidName(nickname)) {
     		response.put("check", "false");
@@ -134,7 +125,6 @@ public class SignController {
         }
     	boolean bool = signService.nicknameCheck(nickname);
     	response.put("check", String.valueOf(bool));
-    	logger.info("[nicknameCheck] nicknameCheck을 완료했습니다.");
     	return response;
     }
 }

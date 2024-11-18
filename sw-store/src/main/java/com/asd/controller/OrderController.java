@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,7 @@ public class OrderController {
 	private final UserService userService;
 	private final ProductService productService;
 	private final AddressService addressService;
+	private Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	//주문 등록 + 주문 내역 상세 등록
 	@PostMapping("/add")
@@ -67,6 +70,7 @@ public class OrderController {
 		orderService.addOrder(order);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[addOrder] {} 사용자가 {} 상품을 {}개 주문했습니다.", user.getId(), product_id, cnt);
     	return response;
 	}
 	
@@ -76,6 +80,7 @@ public class OrderController {
 		orderService.cancelOrder(Long.parseLong(order_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
+		logger.info("[cancelOrder] {} 주문이 취소되었습니다.", order_id);
     	return response;
 	}
 		

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:\\asd\\logs\\auth.log</file>
+        <file>/app/logs/auth.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>C:\\asd\\logs\\auth.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>/app/logs/auth.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
             <maxHistory>30</maxHistory>
         </rollingPolicy>

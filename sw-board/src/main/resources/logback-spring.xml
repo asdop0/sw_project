@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:\\asd\\logs\\project.log</file>
+        <file>/app/logs/board.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>C:\\asd\\logs\\project.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>/app/logs/board.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
