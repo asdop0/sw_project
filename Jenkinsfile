@@ -1,21 +1,16 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker-token')
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
-                echo "$DOCKERHUB_CREDENTIALS_PSW, $DOCKERHUB_CREDENTIALS_USR"
             }
         }
 
         stage('Docker Login'){
           steps{
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
+            withCredentials([usernamePassword(credentialsId: 'docker-token', 
                                    usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', 
                                    passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
             bat "docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin <<< \$DOCKERHUB_CREDENTIALS_PSW"
