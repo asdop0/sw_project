@@ -6,23 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Trigger Check') {
-            steps {
-                script {
-                    env.TRIGGER_CAUSE = currentBuild.getBuildCauses()[0].shortDescription
-                    if (env.TRIGGER_CAUSE.contains("GitHub push")) {
-                        env.TARGET_SERVICE = "specific-service"
-                        echo "Triggered by GitHub Push"
-                    } else if (env.TRIGGER_CAUSE.contains("Started by user")) {
-                        env.TARGET_SERVICE = "all-services"
-                        echo "Triggered by Manual Build"
-                    } else {
-                        echo env.TRIGGER_CAUSE
-                    }
-                    echo "TARGET_SERVICE is now: ${env.TARGET_SERVICE}"
-                }
-            }
-        }
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
@@ -31,6 +14,7 @@ pipeline {
 
         stage('Docker Login'){
           steps{
+            echo "$DOCKERHUB_CREDENTIALS_PSW, $DOCKERHUB_CREDENTIALS_USR"
               bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
           }
       }
