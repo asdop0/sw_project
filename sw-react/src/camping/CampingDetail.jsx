@@ -4,12 +4,14 @@ import "./Camping.css";
 import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
 import ReviewController from "../services/camping/ReviewController";
+import BookmarkApiClient from "../services/camping/BookmarkApiClient";
 
 const CampingDetail = () => {
   const { id } = useParams();
   const [camping, setCamping] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState("");
+  const [bookmarkCount, setBookmarkCount] = useState(0);  
   
   //api 호출
   useEffect(() => {
@@ -22,6 +24,7 @@ const CampingDetail = () => {
           } else {
             //캠핑 데이터 불러오기 성공
             setCamping(json);
+            fetchBookmarkCount();
           }
         });
       }
@@ -29,6 +32,26 @@ const CampingDetail = () => {
     // 리뷰 데이터 호출
     fetchReviews();
   }, []);
+
+  const fetchBookmarkCount = () => {
+    BookmarkApiClient.getBookmarkCount(id)
+      .then((res) => res.json())
+      .then((data) => {
+        setBookmarkCount(data.count);
+      })
+      .catch((err) => console.error("Failed to fetch bookmark count:", err));
+  };
+
+  const handleAddBookmark = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    BookmarkApiClient.addBookmark(accessToken, id)
+      .then((res) => {
+        if (res.ok) {
+          setBookmarkCount((prevCount) => prevCount + 1); // 카운트 증가
+        }
+      })
+      .catch((err) => console.error("Failed to add bookmark:", err));
+  };
 
   //서버에서 리뷰 가져오기
   const fetchReviews = () => {
@@ -74,6 +97,18 @@ const CampingDetail = () => {
 
         <h2 className="camping_name">
           {camping.name}
+          <button
+              className="bookmark_button"
+              onClick={handleAddBookmark}
+              aria-label="Add to bookmarks"
+            >
+              <img
+                src="/bookmark.png"
+                alt="Bookmark"
+                className="bookmark_icon"
+              />
+            </button>
+            <span className="bookmark_count">({bookmarkCount})</span>
         </h2>
 
         <p className="camping_address">

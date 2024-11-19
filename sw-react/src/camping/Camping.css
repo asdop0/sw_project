@@ -128,3 +128,15 @@
 .findway{
   width: 100px;
 }
+
+.bookmark_icon{
+  width: 15px;
+}
+
+.bookmark_button{
+  background-color: transparent;
+}
+
+.bookmark_count{
+  font-size: 14px;
+}
