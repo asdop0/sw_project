@@ -1,5 +1,5 @@
 class ProductApiClient {
-    static SERVER_URL = "http://gateway-container:8000";
+    static SERVER_URL = "http://host.docker.internal:8000";
     static API = "/product";
     static LIST = "/list";
     static CATEGORY = "/category";

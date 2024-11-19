@@ -42,6 +42,8 @@ services:
   gateway:
     image: cmuname/sw-docker:gateway
     container_name: gateway-container
+    ports:
+      - "8000:8000"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     networks:
@@ -52,7 +54,7 @@ services:
     image: cmuname/sw-docker:react
     container_name: react-container
     ports:
-      - "50000:80"
+      - "5173:80"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     networks:
