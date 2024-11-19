@@ -1,5 +1,5 @@
 class ProductApiClient {
-    static SERVER_URL = "http://localhost:8000";
+    static SERVER_URL = "http://gateway-contaier:8000";
     static API = "/product";
     static LIST = "/list";
     static CATEGORY = "/category";
