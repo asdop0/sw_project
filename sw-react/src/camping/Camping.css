@@ -104,7 +104,9 @@
 
 .campingImg {
   width: 480px;
+  height: 300px;
   border-radius: 10px;
+  margin-top: 100px;
 }
 
 .marker{

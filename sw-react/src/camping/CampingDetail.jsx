@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import "./Camping.css";
 import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
+import ReviewController from "../services/camping/ReviewController";
 
 const CampingDetail = () => {
   const { id } = useParams();
   const [camping, setCamping] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState("");
   
   //api 호출
   useEffect(() => {
@@ -23,11 +26,38 @@ const CampingDetail = () => {
         });
       }
     });
+    // 리뷰 데이터 호출
+    fetchReviews();
   }, []);
 
-  const createGoogleMapUrl = () => {
+  //서버에서 리뷰 가져오기
+  const fetchReviews = () => {
+    fetch(`${ReviewController.SERVER_URL}${ReviewController.API}?camping_id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data); //가져온 데이터 저장하여 출력력
+      })
+      .catch((err) => console.error("Failed to fetch reviews:", err));
+  };
+
+  //새 리뷰
+  const handleAddReview = () => {
+    const accessToken = localStorage.getItem("accessToken"); // 토큰 저장 위치 확인 필요
+    ReviewController.addReview(accessToken, id, newReview)
+      .then((res) => {
+        if (res.ok) {
+          setNewReview("");
+          fetchReviews(); // 리뷰 새로고침
+        } else {
+          console.error("Failed to add review.");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const createKakaoMapUrl = () => {
   if (camping && camping.latitude && camping.longitude) {
-    const url = `https://www.google.com/maps?q=${camping.latitude},${camping.longitude}`;
+    const url = `https://map.kakao.com/link/map/${camping.name},${camping.latitude},${camping.longitude}`;
     console.log("Generated URL:", url);
     return url;
   }
@@ -61,15 +91,34 @@ const CampingDetail = () => {
           관광사업자로 등록된 인증 캠핑장 <a href="https://gocamping.or.kr/">바로가기</a>
         </p>
         
-
         <p className="camping_icon">
           <a href={camping.homepage} target="_blank">
            <img className="book" src="/book.png" />
           </a>
-          <a href={createGoogleMapUrl()} target="_blank" >
+          <a href={createKakaoMapUrl()} target="_blank" >
             <img className="findway" src="/findway.png"  />
           </a>
         </p>
+
+        <div className="reviews_section">
+          <h3>리뷰</h3>
+          <ul className="reviews_list">
+            {reviews.map((review) => (
+              <li key={review.id} className="review_item">
+              {review.content}
+              </li>
+            ))}
+          </ul>
+
+          <div className="review_input">
+            <textarea
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              placeholder="리뷰를 작성하세요"
+            ></textarea>
+          </div>
+          <button onClick={handleAddReview}>리뷰 추가</button>
+        </div>
       </div>
     ) : null
   );

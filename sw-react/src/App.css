@@ -954,3 +954,34 @@
   left: 930px;
   top: 40px;
 }
+
+.reviews_section {
+  margin-top: 20px;
+}
+
+.reviews_list {
+  list-style: none;
+  padding: 0;
+}
+
+.review_item {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.review_input textarea {
+  width: 500px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.review_input button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
