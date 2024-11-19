@@ -35,24 +35,75 @@
     text-align: center;
   }
   
-  .product_image {
+  .product_detail .product_image {
     width: 150px;
     height:  150px;
-    border-radius: 10px;
+    border-radius: 10px;  
   }
   
-  .product_name {
-    font-size: 16px;
-    margin: 16px 0;
-    /* font-family: 'IBM Plex Sans KR', serif;
-    font-weight: 700; */
+  .product_detail .productImg{
+    position: relative;
+    right: 25%;
   }
   
-  .product_price {
+  .product_detail .product_name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    word-break: break-word; /* 단어를 강제로 나눠 다음 줄로 넘김 */
+    max-width: 300px; /* 글자 줄바꿈을 위한 최대 너비 설정 */
+    white-space: normal; /* 기본 줄바꿈 허용 */
+    overflow-wrap: break-word; /* 14글자 초과 시 강제 줄바꿈 */
+    position: absolute;
+    left: 55%;
+    top: 30%;
+  }
+  
+  .product_detail .product_price {
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold;
+    position: absolute;
+    left: 56%;
+    top: 40%;
   }
+  .product_detail .delivery_price{
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    position: absolute;
+    left: 56%;
+    top: 45%;
+  }
+
+  .product_detail .quantity_button_decrease{
+    position: absolute;
+    left: 56.5%;
+    top: 54%;
+  }
+
+  .product_detail .quantity_display{
+    position: absolute;
+    left: 60%;
+    top: 55%;
+  }
+
+  .product_detail .quantity_button_increase{
+    position: absolute;
+    left: 61%;
+    top: 54%;
+  }
+
+  .product_detail .total_price{
+    position: absolute;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: bold; 
+    left: 73%;
+    top: 54%;
+  }
+
+ 
 
 .category_filter button {
     position: relative;
@@ -71,3 +122,41 @@
   flex: 0 0 23%; /* 한 줄에 4개가 들어가도록 크기 조정 */
   margin: 1%; /* 카드 사이의 간격을 위한 마진 */
 }
+
+.product_bookmark_icon{
+  width: 15px;
+}
+
+.product_bookmark_button{
+  background-color: transparent;
+}
+
+.bookmark_count{
+  font-size: 14px;
+}
+
+.product_buy_button{
+  position: absolute;
+  left: 57%;
+  top: 61%;
+  background-color :rgb(0, 0, 0);
+  color: #ffffff;
+  width: 7%;
+  border-radius: 0px;
+}
+.product_cart{
+  position: absolute;
+  left: 64%;
+  top: 61%;
+  width: 7%;
+  border-radius: 0px;
+}
+
+.product_bookmark{
+  position: absolute;
+  left: 71%;
+  top: 61%;
+  width: 7%;
+  border-radius: 0px;
+}
+

@@ -89,8 +89,6 @@ const CampingDetail = () => {
   return (
     camping ? (
       <div className="camping_detail">
-        {/* <img src={camping.image} alt={camping.name} className="camping_image" /> */}
-        
         <img className="campingImg" 
           src="/트리앤캠프스토리.png">
         </img>
@@ -98,7 +96,7 @@ const CampingDetail = () => {
         <h2 className="camping_name">
           {camping.name}
           <button
-              className="bookmark_button"
+              className="camping_bookmark_button"
               onClick={handleAddBookmark}
               aria-label="Add to bookmarks"
             >
