@@ -1,11 +1,18 @@
-FROM node:20.13.1
-# set working directory
+FROM node:20 AS build
+
 WORKDIR /app
-COPY . . 
-COPY package.json .
-COPY package-lock.json .
-RUN rm -rf node_modules
+
+COPY package.json package-lock.json ./
+
 RUN npm install
 
-# 앱 실행
-ENTRYPOINT ["npm", "run", "dev"]
+COPY . .
+
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+
+CMD ["nginx", "-g", "daemon off;"]

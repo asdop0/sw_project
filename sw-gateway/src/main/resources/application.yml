@@ -62,7 +62,7 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://react-container:5173"
+            allowedOrigins: "http://react-container:80"
             allowedHeaders:
               - "*"
             allowedMethods:
@@ -74,7 +74,7 @@ spring:
         - name: Retry
           args:
             retries: 3
-            methods: GET,POST
+            methods: GET,POST, DELETE
 
 jwt:
   secret: 5asf46g8asg56hesh8j65j4g23agw874rq564asg56h48ry47sd65g4ag8q
