@@ -53,11 +53,12 @@ pipeline {
         stage('Pull Docker Image') {
             steps{
                 script {
-                    def pid = sh(script: "lsof -t -i:5173", returnStdout: true).trim()
-                    if (pid) {
+                     def pid = sh(script: "lsof -t -i:5173", returnStdout: true, returnStatus: true).trim()
+                    if (pid != "1") {
                         sh "kill ${pid}"
+                        echo "Process on port 5173 killed."
                     } else {
-                        echo "No process found on port 5173"
+                        echo "No process found on port 5173."
                     }
                 }
                 dir('sw-react') { 
