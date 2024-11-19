@@ -5,8 +5,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
-                sh 'sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/git_docker/sw-react'
-                sh 'sudo chmod -R 775 /var/lib/jenkins/workspace/git_docker/sw-react'
             }
         }
 
