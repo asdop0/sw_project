@@ -47,21 +47,8 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     networks:
-      - frontend
       - backend
-
-  react:
-    image: cmuname/sw-docker:react
-    container_name: react-container
-    ports:
-      - "5173:80"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    networks:
-      - frontend
 
 networks:
   backend:
-    driver: bridge
-  frontend:
     driver: bridge
