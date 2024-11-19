@@ -10,10 +10,6 @@ import Store from "./store/Store";
 import MyPage from "./mypage/MyPage";
 import ProductDetail from "./store/ProductDetail";
 import Used_store from "./used_store/Used_store";
-import Delivery from "./mypage/Delivery";
-import AddAddress_Modal from "./modal/AddAdress_Modal";
-import Note from "./mypage/Note";
-import CampingDetail from "./camping/CampingDetail";
 
 
 function App() {
@@ -37,11 +33,6 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/used_store" element={<Used_store />} />
-        <Route path="/delivery" element={<Delivery />} />
-        <Route path="/adddelivery" element={<AddAddress_Modal/>}/>
-        <Route path="/note" element={<Note />} />
-        <Route path="/camping/:id" element={<CampingDetail />} />
-        
         {/* <Route path="/sign_up" element={<Sign_up />} /> */}
       </Routes>
       <Background /> 

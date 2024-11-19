@@ -1,3 +1,4 @@
+// src/components/ProductDetail.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Store.css";
@@ -30,8 +31,6 @@ const ProductDetail = () => {
         {/* <img src={product.image} alt={product.name} className="product_image" /> */}
         <h2 className="product_name">{product.name}</h2>
         <p className="product_price">{product.price} 원</p>
-        <p className="product_description">{product.description}</p>
-        <button className="product_buy_button">구매하기</button>
       </div>
     ) : null
   );

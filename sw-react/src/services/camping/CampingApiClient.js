@@ -19,15 +19,23 @@ class CampingApiClient {
         });
     } 
     //조건에 따른 캠핑장 조회
-    static getSortList(district, condition) {
-        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.SORT + "?district=" + district + "&conditio=" +condition, {
-            method: 'GET'
+    static getSortList(id, password) {
+        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.IN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id, password})
         });
     } 
     //캠핑장 상세정보
-    static viewCamping(camping_id) {
-        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.VIEW + "?camping_id=" +camping_id,  {
-            method: 'GET',
+    static viewCamping(id, password) {
+        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.IN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id, password})
         });
     } 
 }

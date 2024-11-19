@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CampingApiClient from "../services/camping/CampingApiClient";
-import CampingCard from "../camping/CampingCard";
-import "../camping/Camping.css";
 
 const MapWithClickableRegions = () => {
   const [hoveredCity, setHoveredCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('강원도'); // 선택된 지역 상태 추가
-  const [regionData, setRegionData] = useState(null); // 출력할 데이터 상태 추가
-  
+
   const handleMouseEnter = (cityName) => {
     setHoveredCity(cityName); // 마우스를 올리면 해당 도시 이름 저장
   };
@@ -25,41 +21,6 @@ const MapWithClickableRegions = () => {
     return hoveredCity === cityName ? 'rgba(120, 130, 140, 0.5)' : 'transparent';
   };
 
-  //api 호출
-  useEffect(() => {
-    if(selectedRegion === '강원도') {
-      CampingApiClient.getCampingList().then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              setRegionData(json);
-            }
-          });
-        }
-      });
-    } else if (selectedRegion === '태백시') {
-      setRegionData([]); // 태백시는 캠핑 데이터 없음
-    } else {
-      CampingApiClient.getDistrictList(selectedRegion).then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              setRegionData(json);
-            }
-          });
-        }
-      });
-    }
-  }, [selectedRegion]);
-
   return (
     
     <div className="map" style={{ position: 'relative' }}>
@@ -76,7 +37,7 @@ const MapWithClickableRegions = () => {
       {/* SVG 오버레이 */}
       <svg
           // 이미지와 동일한 크기로 설정
-        style={{ position: 'absolute', top: '47', left: '400', pointerEvents: 'none',width:"480px", height:"357px" }}
+        style={{ position: 'absolute', top: '47', left: '42', pointerEvents: 'none',width:"480px", height:"357px" }}
       >
         {/* 양구군 */}
         <polygon
@@ -366,33 +327,17 @@ const MapWithClickableRegions = () => {
           onMouseEnter={() => handleMouseEnter('태백시')}
           onMouseLeave={handleMouseLeave}
           onClick={() => setSelectedRegion('태백시')}
-          // onClick={(alert("정보 없음"))}
         />
 
         {/* 다른 지역들도 동일하게 추가 */}
       </map>
+
       {/* 선택된 지역의 캠핑 데이터 출력 */}
        {selectedRegion && (
         <div>
-          <h3 className='selectCampingList'>{selectedRegion}의 캠핑장 리스트</h3>
+          <h3>{selectedRegion}의 캠핑장 리스트</h3>
         </div>
       )} 
-      <div className="camping_list">
-        {/* {regionData && regionData.map((camping) => (
-          <div className="product_card_wrapper" key={camping.id}>
-          <CampingCard key={camping.id} camping={camping} />
-          </div>
-        ))} */}
-        {selectedRegion === '태백시' ? (
-          <p>데이터 없음</p> // 태백시의 경우 데이터 없음 표시
-        ) : regionData && regionData.length > 0 ? (
-          regionData.map((camping) => (
-            <div className="product_card_wrapper" key={camping.id}>
-              <CampingCard key={camping.id} camping={camping} />
-            </div>
-          ))
-        ) : null}
-      </div>
     </div>
     
   );

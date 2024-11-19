@@ -2,11 +2,9 @@ import React,{useState} from 'react';
 import './Delivery.css'; // 같은 폴더 내 CSS 파일을 가져옴
 import {Link} from "react-router-dom";
 import Adress_Modal from '../modal/Adress_Modal';
-import Input_information from '../modal/Input_information';
 
 const Delivery = () => {
     const [showAdressModal, setShowAdressModal] = useState(false);
-    const [showInputModal, setShowInputModal] = useState(false);
    
     /* 배송지 저장 test */
     const [selectedAddress, setSelectedAddress] = useState(''); 
@@ -15,10 +13,6 @@ const Delivery = () => {
     const handleOpenAdressModal = () =>{
         setShowAdressModal(true)
       }
-
-    const handleOpenInputModal = () => {
-      setShowInputModal(true); 
-    };
 
 
     /* 배송지 저장 test */
@@ -53,11 +47,8 @@ const Delivery = () => {
           </ul>
       </aside>
       <main className="mypage_content">
-        {/* <div className="delivery_button_container">
+        <div className="delivery_button_container">
           <button className="add_delivery_button"  onClick={handleOpenAdressModal}>배송지 추가</button>
-        </div> */}
-        <div className="delivery2_button_container">
-          <button className= "add_delivery_button2"onClick={handleOpenInputModal}>배송지 추가</button>
         </div>
         
         {/* /배송지 저장 test  */}
@@ -70,12 +61,11 @@ const Delivery = () => {
         
       </main>
       <Adress_Modal show={showAdressModal} 
+      
     //{/* /배송지 저장 test  */}
       onAddressSelect={handleAddressSelect}/>
     {/* /배송지 저장 test  */}
-    {showInputModal && (
-        <Input_information show={showInputModal} />
-      )}
+        
     </div>
   );
 };
