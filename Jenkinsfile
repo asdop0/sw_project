@@ -52,7 +52,7 @@ pipeline {
 
         stage('Pull Docker Image') {
             steps{
-                sh "kill $(lsof -t -i:3000)"
+                sh "kill \$(lsof -t -i:3000)"
                 dir('sw-react') { 
                     sh 'npm run dev &'
                 }
