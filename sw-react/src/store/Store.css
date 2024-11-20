@@ -29,8 +29,9 @@
     justify-content: space-around;
   }
   .product_detail {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 1000px;
+    max-height: 1000px;
+    /* margin: 0 auto; */
     padding: 20px;
     text-align: center;
   }
@@ -43,7 +44,8 @@
   
   .product_detail .productImg{
     position: relative;
-    right: 25%;
+    right: 150px;
+    top: 100px;
   }
   
   .product_detail .product_name {
@@ -55,8 +57,8 @@
     white-space: normal; /* 기본 줄바꿈 허용 */
     overflow-wrap: break-word; /* 14글자 초과 시 강제 줄바꿈 */
     position: absolute;
-    left: 55%;
-    top: 30%;
+    right: 600px;
+    top: 200px;
   }
   
   .product_detail .product_price {
@@ -64,34 +66,34 @@
     color: rgb(0, 0, 0);
     font-weight: bold;
     position: absolute;
-    left: 56%;
-    top: 40%;
+    right: 770px;
+    top: 300px;
   }
   .product_detail .delivery_price{
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold;
     position: absolute;
-    left: 56%;
-    top: 45%;
+    right: 437px;
+    top: 350px;
   }
 
   .product_detail .quantity_button_decrease{
     position: absolute;
-    left: 56.5%;
-    top: 54%;
+    left: 1010px;
+    top: 420px;
   }
 
   .product_detail .quantity_display{
     position: absolute;
-    left: 60%;
-    top: 55%;
+    left: 1070px;
+    top: 430px;
   }
 
   .product_detail .quantity_button_increase{
     position: absolute;
-    left: 61%;
-    top: 54%;
+    left: 1090px;
+    top: 420px;
   }
 
   .product_detail .total_price{
@@ -99,8 +101,8 @@
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold; 
-    left: 73%;
-    top: 54%;
+    right: 550px;
+    top: 415px;
   }
 
  
@@ -137,8 +139,8 @@
 
 .product_buy_button{
   position: absolute;
-  left: 57%;
-  top: 61%;
+  left: 1010px;
+  top: 500px;
   background-color :rgb(0, 0, 0);
   color: #ffffff;
   width: 7%;
@@ -146,17 +148,43 @@
 }
 .product_cart{
   position: absolute;
-  left: 64%;
-  top: 61%;
+  left: 1144px;
+  top: 500px;
   width: 7%;
   border-radius: 0px;
 }
 
 .product_bookmark{
   position: absolute;
-  left: 71%;
-  top: 61%;
+  left: 1278px;
+  top: 500px;
   width: 7%;
   border-radius: 0px;
 }
 
+.product_info_section {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  margin-top: 100px;
+}
+
+.info_block h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+  margin-left: 100px;
+}
+
+.info_block p,
+.info_block ul {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin-left: 100px;
+}
+
+.info_block ul {
+  padding-left: 20px;
+  list-style: disc;
+  margin-left: 100px;
+}

@@ -86,8 +86,39 @@ const ProductDetail = () => {
         <button className="product_buy_button">구매하기</button>
         <button className="product_cart">장바구니</button>
         <button className="product_bookmark">찜</button>
+{/*         
+        <sapn className="product_description">{product.description}</sapn> <br/> */}
         
-        <p className="product_description">{product.description}</p>
+        <div className="product_info_section">
+        <div className="info_block">
+          <h3>배송안내</h3>
+          <p>제품 수령 후 구성품을 꼭 확인해주세요.</p>
+          <p>총 결제금액 50,000원 미만 배송비 3,000원이 청구됩니다.</p>
+          <p>제품에 따라 유통/배송일정이 상이할 수 있습니다.</p>
+        </div>
+
+        <div className="info_block">
+          <h3>교환/반품안내</h3>
+          <p>교환/반품이 가능한 경우:</p>
+          <ul>
+            <li>단순 변심으로 인한 교환/반품은 구매자 부담</li>
+            <li>상품 하자 또는 오배송은 판매자가 부담</li>
+          </ul>
+          <p>교환/반품이 불가능한 경우:</p>
+          <ul>
+            <li>상품을 사용했거나 구성품이 훼손된 경우</li>
+            <li>포장을 개봉하여 상품 가치가 감소한 경우</li>
+          </ul>
+        </div>
+
+        <div className="info_block">
+          <h3>A/S 안내</h3>
+          <p>제품 A/S는 반드시 손상된 제품이 있고 영수증이 필요합니다.</p>
+          <p>자세한 사항은 고객센터로 문의해주세요.</p>
+        </div>
+        
+      </div>
+
         
       </div>
       
