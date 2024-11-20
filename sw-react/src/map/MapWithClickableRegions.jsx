@@ -47,9 +47,7 @@ const MapWithClickableRegions = () => {
           });
         }
       });
-    } else if (selectedRegion === '태백시') {
-      setRegionData([]); // 태백시는 캠핑 데이터 없음
-    } else {
+    }  else {
       CampingApiClient.getDistrictList(selectedRegion).then(res => {
         if(res.ok) {
           res.json().then(json => {
@@ -378,27 +376,29 @@ const MapWithClickableRegions = () => {
         {/* 다른 지역들도 동일하게 추가 */}
       </map>
       {/* 선택된 지역의 캠핑 데이터 출력 */}
-       {selectedRegion && (
-        <div>
-          <h3 className='selectCampingList'>{selectedRegion}의 캠핑장 리스트</h3>
-          <select 
-      className="category_Latest" 
-      value={selectedOption} 
-      onChange={handleSelectChange}
-    >
-      <option value="최신">최신</option>
-      <option value="후기순">후기순</option>
-      <option value="댓글순">댓글순</option>
-    </select>
-        </div>
+      {selectedRegion && (
+      <div>
+         <h3 className="selectCampingList">{selectedRegion}의 캠핑장 리스트</h3>
+         {selectedRegion !== '강원도' && ( // '강원도'일 때 select 옵션 숨기기
+         <select 
+            className="category_Latest" 
+            value={selectedOption} 
+            onChange={handleSelectChange}
+          >
+          <option value="최신">최신</option>
+          <option value="후기순">후기순</option>
+          <option value="댓글순">댓글순</option>
+        </select>
+        )}
+      </div>
       )} 
       <div className="camping_list">
-        {/* {regionData && regionData.map((camping) => (
+        {regionData && regionData.map((camping) => (
           <div className="product_card_wrapper" key={camping.id}>
           <CampingCard key={camping.id} camping={camping} />
           </div>
-        ))} */}
-        {selectedRegion === '태백시' ? (
+        ))}
+        {/* {selectedRegion === '태백시' ? (
           <p>데이터 없음</p> // 태백시의 경우 데이터 없음 표시
         ) : regionData && regionData.length > 0 ? (
           regionData.map((camping) => (
@@ -406,7 +406,7 @@ const MapWithClickableRegions = () => {
               <CampingCard key={camping.id} camping={camping} />
             </div>
           ))
-        ) : null}
+        ) : null} */}
       </div>
     </div>
     
