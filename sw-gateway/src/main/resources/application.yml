@@ -62,7 +62,9 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://host.docker.internal:5173"
+            allowedOrigins: 
+              - "http://host.docker.internal:5173"
+              - "http://localhost:5173" 
             allowedHeaders:
               - "*"
             allowedMethods:
