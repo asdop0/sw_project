@@ -7,6 +7,12 @@ const MapWithClickableRegions = () => {
   const [hoveredCity, setHoveredCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('강원도'); // 선택된 지역 상태 추가
   const [regionData, setRegionData] = useState(null); // 출력할 데이터 상태 추가
+
+  const [selectedOption, setSelectedOption] = useState('최신');
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   
   const handleMouseEnter = (cityName) => {
     setHoveredCity(cityName); // 마우스를 올리면 해당 도시 이름 저장
@@ -375,6 +381,15 @@ const MapWithClickableRegions = () => {
        {selectedRegion && (
         <div>
           <h3 className='selectCampingList'>{selectedRegion}의 캠핑장 리스트</h3>
+          <select 
+      className="category_Latest" 
+      value={selectedOption} 
+      onChange={handleSelectChange}
+    >
+      <option value="최신">최신</option>
+      <option value="후기순">후기순</option>
+      <option value="댓글순">댓글순</option>
+    </select>
         </div>
       )} 
       <div className="camping_list">

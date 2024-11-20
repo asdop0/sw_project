@@ -4,7 +4,7 @@ import Background from "./back/Background";
 import Login from "./Login";
 import MapWithClickableRegions from "./map/MapWithClickableRegions";
 // import { Sign_up } from "./Sign_up";
-import BackImg from "./back/BackImg";
+// import BackImg from "./back/BackImg";
 import BottomBar from "./bottombar/BottomBar";
 import Store from "./store/Store";
 import MyPage from "./mypage/MyPage";
@@ -31,7 +31,8 @@ function App() {
 
       {/* Routes 설정 */}
       <Routes>
-        <Route path="/" element={<> <Background /> <MapWithClickableRegions /> <BackImg selectedRegion={selectedRegion}/> <BottomBar /> </>} />
+        {/* <BackImg selectedRegion={selectedRegion}/> 제거 */}
+        <Route path="/" element={<> <Background /> <MapWithClickableRegions /> <BottomBar /> </>} /> 
         <Route path="/login" element={<Login />} />
         <Route path="/store" element={<Store/>} />
         <Route path="/mypage" element={<MyPage />} />
