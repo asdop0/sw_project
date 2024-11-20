@@ -54,16 +54,16 @@ pipeline {
             steps{
                 script {
                     try {
-                        def pid = sh(script: "lsof -t -i:5173", returnStdout: true).trim()
+                        def pid = sh(script: "sudo lsof -t -i:5173", returnStdout: true).trim()
                         echo "Port 5173 is in use by process ID: ${pid}"
-                        sh "kill ${pid}"
+                        sh "sudo kill ${pid}"
                         echo "Process on port 5173 killed."
                     } catch (Exception e) {
                         echo "Port 5173 is not in use."
                     }
                 }
                 dir('sw-react') { 
-                    sh 'npm run dev &'
+                    sh 'sudo npm run dev &'
                 }
                 sh "docker pull cmuname/sw-docker:camping"
                 sh "docker pull cmuname/sw-docker:board"
