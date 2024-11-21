@@ -15,14 +15,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CampingReviewDto {
 	private Long id;
-	private String userName;
+	private String nickname;
 	private LocalDateTime writeDate;
 	private String content;
 	
 	public static CampingReviewDto toDto(CampingReview campingReview) {
 		return new CampingReviewDto(
 			campingReview.getId(),
-			campingReview.getUser().getName(),
+			campingReview.getUser().getNickname(),
 			campingReview.getWriteDate(),
 			campingReview.getContent()
 		);

@@ -61,7 +61,7 @@ public class SignService {
         SignInResultDto signInResultDto = SignInResultDto.builder()
                 .refreshToken(jwtTokenProvider.createRefreshToken(String.valueOf(user.getUid()), user.getRoles()))
                 .accessToken(jwtTokenProvider.createAccessToken(String.valueOf(user.getUid()), user.getRoles()))
-                .role(user.getRoles().get(0)).build();
+                .role(user.getRoles().get(0)).nickname(user.getNickname()).build();
         setSuccessResult(signInResultDto);
         return signInResultDto;
     }

@@ -14,11 +14,13 @@ public class SignInResultDto extends SignUpResultDto {
     private String accessToken;
     private String refreshToken;
     private String role;
+    private String nickname;
     @Builder
-    public SignInResultDto(boolean success, int code, String msg, String accessToken, String refreshToken, String role) {
+    public SignInResultDto(boolean success, int code, String msg, String accessToken, String refreshToken, String role, String nickname) {
         super(success, code, msg);
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.role = role; 
+        this.nickname = nickname;
     }
 }
