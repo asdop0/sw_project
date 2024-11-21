@@ -92,9 +92,11 @@ public class SignController {
     
     //로그아웃
     @PostMapping("/sign-out")
-    public boolean signOut(HttpServletRequest request) {
+    public Map<String, String> signOut(HttpServletRequest request) {
+    	Map<String, String> response = new HashMap<>();
     	signService.signOut(request);
-    	return true;
+    	response.put("check", "true");
+    	return response;
     }
     
     //회원탈퇴
