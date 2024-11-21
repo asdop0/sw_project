@@ -5,7 +5,7 @@
     margin-left: 0; /* 왼쪽에 완전히 붙임 */
     position: absolute; /* 절대 위치 설정 */
     left: 0; /* 화면의 가장 왼쪽으로 이동 */
-    top: 100px;
+    top:  100px;
   }
   
   .mypage_sidebar {

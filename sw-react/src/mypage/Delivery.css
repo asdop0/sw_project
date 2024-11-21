@@ -1,4 +1,13 @@
-
+  .delivery_container {
+    display: flex;
+    background-color: #f9f9f9;
+    height: 100vh;
+    margin-left: 0; /* 왼쪽에 완전히 붙임 */
+    position: absolute; /* 절대 위치 설정 */
+    left: 0; /* 화면의 가장 왼쪽으로 이동 */
+    top: 0px;
+  }
+  
   .mypage_content {
     flex-grow: 1;
     padding: 20px;
@@ -16,14 +25,14 @@
     padding: 10px;
   }
   
-  .add_delivery_button {
+  .add_delivery_button2 {
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
     position: absolute;
-    width: 100%;
+    width: 200px;
     left: 900px;
-    top: 60px;
+    top: 200px;
   }
   
   /* 배송지 저장 test */

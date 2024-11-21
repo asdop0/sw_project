@@ -14,10 +14,12 @@ import Delivery from "./mypage/Delivery";
 import AddAddress_Modal from "./modal/AddAdress_Modal";
 import Note from "./mypage/Note";
 import CampingDetail from "./camping/CampingDetail";
+import ProductBookmark from "./mypage/ProductBookmark";
+import CampingBookmark from "./mypage/CampingBookmark";
 
 
 function App() {
-  const [selectedRegion, setSelectedRegion] = useState('강원도');
+  // const [selectedRegion, setSelectedRegion] = useState('강원도');
   
   return (
     <Router>
@@ -42,6 +44,8 @@ function App() {
         <Route path="/adddelivery" element={<AddAddress_Modal/>}/>
         <Route path="/note" element={<Note />} />
         <Route path="/camping/:id" element={<CampingDetail />} />
+        <Route path="/productbookmark" element={<ProductBookmark />} />
+        <Route path="/campingbookmark" element={<CampingBookmark />} />
         
         {/* <Route path="/sign_up" element={<Sign_up />} /> */}
       </Routes>

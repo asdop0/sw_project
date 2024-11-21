@@ -1,0 +1,57 @@
+.camping_bookmark_container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+.camping_tabs {
+    display: flex;
+    margin: 10px 0;
+}
+
+.camping_tab {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.camping_tab_active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    font-weight: bold;
+}
+
+.camping_empty_state {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.camping_empty_state p {
+    color: #666;
+}
+
+
+.camping_controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.camping_controls input[type="camping_checkbox"] {
+    margin-right: 5px;
+    width: 1px;
+}
+
+.camping_controls button {
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border-radius: 1px;
+    color: rgb(109, 176, 238);
+    cursor: pointer;
+}   

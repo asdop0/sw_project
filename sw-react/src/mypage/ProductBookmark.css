@@ -1,0 +1,57 @@
+.product_bookmark_container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+.product_tabs {
+    display: flex;
+    margin: 10px 0;
+}
+
+.product_tab {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.product_tab_active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    font-weight: bold;
+}
+
+.product_empty_state {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.product_empty_state p {
+    color: #666;
+}
+
+
+.product_controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.product_controls inputbox[type="checkbox"] {
+    margin-right: 5px;
+    width: 1px;
+}
+
+.product_controls button {
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border-radius: 1px;
+    color: rgb(109, 176, 238);
+    cursor: pointer;
+}   

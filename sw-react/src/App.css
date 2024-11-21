@@ -923,7 +923,8 @@
     color: #3bbaf1;
 }
 .nickname_check_button.moved {
-  transform: translateX(30px); /* 원하는 위치로 이동 */
+  transform: translateX(1px); /* 원하는 위치로 이동 */
+  
 }
 
 .camping_list{

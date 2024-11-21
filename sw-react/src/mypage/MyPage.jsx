@@ -16,7 +16,16 @@ const MyPage = () => {
             </div>
             <div className='MyActivity'>
               <div className='MyActivity_text'>My 활동</div><br/>
-                <li>찜 리스트</li><br/><br/>
+                <li>
+                  <Link to="/campingbookmark">
+                  나의 캠핑장
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/productbookmark">
+                  나의 상품
+                  </Link>
+                </li>
             </div>
             <div className='MyInformation'>
               <div className='MyInformation_text'>My 정보</div><br/>
