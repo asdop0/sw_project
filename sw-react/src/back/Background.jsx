@@ -6,7 +6,7 @@ import SignApiClient from "../services/auth/SignApiClient";
 const Background = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate(); // useNavigate 사용
-  const [login, setLogin] = useState(localStorage.getItem('login') ? true : false);
+  const login = localStorage.getItem('login') === "true" ? true : false;
 
   const toggleDropdown = () => {
     setShowDropdown((prevShow) => !prevShow);
@@ -35,13 +35,12 @@ const Background = () => {
           if(json.code === "401") {
             //아이디나 비밀번호가 틀렸음
           } else {
-            localStorage.setItem('login', null);
+            localStorage.setItem('login', false);
             localStorage.setItem('accessToken', null);
             localStorage.setItem('refreshToken', null);
             localStorage.setItem('role', null);
             localStorage.setItem('nickname', null);
             console.log("out: " + localStorage.getItem('login'));
-            setLogin(null);
             navigate('/');
             
           }
@@ -52,6 +51,7 @@ const Background = () => {
 
   useEffect(() => {
     console.log(login);
+    console.log(localStorage.getItem('accessToken'));
   }, [login]);
 
   return (
