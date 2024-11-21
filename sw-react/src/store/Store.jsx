@@ -6,18 +6,7 @@ import ImageSlider from "./ImageSlider";
 import ProductApiClient from "../services/store/ProductApiClient";
 
 const Store = () => {
-    //background 제거
-    
-    // useEffect(() => {
-    //     // Store 페이지가 마운트될 때 body에 클래스 추가
-    //     document.body.classList.add("store-background-hidden");
-        
-    //     // Store 페이지가 언마운트될 때 클래스 제거
-    //     return () => {
-    //       document.body.classList.remove("store-background-hidden");
-    //     };
-    //   }, []);
-    
+
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [products, setProducts] = useState(null);
 

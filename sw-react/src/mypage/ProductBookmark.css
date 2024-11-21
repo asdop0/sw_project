@@ -8,23 +8,6 @@ h3 {
     color: #333;
 }
 
-.product_tabs {
-    display: flex;
-    margin: 10px 0;
-}
-
-.product_tab {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    cursor: pointer;
-}
-
-.product_tab_active {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
-    font-weight: bold;
-}
 
 .product_empty_state {
     text-align: center;

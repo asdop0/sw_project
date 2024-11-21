@@ -8,24 +8,6 @@ h3 {
     color: #333;
 }
 
-.camping_tabs {
-    display: flex;
-    margin: 10px 0;
-}
-
-.camping_tab {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    cursor: pointer;
-}
-
-.camping_tab_active {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
-    font-weight: bold;
-}
-
 .camping_empty_state {
     text-align: center;
     margin: 20px 0;

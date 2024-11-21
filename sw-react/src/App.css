@@ -725,6 +725,19 @@
   width: 100px;
 }
 
+.logout_button{
+  position: relative;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  top: -11px;
+  right: 180px;
+  width: 120px;
+  background-color: transparent;
+}
+
 /* 드롭다운 메뉴 스타일 */
 .dropdown-menu {
   position: absolute;

@@ -46,8 +46,7 @@ function App() {
         <Route path="/camping/:id" element={<CampingDetail />} />
         <Route path="/productbookmark" element={<ProductBookmark />} />
         <Route path="/campingbookmark" element={<CampingBookmark />} />
-        
-        {/* <Route path="/sign_up" element={<Sign_up />} /> */}
+
       </Routes>
       <Background /> 
     </Router>

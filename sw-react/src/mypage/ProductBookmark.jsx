@@ -1,15 +1,12 @@
 import React from 'react';
 import './ProductBookmark.css'; 
-
+import MyPage from './MyPage';
 const ProductBookmark = () => {
 
     return (
         <div className="product_bookmark_container">
+             <MyPage />
             <h3>상품 찜 리스트</h3>
-
-            <div className="product_tabs">
-                <button className="product_tab_active">상품</button>
-            </div>
 
             <div className="product_empty_state">
                     <p>찜한 상품이 없습니다.</p>

@@ -121,7 +121,7 @@ const Background = () => {
                   )}
                 </div>
                 <div className="item-link-9">
-                <button onClick={handleSignOut}>로그아웃</button>
+                <button className="logout_button" onClick={handleSignOut}>로그아웃</button>
                 </div>
               </>
             )}
