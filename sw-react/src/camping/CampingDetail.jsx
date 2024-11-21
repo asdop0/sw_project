@@ -55,7 +55,12 @@ const CampingDetail = () => {
         }
       })
       .catch((err) => console.error(err));
-      setPageRefresh(!pageRefresh);
+      const timer = setTimeout(() => {
+        setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+      }, 1500);
+  
+      // 컴포넌트 언마운트 시 타이머 정리
+      return () => clearTimeout(timer);
   };
 
   const createKakaoMapUrl = () => {

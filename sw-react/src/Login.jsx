@@ -8,7 +8,7 @@ import SignUp_Modal from './modal/SignUp_Modal';
 // import Adress_Modal from './modal/Adress_Modal';
 import SignApiClient from "./services/auth/SignApiClient";
 
-export const Login = () => {
+export const Login = ({ setIsLoggedIn }) => {
   const location = useLocation();
   const [showModal, setShowModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false); // 비밀번호 모달 상태 추가
@@ -66,9 +66,11 @@ export const Login = () => {
             localStorage.setItem('accessToken', json.accessToken);
             localStorage.setItem('refreshToken', json.refreshToken);
             localStorage.setItem('role', json.role);
+            localStorage.setItem('nickname', json.nickname);
             const value = localStorage.getItem('refreshToken');
-            console.log(value);
+            console.log(json.refreshToken);
             //페이지 이동
+            window.location.replace("/"); 
           }
         });
       }
