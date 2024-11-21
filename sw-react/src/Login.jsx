@@ -58,19 +58,16 @@ export const Login = ({ setIsLoggedIn }) => {
     SignApiClient.signIn(id, password).then(res => {
       if(res.ok) {
         res.json().then(json => {
-          if(json.code === "401") {
-            //아이디나 비밀번호가 틀렸음
-          } else {
+          if(json.msg === "Success") {
             //로그인 성공
             localStorage.setItem('login', 'true');
             localStorage.setItem('accessToken', json.accessToken);
             localStorage.setItem('refreshToken', json.refreshToken);
             localStorage.setItem('role', json.role);
             localStorage.setItem('nickname', json.nickname);
-            const value = localStorage.getItem('refreshToken');
-            console.log(json.refreshToken);
-            //페이지 이동
             window.location.replace("/"); 
+          } else {
+            alert("아이디나 비밀번호가 틀렸습니다.");
           }
         });
       }
