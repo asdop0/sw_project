@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import "./Store.css";
 import "../App.css";
 import ProductApiClient from "../services/store/ProductApiClient";
-import BookmarkApiClient from "../services/camping/BookmarkApiClient";
+import BookmarkApiClient from "../services/store/BookmarkApiClient";
+import CartApiClient from "../services/store/CartApiClient";
+import SignApiClient from "../services/auth/SignApiClient";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [bookmarkCount, setBookmarkCount] = useState(0);  
+  const [product, setProduct] = useState(null);  
   const [quantity, setQuantity] = useState(1);
   
   //api 호출
@@ -22,28 +23,29 @@ const ProductDetail = () => {
           } else {
             //상품 데이터 불러오기 성공
             setProduct(json);
-            fetchBookmarkCount();
           }
         });
       }
     });
   }, []);
 
-  const fetchBookmarkCount = () => {
-    BookmarkApiClient.getBookmarkCount(id)
-      .then((res) => res.json())
-      .then((data) => {
-        setBookmarkCount(data.count);
+  const handleAddCart = () => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem("accessToken");
+    CartApiClient.addCart(accessToken, id, quantity)
+      .then((res) => {
+        if (res.ok) {
+        }
       })
-      .catch((err) => console.error("Failed to fetch bookmark count:", err));
+      .catch((err) => console.error("Failed to add bookmark:", err));
   };
 
   const handleAddBookmark = () => {
+    SignApiClient.loginCheck();
     const accessToken = localStorage.getItem("accessToken");
     BookmarkApiClient.addBookmark(accessToken, id)
       .then((res) => {
         if (res.ok) {
-          setBookmarkCount((prevCount) => prevCount + 1); // 카운트 증가
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));
@@ -73,7 +75,6 @@ const ProductDetail = () => {
               alt="Bookmark"
               className="product_bookmark_icon"></img>
           </button>
-          <span className="bookmark_count">({bookmarkCount})</span>
         </h2>
         <p className="product_price">판매가 : {product.price} 원</p>
         <p className="delivery_price">배송비 : 총 결제금액이 50,000원 미만시 배송비 3,000원이 청구됩니다.</p>
@@ -84,12 +85,16 @@ const ProductDetail = () => {
         </div>
         <p className="total_price">총 가격: {product.price * quantity} 원</p>
         <button className="product_buy_button">구매하기</button>
-        <button className="product_cart">장바구니</button>
-        <button className="product_bookmark">찜</button>
+        <button onClick={handleAddCart} className="product_cart">장바구니 등록</button>
+        <button onClick={handleAddBookmark} className="product_bookmark">찜</button>
 {/*         
         <sapn className="product_description">{product.description}</sapn> <br/> */}
         
         <div className="product_info_section">
+        <div className="info_block">
+          <h3>제품설명</h3>
+          <p>{product.description}</p>
+        </div>
         <div className="info_block">
           <h3>배송안내</h3>
           <p>제품 수령 후 구성품을 꼭 확인해주세요.</p>
