@@ -20,7 +20,7 @@ class CampingApiClient {
     } 
     //조건에 따른 캠핑장 조회
     static getSortList(district, condition) {
-        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.SORT + "?district=" + district + "&conditio=" +condition, {
+        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.SORT + "?district=" + district + "&condition=" +condition, {
             method: 'GET'
         });
     } 

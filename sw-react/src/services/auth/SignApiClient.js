@@ -76,6 +76,16 @@ class SignApiClient {
             method: 'POST'
         });
     }
+
+    //로그인 체크
+    static loginCheck() {
+        const isLoggedIn = localStorage.getItem("login");
+        if(isLoggedIn === 'true') {
+            return;
+        } else {
+            window.location.replace("/login"); 
+        }
+    }
 }
 
 export default SignApiClient;

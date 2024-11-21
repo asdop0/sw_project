@@ -5,13 +5,13 @@ import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
 import ReviewController from "../services/camping/ReviewController";
 import BookmarkApiClient from "../services/camping/BookmarkApiClient";
+import SignApiClient from "../services/auth/SignApiClient";
 
 const CampingDetail = () => {
   const { id } = useParams();
   const [camping, setCamping] = useState(null);
-  const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState("");
-  const [bookmarkCount, setBookmarkCount] = useState(0);  
+  const [newReview, setNewReview] = useState(""); 
+  const [pageRefresh, setPageRefresh] = useState(true);
   
   //api 호출
   useEffect(() => {
@@ -24,58 +24,38 @@ const CampingDetail = () => {
           } else {
             //캠핑 데이터 불러오기 성공
             setCamping(json);
-            fetchBookmarkCount();
           }
         });
       }
     });
-    // 리뷰 데이터 호출
-    fetchReviews();
-  }, []);
+  }, [pageRefresh]);
 
-  const fetchBookmarkCount = () => {
-    BookmarkApiClient.getBookmarkCount(id)
-      .then((res) => res.json())
-      .then((data) => {
-        setBookmarkCount(data.count);
-      })
-      .catch((err) => console.error("Failed to fetch bookmark count:", err));
-  };
 
   const handleAddBookmark = () => {
+    SignApiClient.loginCheck();
     const accessToken = localStorage.getItem("accessToken");
     BookmarkApiClient.addBookmark(accessToken, id)
       .then((res) => {
         if (res.ok) {
-          setBookmarkCount((prevCount) => prevCount + 1); // 카운트 증가
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));
   };
 
-  //서버에서 리뷰 가져오기
-  const fetchReviews = () => {
-    fetch(`${ReviewController.SERVER_URL}${ReviewController.API}?camping_id=${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data); //가져온 데이터 저장하여 출력력
-      })
-      .catch((err) => console.error("Failed to fetch reviews:", err));
-  };
-
   //새 리뷰
   const handleAddReview = () => {
+    SignApiClient.loginCheck();
     const accessToken = localStorage.getItem("accessToken"); // 토큰 저장 위치 확인 필요
     ReviewController.addReview(accessToken, id, newReview)
       .then((res) => {
         if (res.ok) {
           setNewReview("");
-          fetchReviews(); // 리뷰 새로고침
         } else {
           console.error("Failed to add review.");
         }
       })
       .catch((err) => console.error(err));
+      setPageRefresh(!pageRefresh);
   };
 
   const createKakaoMapUrl = () => {
@@ -106,7 +86,6 @@ const CampingDetail = () => {
                 className="bookmark_icon"
               />
             </button>
-            <span className="bookmark_count">({bookmarkCount})</span>
         </h2>
 
         <p className="camping_address">
@@ -136,12 +115,14 @@ const CampingDetail = () => {
         <div className="reviews_section">
           <h3>리뷰</h3>
           <ul className="reviews_list">
-            {reviews.map((review) => (
+            {camping.campingReviews.map((review) => (
               <li key={review.id} className="review_item">
-              {review.content}
+              {review.nickname}<span> : </span>
+              {review.content}<span> / </span>
+              {review.writeDate.split("T")[0]}
               </li>
-            ))}
-          </ul>
+            ))} 
+          </ul> {/* 로그인을 하면 닉네임을 받아오고 그걸 로컬 스토리지에 저장 -> 리뷰의 닉네임과 로컬 스토리지에서 받아온 닉네임이 같으면 삭제 버튼 생김*/}
 
           <div className="review_input">
             <textarea

@@ -48,21 +48,51 @@ const MapWithClickableRegions = () => {
         }
       });
     }  else {
-      CampingApiClient.getDistrictList(selectedRegion).then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              setRegionData(json);
-            }
-          });
-        }
-      });
+      if(selectedOption === '후기순') {
+        CampingApiClient.getSortList(selectedRegion, 'review').then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //캠핑장 데이터 불러오기 성공
+                setRegionData(json);
+              }
+            });
+          }
+        });
+      } else if(selectedOption === '즐겨찾기순') {
+        CampingApiClient.getSortList(selectedRegion, 'bookmart').then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //캠핑장 데이터 불러오기 성공
+                setRegionData(json);
+              }
+            });
+          }
+        });
+      } else {
+        CampingApiClient.getSortList(selectedRegion, 'update').then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //캠핑장 데이터 불러오기 성공
+                setRegionData(json);
+              }
+            });
+          }
+        });
+      }
     }
-  }, [selectedRegion]);
+  }, [selectedRegion, selectedOption]);
 
   return (
     
@@ -386,8 +416,8 @@ const MapWithClickableRegions = () => {
             onChange={handleSelectChange}
           >
           <option value="최신">최신</option>
+          <option value="즐겨찾기순">즐겨찾기순</option>
           <option value="후기순">후기순</option>
-          <option value="댓글순">댓글순</option>
         </select>
         )}
       </div>
