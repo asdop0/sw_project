@@ -45,11 +45,17 @@ public class BookmarkController {
 	@PostMapping("/add")
 	public Map<String, String> addBookmark(HttpServletRequest request, @RequestParam String camping_id) {
 		User user = userService.findUser(request); //유저 정보 추출
+		Camping camping = campingService.getCamping(Long.parseLong(camping_id)); //해당 캠핑장 추출
+		
+		if(bookmarkService.getBookmark(user, camping).isPresent()) {
+			Map<String, String> response = new HashMap<>();
+			response.put("check", "true");
+			return response;
+		}
 		
 		CampingBookmark campingBookmark = new CampingBookmark(); //즐겨찾기 정보 삽입
 		campingBookmark.setUser(user);
 		
-		Camping camping = campingService.getCamping(Long.parseLong(camping_id)); //해당 캠핑장 추출
 		camping.addCampingBookmark(campingBookmark);
 		
 		campingService.addCamping(camping); //cascade를 통한 즐겨찾기 저장

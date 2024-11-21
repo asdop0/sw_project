@@ -2,6 +2,7 @@ package com.asd.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,11 @@ public class BookmarkService {
         }
 		
 		return bookmarkListDtos;
+	}
+	
+	//지정된 북마크 찾기
+	public Optional<CampingBookmark> getBookmark(User user, Camping camping) {
+		return campingBookmarkRepository.findByUserAndCamping(user, camping);
 	}
 	
 	//지정된 북마크 삭제

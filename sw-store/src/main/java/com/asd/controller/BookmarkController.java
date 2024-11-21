@@ -45,11 +45,16 @@ public class BookmarkController {
 	@PostMapping("/add")
 	public Map<String, String> addBookmark(HttpServletRequest request, @RequestParam String product_id) {
 		User user = userService.findUser(request); //유저 정보 추출
+		Product product = productService.getProduct(Long.parseLong(product_id)); //해당 상품 추출
 		
+		if(bookmarkService.getBookmark(user, product).isPresent()) {
+			Map<String, String> response = new HashMap<>();
+			response.put("check", "true");
+			return response;
+		}
 		ProductBookmark productBookmark = new ProductBookmark(); //즐겨찾기 정보 삽입
 		productBookmark.setUser(user);
 		
-		Product product = productService.getProduct(Long.parseLong(product_id)); //해당 상품 추출
 		product.addProductBookmark(productBookmark);
 		
 		productService.addProduct(product); //cascade를 통한 즐겨찾기 저장
