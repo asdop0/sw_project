@@ -37,6 +37,7 @@ const CampingDetail = () => {
     BookmarkApiClient.addBookmark(accessToken, id)
       .then((res) => {
         if (res.ok) {
+          alert("등록되었습니다.");
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));

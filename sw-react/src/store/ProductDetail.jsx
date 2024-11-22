@@ -46,6 +46,7 @@ const ProductDetail = () => {
     BookmarkApiClient.addBookmark(accessToken, id)
       .then((res) => {
         if (res.ok) {
+          alert("등록되었습니다.");
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));
@@ -69,7 +70,7 @@ const ProductDetail = () => {
           src="/store1.png">
         </img>
         <h2 className="product_name">{product.name}
-          <button className="product_bookmark_button">
+          <button className="product_bookmark_button" onClick={handleAddBookmark}>
             <img
               src="/bookmark.png"
               alt="Bookmark"
@@ -86,7 +87,6 @@ const ProductDetail = () => {
         <p className="total_price">총 가격: {product.price * quantity} 원</p>
         <button className="product_buy_button">구매하기</button>
         <button onClick={handleAddCart} className="product_cart">장바구니 등록</button>
-        <button onClick={handleAddBookmark} className="product_bookmark">찜</button>
 {/*         
         <sapn className="product_description">{product.description}</sapn> <br/> */}
         

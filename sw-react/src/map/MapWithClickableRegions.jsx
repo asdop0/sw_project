@@ -424,19 +424,10 @@ const MapWithClickableRegions = () => {
       )} 
       <div className="camping_list">
         {regionData && regionData.map((camping) => (
-          <div className="product_card_wrapper" key={camping.id}>
+          <div className="camping_card_wrapper" key={camping.id}>
           <CampingCard key={camping.id} camping={camping} />
           </div>
         ))}
-        {/* {selectedRegion === '태백시' ? (
-          <p>데이터 없음</p> // 태백시의 경우 데이터 없음 표시
-        ) : regionData && regionData.length > 0 ? (
-          regionData.map((camping) => (
-            <div className="product_card_wrapper" key={camping.id}>
-              <CampingCard key={camping.id} camping={camping} />
-            </div>
-          ))
-        ) : null} */}
       </div>
     </div>
     
