@@ -1,193 +1,193 @@
 .product_card {
-    border: 1px solid #ddd;
-    padding: 16px;
-    margin: 16px;
-    text-align: center;
-    border-radius: 8px;
-    transition: transform 0.2s;
-  }
-  
-  .product_card:hover {
-    transform: scale(1.05);
-  }
-  
-  .product_details-link {
-    display: block;
-    margin-top: 8px;
-    color: #00f;
-    text-decoration: underline;
-  }
-  .store_container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .product_list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-  .product_detail {
-    max-width: 1000px;
-    max-height: 1000px;
-    /* margin: 0 auto; */
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .product_detail .product_image {
-    width: 150px;
-    height:  150px;
-    border-radius: 10px;  
-  }
-  
-  .product_detail .productImg{
-    position: relative;
-    right: 150px;
-    top: 100px;
-    width: 200px;
-    height: 300px;
-  }
-  
-  .product_detail .product_name {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    word-break: break-word; /* 단어를 강제로 나눠 다음 줄로 넘김 */
-    max-width: 300px; /* 글자 줄바꿈을 위한 최대 너비 설정 */
-    white-space: normal; /* 기본 줄바꿈 허용 */
-    overflow-wrap: break-word; /* 14글자 초과 시 강제 줄바꿈 */
-    position: relative;
-    left: 670px;
-    bottom: 100px;
-  }
-  
-  .product_detail .product_price {
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    position:  relative;
-    left: 243px;
-    bottom: 50px;
-  }
-  .product_detail .delivery_price{
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    position: relative;
-    left : 410px;
-    bottom: 50px;
-  }
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
 
-  .product_detail .quantity_button_decrease{
-    position: relative;
-    left: 235px;
-    bottom: 30px;
-  }
+.product_card:hover {
+  transform: scale(1.05);
+}
 
-  .product_detail .quantity_display{
-    position: relative;
-    left: 255px;
-    bottom: 30px;
-  }
-
-  .product_detail .quantity_button_increase{
-    position: relative;
-    left: 275px;
-    bottom: 30px;
-  }
-
-  .product_detail .total_price{
-    
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    font-weight: bold; 
-    position: relative;
-    left: 460px;
-    bottom: 75px;
-  }
-
- 
-
-.category_filter button {
-    position: relative;
-    z-index: 2; /* 슬라이드보다 높은 z-index */
-    margin: 1%;
-  }
-  
+.product_details-link {
+  display: block;
+  margin-top: 8px;
+  color: #00f;
+  text-decoration: underline;
+}
+.store_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 .product_list {
   display: flex;
-  flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
+  flex-wrap: wrap;
   justify-content: space-around;
+}
+.product_detail {
+  max-width: 1000px;
+  max-height: 1000px;
+  /* margin: 0 auto; */
+  padding: 20px;
+  text-align: center;
+}
+
+.product_detail .product_image {
+  width: 150px;
+  height:  150px;
+  border-radius: 10px;  
+}
+
+.product_detail .productImg{
+  position: relative;
+  right: 150px;
+  top: 100px;
+  width: 200px;
+  height: 300px;
+}
+
+.product_detail .product_name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  word-break: break-word; /* 단어를 강제로 나눠 다음 줄로 넘김 */
+  max-width: 300px; /* 글자 줄바꿈을 위한 최대 너비 설정 */
+  white-space: normal; /* 기본 줄바꿈 허용 */
+  overflow-wrap: break-word; /* 14글자 초과 시 강제 줄바꿈 */
+  position: relative;
+  left: 670px;
+  bottom: 100px;
+}
+
+.product_detail .product_price {
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  position:  relative;
+  left: 243px;
+  bottom: 50px;
+}
+.product_detail .delivery_price{
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  position: relative;
+  left : 410px;
+  bottom: 50px;
+}
+
+.product_detail .quantity_button_decrease{
+  position: relative;
+  left: 235px;
+  bottom: 30px;
+}
+
+.product_detail .quantity_display{
+  position: relative;
+  left: 255px;
+  bottom: 30px;
+}
+
+.product_detail .quantity_button_increase{
+  position: relative;
+  left: 275px;
+  bottom: 30px;
+}
+
+.product_detail .total_price{
+  
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: bold; 
+  position: relative;
+  left: 460px;
+  bottom: 75px;
+}
+
+
+
+.category_filter button {
+  position: relative;
+  z-index: 2; /* 슬라이드보다 높은 z-index */
+  margin: 1%;
+}
+
+
+.product_list {
+display: flex;
+flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
+justify-content: space-around;
 }
 
 .product_card_wrapper {
-  flex: 0 0 23%; /* 한 줄에 4개가 들어가도록 크기 조정 */
-  margin: 1%; /* 카드 사이의 간격을 위한 마진 */
+flex: 0 0 23%; /* 한 줄에 4개가 들어가도록 크기 조정 */
+margin: 1%; /* 카드 사이의 간격을 위한 마진 */
 }
 
 .product_bookmark_icon{
-  width: 15px;
+width: 15px;
 }
 
 .product_bookmark_button{
-  background-color: transparent;
+background-color: transparent;
 }
 
 .bookmark_count{
-  font-size: 14px;
+font-size: 14px;
 }
 
 .product_buy_button{
-  position: relative;
-  left: 320px;
-  bottom: 50px;
-  background-color :rgb(0, 0, 0);
-  color: #ffffff;
-  width: 13%;
-  border-radius: 0px;
+position: relative;
+left: 320px;
+bottom: 50px;
+background-color :rgb(0, 0, 0);
+color: #ffffff;
+width: 13%;
+border-radius: 0px;
 }
 .product_cart{
-  position: relative;
-  left: 330px;
-  bottom: 50px;
-  width: 15%;
-  border-radius: 0px;
+position: relative;
+left: 330px;
+bottom: 50px;
+width: 15%;
+border-radius: 0px;
 }
 
 .product_bookmark{
-  position: absolute;
-  left: 1278px;
-  top: 500px;
-  width: 7%;
-  border-radius: 0px;
+position: absolute;
+left: 1278px;
+top: 500px;
+width: 7%;
+border-radius: 0px;
 }
 
 .product_info_section {
-  border-top: 1px solid #ddd;
-  padding-top: 1px;
-  margin-top: 10px;
+border-top: 1px solid #ddd;
+padding-top: 1px;
+margin-top: 10px;
 }
 
 .info_block h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
-  margin-left: 100px;
+font-size: 18px;
+margin-bottom: 10px;
+color: #333;
+margin-left: 100px;
 }
 
 .info_block p,
 .info_block ul {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-  margin-left: 100px;
+font-size: 14px;
+color: #555;
+line-height: 1.5;
+margin-left: 100px;
 }
 
 .info_block ul {
-  padding-left: 20px;
-  list-style: disc;
-  margin-left: 100px;
+padding-left: 20px;
+list-style: disc;
+margin-left: 100px;
 }

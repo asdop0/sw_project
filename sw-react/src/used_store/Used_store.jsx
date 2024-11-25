@@ -1,39 +1,88 @@
 import React, { useEffect, useState } from "react";
 import "./Used_store.css";
 import UsedCard from "./UsedCard"; // UsedCard 컴포넌트를 가져옵니다.
+import BoardApiClient from "../services/board/BoardApiClient";
 
 const Used_store = () => {
-  const [products, setProducts] = useState([]);
+  const [boards, setBoards] = useState([]);
+  const [sortBy, setSortBy] = useState("최신");
+
+  const handleSortByChange = (event) => {
+    setSortBy(event.target.value);
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const data = [
-        { id: 1, name: "중고 캠핑 의자", category: "캠핑가구", price: "30,000", image: "" },
-        { id: 2, name: "중고 캠핑 텐트", category: "텐트", price: "80,000", image: "" },
-        { id: 3, name: "중고 랜턴", category: "DIY", price: "15,000", image: "" },
-        { id: 4, name: "중고 랜턴", category: "DIY", price: "15,000", image: "" },
-        { id: 5, name: "중고 랜턴", category: "DIY", price: "15,000", image: "" }
-      ];
-      setProducts(data);
-    };
-
-    fetchProducts();
-  }, []);
+    if(sortBy === "최신") {
+      BoardApiClient.getBoardList().then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+              //게시판 오류
+              console.log(json.message);
+            } else {
+              //상품 데이터 불러오기 성공
+              setBoards(json);
+            }
+          });
+        }
+      });
+    } else if (sortBy === "조회순"){
+      BoardApiClient.getSortList("view").then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+              //요청 오류
+              console.log(json.message);
+            } else {
+              //게시판 데이터 불러오기 성공
+              setBoards(json);
+            }
+          });
+        }
+      });
+    } else if (sortBy === "댓글순"){
+      BoardApiClient.getSortList("comment").then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+              //요청 오류
+              console.log(json.message);
+            } else {
+              //게시판 데이터 불러오기 성공
+              setBoards(json);
+            }
+          });
+        }
+      });
+    }
+  }, [sortBy]);
 
   return (
     <div className="Used_store">
       <h3 className="recommand" style={{ textAlign: 'left', paddingLeft: '10px', marginBottom: '20px' }}>추천상품</h3>
+      
       <br />
-      <div className="product_list">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <div key={product.id} className="product_card_wrapper">
-              <UsedCard product={product} /> {/* 각 제품에 대한 UsedCard 컴포넌트를 사용 */}
+      <div className="board_list">
+        {boards.length > 0 ? (
+          boards.map((board) => (
+            <div key={board.id} className="board_card_wrapper">
+              <UsedCard board={board} /> {/* 각 제품에 대한 UsedCard 컴포넌트를 사용 */}
             </div>
           ))
         ) : (
+          <div>
           <p>등록된 중고 상품이 없습니다.</p>
-        )}
+          <select 
+            className="category_Latest" 
+            value={sortBy} 
+            onChange={handleSortByChange}
+          >
+            <option value="최신">최신</option>
+            <option value="조회순">조회순</option>
+            <option value="댓글순">댓글순</option>
+          </select>
+          </div>
+          )}
       </div>
     </div>
   );

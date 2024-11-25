@@ -6,13 +6,13 @@
   box-sizing: border-box;
 }
 
-.product_list {
+.board_list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 한 줄 4개 칸 고정 */
   gap: 30px; /* 카드 사이 간격을 넓게 설정 */
 }
 
-.product_card_wrapper {
+.board_card_wrapper {
   box-sizing: border-box;
 }
 
@@ -34,7 +34,7 @@
   transform: scale(1.05);
 }
 
-.product_image {
+.board_image {
   width: 100%;
   height: auto;
   max-height: 150px;
@@ -42,18 +42,18 @@
   border-radius: 10px;
 }
 
-.product_name {
+.board_name {
   font-size: 16px;
   margin: 16px 0;
 }
 
-.product_price {
+.board_price {
   font-size: 14px;
   color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
-.product_details-link {
+.board_details-link {
   display: block;
   margin-top: auto;
   color: #00f;

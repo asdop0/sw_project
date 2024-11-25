@@ -16,7 +16,7 @@ import Note from "./mypage/Note";
 import CampingDetail from "./camping/CampingDetail";
 import ProductBookmark from "./mypage/ProductBookmark";
 import CampingBookmark from "./mypage/CampingBookmark";
-import Order from "./store/Order";
+import UsedDetail from "./used_store/UsedDetail";
 
 
 function App() {
@@ -41,13 +41,14 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/used_store" element={<Used_store />} />
+        <Route path="/board/:id" element={<UsedDetail />} />
         <Route path="/delivery" element={<Delivery />} />
         <Route path="/adddelivery" element={<AddAddress_Modal/>}/>
         <Route path="/note" element={<Note />} />
         <Route path="/camping/:id" element={<CampingDetail />} />
         <Route path="/productbookmark" element={<ProductBookmark />} />
         <Route path="/campingbookmark" element={<CampingBookmark />} />
-        <Route path="/product/:id/order" element={<Order />} />
+
       </Routes>
       <Background /> 
     </Router>
