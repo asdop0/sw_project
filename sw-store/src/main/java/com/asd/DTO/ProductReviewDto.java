@@ -15,14 +15,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductReviewDto {
 	private Long id;
-	private String userName;
+	private String nickname;
 	private LocalDateTime writeDate;
 	private String content;
 	
 	public static ProductReviewDto toDto(ProductReview productReview) {
 		return new ProductReviewDto(
 			productReview.getId(),
-			productReview.getUser().getName(),
+			productReview.getUser().getNickname(),
 			productReview.getWriteDate(),
 			productReview.getContent()
 		);
