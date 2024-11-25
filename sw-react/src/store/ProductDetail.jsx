@@ -11,6 +11,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);  
   const [quantity, setQuantity] = useState(1);
+  const [category, setCategory] = useState(0);
   
   //api 호출
   useEffect(() => {
@@ -23,6 +24,20 @@ const ProductDetail = () => {
           } else {
             //상품 데이터 불러오기 성공
             setProduct(json);
+            switch (json.categoryName) {
+              case "캠핑가구":
+                setCategory(1);
+                break;
+              case "텐트":
+                setCategory(2);
+                break;
+              case "푸드":
+                setCategory(3);
+                break;
+              case "보조장비":
+                setCategory(4);
+                break;
+            }
           }
         });
       }
@@ -67,7 +82,7 @@ const ProductDetail = () => {
     product ? (
       <div className="product_detail">
         <img className="productImg"
-          src="/store1.png">
+          src={"/category_" + category + ".jpg"} alt="상품 임시 이미지">
         </img>
         <h2 className="product_name">{product.name}
           <button className="product_bookmark_button" onClick={handleAddBookmark}>

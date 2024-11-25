@@ -76,7 +76,7 @@ const CampingDetail = () => {
     camping ? (
       <div className="camping_detail">
         <img className="campingImg" 
-          src="/트리앤캠프스토리.png">
+          src="/camping.png" alt="캠핑장 임시 이미지">
         </img>
 
         <h2 className="camping_name">
