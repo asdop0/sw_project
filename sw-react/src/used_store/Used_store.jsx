@@ -60,8 +60,17 @@ const Used_store = () => {
   return (
     <div className="Used_store">
       <h3 className="recommand" style={{ textAlign: 'left', paddingLeft: '10px', marginBottom: '20px' }}>추천상품</h3>
-      
       <br />
+      <select 
+      className="category_Latest" 
+      value={sortBy} 
+      onChange={handleSortByChange}
+    >
+      <option value="최신">최신</option>
+      <option value="조회순">조회순</option>
+      <option value="댓글순">댓글순</option>
+    </select>
+    <button className="board_register_button">등록</button>
       <div className="board_list">
         {boards.length > 0 ? (
           boards.map((board) => (
@@ -72,15 +81,7 @@ const Used_store = () => {
         ) : (
           <div>
           <p>등록된 중고 상품이 없습니다.</p>
-          <select 
-            className="category_Latest" 
-            value={sortBy} 
-            onChange={handleSortByChange}
-          >
-            <option value="최신">최신</option>
-            <option value="조회순">조회순</option>
-            <option value="댓글순">댓글순</option>
-          </select>
+         
           </div>
           )}
       </div>

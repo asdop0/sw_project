@@ -17,6 +17,7 @@ import CampingDetail from "./camping/CampingDetail";
 import ProductBookmark from "./mypage/ProductBookmark";
 import CampingBookmark from "./mypage/CampingBookmark";
 import UsedDetail from "./used_store/UsedDetail";
+import Order from "./store/Order";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/camping/:id" element={<CampingDetail />} />
         <Route path="/productbookmark" element={<ProductBookmark />} />
         <Route path="/campingbookmark" element={<CampingBookmark />} />
+        <Route path="/product/:id/order" element={<Order />} />
 
       </Routes>
       <Background /> 

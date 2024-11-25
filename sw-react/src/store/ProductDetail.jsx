@@ -101,9 +101,11 @@ const ProductDetail = () => {
         </div>
         <p className="total_price">총 가격: {product.price * quantity} 원</p>
         {/* <button className="product_buy_button">구매하기</button> */}
-        <Link to={`/product/${product.id}/order`} className="product_buy_button">
+        <button className="product_buy_button">
+        <Link to={`/product/${product.id}/order`}>
           구매하기
         </Link>
+        </button>
 
         <button onClick={handleAddCart} className="product_cart">장바구니 등록</button>
 {/*         

@@ -85,7 +85,7 @@
   }
   
 
- .camping_list {
+ .selectCampingList {
   display: flex;
   flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
   justify-content: space-around; 
