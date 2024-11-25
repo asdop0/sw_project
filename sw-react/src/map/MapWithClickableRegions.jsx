@@ -9,6 +9,7 @@ const MapWithClickableRegions = () => {
   const [regionData, setRegionData] = useState(null); // 출력할 데이터 상태 추가
 
   const [selectedOption, setSelectedOption] = useState('최신');
+  const [pageRefresh, setPageRefresh] = useState(true);
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -92,7 +93,7 @@ const MapWithClickableRegions = () => {
         });
       }
     }
-  }, [selectedRegion, selectedOption]);
+  }, [selectedRegion, selectedOption, pageRefresh]);
 
   return (
     
@@ -405,7 +406,6 @@ const MapWithClickableRegions = () => {
 
         {/* 다른 지역들도 동일하게 추가 */}
       </map>
-
       {/* 선택된 지역의 캠핑 데이터 출력 */}
       {selectedRegion && (
       <div>
@@ -417,7 +417,6 @@ const MapWithClickableRegions = () => {
             alt="등록 버튼"
           />
           </button>
-
          {selectedRegion !== '강원도' && ( // '강원도'일 때 select 옵션 숨기기
          <select 
             className="category_Latest" 
@@ -434,7 +433,7 @@ const MapWithClickableRegions = () => {
       <div className="camping_list">
         {regionData && regionData.map((camping) => (
           <div className="camping_card_wrapper" key={camping.id}>
-          <CampingCard key={camping.id} camping={camping} />
+          <CampingCard key={camping.id} camping={camping} setPageRefresh={setPageRefresh}/>
           </div>
         ))}
       </div>

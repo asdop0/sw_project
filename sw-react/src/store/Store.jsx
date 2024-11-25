@@ -9,6 +9,7 @@ const Store = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [products, setProducts] = useState(null);
+  const [pageRefresh, setPageRefresh] = useState(true);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -44,7 +45,7 @@ const Store = () => {
         }
       });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, pageRefresh]);
 
   return (
     <div className="store_container">
@@ -65,7 +66,7 @@ const Store = () => {
       <div className="product_list">
         {products && products.map((product) => (
           <div className="product_card_wrapper" key={product.id}>
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>
           </div>
         ))}
       </div>

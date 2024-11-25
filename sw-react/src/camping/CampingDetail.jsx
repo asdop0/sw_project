@@ -5,6 +5,7 @@ import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
 import ReviewController from "../services/camping/ReviewController";
 import BookmarkApiClient from "../services/camping/BookmarkApiClient";
+import AdminApiClient from "../services/camping/AdminApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
 
 const CampingDetail = () => {
@@ -12,9 +13,13 @@ const CampingDetail = () => {
   const [camping, setCamping] = useState(null);
   const [newReview, setNewReview] = useState(""); 
   const [pageRefresh, setPageRefresh] = useState(true);
+  const [role, setRole] = useState(null);
+  const [nickname, setNickname] = useState(null);
   
   //api 호출
   useEffect(() => {
+    setRole(localStorage.getItem("role"));
+    setNickname(localStorage.getItem("nickname"));
     CampingApiClient.viewCamping(id).then(res => {
       if(res.ok) {
         res.json().then(json => {
@@ -38,6 +43,31 @@ const CampingDetail = () => {
       .then((res) => {
         if (res.ok) {
           alert("등록되었습니다.");
+        } else if(res.status === 403) {
+          const refreshToken = localStorage.getItem('refreshToken');
+          SignApiClient.refresh(refreshToken).then(res => {
+            if(json.msg === "Success") {
+              localStorage.setItem('accessToken');
+              AdminApiClient.deleteCamping(token, camping.id).then(res => {
+                if(res.ok) {
+                  res.json().then(json => {
+                    if(json.code === "401") {
+                        //요청 오류
+                        console.log(json.message);
+                    } else {
+                      const timer = setTimeout(() => {
+                        setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+                      }, 1500);
+                      alert("삭제되었습니다.");
+                      // 컴포넌트 언마운트 시 타이머 정리
+            
+                      return () => clearTimeout(timer);    
+                    }
+                  });
+                }
+              });
+            }
+          })
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));
@@ -63,6 +93,52 @@ const CampingDetail = () => {
       // 컴포넌트 언마운트 시 타이머 정리
       return () => clearTimeout(timer);
   };
+
+  const handleDeleteReview = (id) => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem('accessToken');
+    if (role === "ROLE_USER") {
+      ReviewController.deleteReview(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    } else {
+      AdminApiClient.deleteReview(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    }
+  }
 
   const createKakaoMapUrl = () => {
   if (camping && camping.latitude && camping.longitude) {
@@ -123,11 +199,18 @@ const CampingDetail = () => {
           <ul className="reviews_list">
             {camping.campingReviews.map((review) => (
               <li key={review.id} className="review_item">
-              {review.nickname}<span> : </span>
-              {review.content}<span> / </span>
-              {review.writeDate.split("T")[0]}
+                {review.nickname}<span> : </span>
+                {review.content}<span> / </span>
+                {review.writeDate.split("T")[0]}
+
+                {/* 조건부로 삭제 버튼 활성화 */}
+                {(review.nickname === nickname || role === 'ROLE_ADMIN') && (
+                  <button onClick={() => handleDeleteReview(review.id)}>
+                    삭제
+                  </button>
+                )}
               </li>
-            ))} 
+            ))}
           </ul> {/* 로그인을 하면 닉네임을 받아오고 그걸 로컬 스토리지에 저장 -> 리뷰의 닉네임과 로컬 스토리지에서 받아온 닉네임이 같으면 삭제 버튼 생김*/}
 
           <div className="review_input">

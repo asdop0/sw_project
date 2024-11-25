@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../store/Store.css";
 import BookmarkApiClient from "../services/store/BookmarkApiClient";
@@ -16,20 +16,6 @@ const ProductBookMarkCard = ({ product, setPageRefresh }) => {
               //요청 오류
               console.log(json.message);
           } else {
-            switch (json.categoryName) {
-              case "캠핑가구":
-                setCategory(1);
-                break;
-              case "텐트":
-                setCategory(2);
-                break;
-              case "푸드":
-                setCategory(3);
-                break;
-              case "보조장비":
-                setCategory(4);
-                break;
-            }
             const timer = setTimeout(() => {
               setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
             }, 1500);
@@ -43,6 +29,23 @@ const ProductBookMarkCard = ({ product, setPageRefresh }) => {
       }
       });
   }
+
+  useEffect(() => {
+    switch (product.categoryName) {
+      case "캠핑가구":
+        setCategory(1);
+        break;
+      case "텐트":
+        setCategory(2);
+        break;
+      case "푸드":
+        setCategory(3);
+        break;
+      case "보조장비":
+        setCategory(4);
+        break;
+    }
+  }, []);
 
   return (
     <div className="product_card">

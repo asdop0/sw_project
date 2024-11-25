@@ -1,150 +1,150 @@
 .camping_card {
-    border: 1px solid #ddd;
-    padding: 16px;
-    margin: 16px;
-    text-align: center;
-    border-radius: 8px;
-    transition: transform 0.2s;
-  }
-  
-  .camping_card:hover {
-    transform: scale(1.05);
-  }
-  
-  .camping_details-link {
-    display: block;
-    margin-top: 8px;
-    color: #00f;
-    text-decoration: underline;
-  }
-  .store_container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* .camping_list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  } */
-  .camping_detail {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
 
-  .camping_detail .camping_name{
-    text-align: left;
-    margin-left: 160px;
-    font-size: 18px;
-  }
+.camping_card:hover {
+  transform: scale(1.05);
+}
 
-  .camping_detail .camping_address{
-    text-align: left;
-    margin-left: 160px;
-  }
+.camping_details-link {
+  display: block;
+  margin-top: 8px;
+  color: #00f;
+  text-decoration: underline;
+}
+.store_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  .camping_detail .camping_number{
-    text-align: left;
-    margin-left: 160px;
-  }
-  
-  .camping_detail .korea_gocamping{
-    text-align: left;
-    margin-left: 160px;
-  }
-  
+/* .camping_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+} */
+.camping_detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
 
-  
-  
-  .camping_image {
-    width: 150px;
-    height:  150px;
-    border-radius: 10px;
-  }
-  
-  .camping_name {
-    font-size: 16px;
-    margin: 16px 0;
-    /* font-family: 'IBM Plex Sans KR', serif;
-    font-weight: 700; */
-  }
-  
-  .camping_address {
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-  }
+.camping_detail .camping_name{
+  text-align: left;
+  margin-left: 160px;
+  font-size: 18px;
+}
+
+.camping_detail .camping_address{
+  text-align: left;
+  margin-left: 160px;
+}
+
+.camping_detail .camping_number{
+  text-align: left;
+  margin-left: 160px;
+}
+
+.camping_detail .korea_gocamping{
+  text-align: left;
+  margin-left: 160px;
+}
+
+
+
+
+.camping_image {
+  width: 150px;
+  height:  150px;
+  border-radius: 10px;
+}
+
+.camping_name {
+  font-size: 16px;
+  margin: 16px 0;
+  /* font-family: 'IBM Plex Sans KR', serif;
+  font-weight: 700; */
+}
+
+.camping_address {
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
 
 .category_filter button {
-    position: relative;
-    z-index: 2; /* 슬라이드보다 높은 z-index */
-    margin: 1%;
-  }
-  
+  position: relative;
+  z-index: 2; /* 슬라이드보다 높은 z-index */
+  margin: 1%;
+}
 
- .selectCampingList {
-  display: flex;
-  flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
-  justify-content: space-around; 
-  }  
+
+.selectCampingList {
+display: flex;
+flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
+justify-content: space-around; 
+}  
 
 .camping_card_wrapper {
-  flex: 0 1 calc(33.33% - 20px); /* 한 줄에 3개씩 표시 */
-  max-width: calc(33.33% - 20px); /* 카드가 컨테이너 너비 내에서 유지되도록 설정 */
-  box-sizing: border-box;
+flex: 0 1 calc(33.33% - 20px); /* 한 줄에 3개씩 표시 */
+max-width: calc(33.33% - 20px); /* 카드가 컨테이너 너비 내에서 유지되도록 설정 */
+box-sizing: border-box;
 }
 .selectCampingList{
-  position: relative;
-  bottom:500px;
-  left: 330px;
+position: relative;
+bottom:500px;
+left: 330px;
 }
 
 .campingImg {
-  width: 480px;
-  height: 300px;
-  border-radius: 10px;
-  margin-top: 100px;
+width: 480px;
+height: 300px;
+border-radius: 10px;
+margin-top: 100px;
 }
 
 .marker{
-  width: 30px;
+width: 30px;
 }
 
 .call{
-  width: 30px;
+width: 30px;
 }
 
 .check{
-  width: 30px;
+width: 30px;
 }
 
 .book{
-  width: 100px;
+width: 100px;
 }
 
 .findway{
-  width: 100px;
+width: 100px;
 }
 
 .bookmark_icon{
-  width: 15px;
+width: 15px;
 }
 
 .camping_bookmark_button{
-  background-color: transparent;
+background-color: transparent;
 }
 
 .bookmark_count{
-  font-size: 14px;
+font-size: 14px;
 }
 
 
 .plus{
-  width: 30px;
-  position: relative;
-  left: 1350px;
-  bottom: 555px;  
+width: 30px;
+position: relative;
+left: 1350px;
+bottom: 555px;  
 }

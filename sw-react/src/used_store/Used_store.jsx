@@ -6,6 +6,7 @@ import BoardApiClient from "../services/board/BoardApiClient";
 const Used_store = () => {
   const [boards, setBoards] = useState([]);
   const [sortBy, setSortBy] = useState("최신");
+  const [pageRefresh, setPageRefresh] = useState(true);
 
   const handleSortByChange = (event) => {
     setSortBy(event.target.value);
@@ -55,7 +56,7 @@ const Used_store = () => {
         }
       });
     }
-  }, [sortBy]);
+  }, [sortBy, pageRefresh]);
 
   return (
     <div className="Used_store">

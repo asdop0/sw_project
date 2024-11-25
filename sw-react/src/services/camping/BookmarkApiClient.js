@@ -35,15 +35,6 @@ class BookmarkApiClient {
             }
         });
     }
-    // 북마크 개수 조회
-    static getBookmarkCount(camping_id) {
-        return fetch(`${BookmarkApiClient.SERVER_URL}${BookmarkApiClient.API}${BookmarkApiClient.COUNT}?camping_id=${camping_id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    }
 }
 
 export default BookmarkApiClient;

@@ -6,15 +6,23 @@ import ProductApiClient from "../services/store/ProductApiClient";
 import BookmarkApiClient from "../services/store/BookmarkApiClient";
 import CartApiClient from "../services/store/CartApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
+import AdminApiClient from "../services/store/AdminApiClient";
+import ReviewController from "../services/store/ReviewController";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);  
   const [quantity, setQuantity] = useState(1);
   const [category, setCategory] = useState(0);
+  const [newReview, setNewReview] = useState(""); 
+  const [pageRefresh, setPageRefresh] = useState(true);
+  const [role, setRole] = useState(null);
+  const [nickname, setNickname] = useState(null);
   
   //api 호출
   useEffect(() => {
+    setRole(localStorage.getItem("role"));
+    setNickname(localStorage.getItem("nickname"));
     ProductApiClient.viewProduct(id).then(res => {
       if(res.ok) {
         res.json().then(json => {
@@ -42,7 +50,7 @@ const ProductDetail = () => {
         });
       }
     });
-  }, []);
+  }, [pageRefresh]);
 
   const handleAddCart = () => {
     SignApiClient.loginCheck();
@@ -76,6 +84,73 @@ const ProductDetail = () => {
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1)); // 최소 1
   };
+
+  //새 리뷰
+  const handleAddReview = () => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem("accessToken"); // 토큰 저장 위치 확인 필요
+    ReviewController.addReview(accessToken, id, newReview)
+      .then((res) => {
+        if (res.ok) {
+          setNewReview("");
+        } else {
+          console.error("Failed to add review.");
+        }
+      })
+      .catch((err) => console.error(err));
+      const timer = setTimeout(() => {
+        setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+      }, 1500);
+  
+      // 컴포넌트 언마운트 시 타이머 정리
+      return () => clearTimeout(timer);
+  };
+
+  const handleDeleteReview = (id) => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem('accessToken');
+    if (role === "ROLE_USER") {
+      ReviewController.deleteReview(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    } else {
+      AdminApiClient.deleteReview(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    }
+  }
 
 
   return (
@@ -144,9 +219,37 @@ const ProductDetail = () => {
         </div>
         
       </div>
+      <div className="reviews_section">
+          <h3>리뷰</h3>
+          <ul className="reviews_list">
+            {product.productReviews.map((review) => (
+              <li key={review.id} className="review_item">
+                {review.nickname}<span> : </span>
+                {review.content}<span> / </span>
+                {review.writeDate.split("T")[0]}
 
+                {/* 조건부로 삭제 버튼 활성화 */}
+                {(review.nickname === nickname || role === 'ROLE_ADMIN') && (
+                  <button onClick={() => handleDeleteReview(review.id)}>
+                    삭제
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul> {/* 로그인을 하면 닉네임을 받아오고 그걸 로컬 스토리지에 저장 -> 리뷰의 닉네임과 로컬 스토리지에서 받아온 닉네임이 같으면 삭제 버튼 생김*/}
+
+          <div className="review_input">
+            <textarea
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              placeholder="리뷰를 작성하세요"
+            ></textarea>
+          </div>
+          <button onClick={handleAddReview}>리뷰 추가</button>
+        </div>
         
       </div>
+      
       
     ) : null
   );

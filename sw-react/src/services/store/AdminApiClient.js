@@ -33,7 +33,7 @@ class AdminApiClient {
     } 
     //상품 삭제
     static deleteProduct(accessToken, product_id) {
-        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.DELETE + "?camping_id=" + camping_id, {
+        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.DELETE + "?product_id=" + product_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ class AdminApiClient {
     } 
     //모든 사용자 주문 내역 출력
     static getFullOrderList(accessToken) {
-        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.ORDERLIST + "?review_id=" + review_id, {
+        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.ORDERLIST, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ class AdminApiClient {
     } 
     //결제 대기 목록 출력
     static getPendingList(accessToken) {
-        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.PENDINGLIST + "?review_id=" + review_id, {
+        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.PENDINGLIST, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ class AdminApiClient {
     } 
     //결제 완료
     static approvalOrder(accessToken, order_id) {
-        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.APPROVAL + "?review_id=" + review_id, {
+        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.APPROVAL + "?order_id=" + order_id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

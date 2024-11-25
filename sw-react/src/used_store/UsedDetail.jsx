@@ -3,15 +3,20 @@ import { useParams } from "react-router-dom";
 import BoardApiClient from "../services/board/BoardApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
 import CommentApiClient from "../services/board/CommentApiClient";
+import AdminApiClient from "../services/board/AdminApiClient";
 
 const UsedDetail = () => {
   const { id } = useParams();
   const [board, setBoard] = useState(null);
   const [newComment, setComment] = useState(""); 
   const [pageRefresh, setPageRefresh] = useState(true);
+  const [role, setRole] = useState(null);
+  const [nickname, setNickname] = useState(null);
 
   //api 호출
   useEffect(() => {
+    setRole(localStorage.getItem("role"));
+    setNickname(localStorage.getItem("nickname"));
     BoardApiClient.viewBoard(id).then(res => {
       if(res.ok) {
         res.json().then(json => {
@@ -46,6 +51,51 @@ const UsedDetail = () => {
       return () => clearTimeout(timer);
   };
 
+  const handleDeleteComment = (id) => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem('accessToken');
+    if (role === "ROLE_USER") {
+      CommentApiClient.deleteComment(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    } else {
+      AdminApiClient.deleteComment(accessToken, id).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+              const timer = setTimeout(() => {
+                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+              }, 1500);
+              alert("삭제되었습니다.");
+              // 컴포넌트 언마운트 시 타이머 정리
+
+              return () => clearTimeout(timer);
+                
+            }
+            });
+        }
+      });
+    }
+  }
 
   return (
     board ? (
@@ -78,6 +128,12 @@ const UsedDetail = () => {
               {comment.userName}<span> : </span>
               {comment.comment}<span> / </span>
               {comment.writeDate.split("T")[0]}
+              {/* 조건부로 삭제 버튼 활성화 */}
+              {(comment.nickname === nickname || role === 'ROLE_ADMIN') && (
+                  <button onClick={() => handleDeleteComment(comment.id)}>
+                    삭제
+                  </button>
+                )}
               </li>
             ))} 
           </ul> {/* 로그인을 하면 닉네임을 받아오고 그걸 로컬 스토리지에 저장 -> 리뷰의 닉네임과 로컬 스토리지에서 받아온 닉네임이 같으면 삭제 버튼 생김*/}
