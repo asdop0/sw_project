@@ -46,6 +46,8 @@
     position: relative;
     right: 150px;
     top: 100px;
+    width: 200px;
+    height: 300px;
   }
   
   .product_detail .product_name {
@@ -56,53 +58,54 @@
     max-width: 300px; /* 글자 줄바꿈을 위한 최대 너비 설정 */
     white-space: normal; /* 기본 줄바꿈 허용 */
     overflow-wrap: break-word; /* 14글자 초과 시 강제 줄바꿈 */
-    position: absolute;
-    right: 600px;
-    top: 200px;
+    position: relative;
+    left: 670px;
+    bottom: 100px;
   }
   
   .product_detail .product_price {
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    position: absolute;
-    right: 770px;
-    top: 300px;
+    position:  relative;
+    left: 243px;
+    bottom: 50px;
   }
   .product_detail .delivery_price{
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    position: absolute;
-    right: 437px;
-    top: 350px;
+    position: relative;
+    left : 410px;
+    bottom: 50px;
   }
 
   .product_detail .quantity_button_decrease{
-    position: absolute;
-    left: 1010px;
-    top: 420px;
+    position: relative;
+    left: 235px;
+    bottom: 30px;
   }
 
   .product_detail .quantity_display{
-    position: absolute;
-    left: 1070px;
-    top: 430px;
+    position: relative;
+    left: 255px;
+    bottom: 30px;
   }
 
   .product_detail .quantity_button_increase{
-    position: absolute;
-    left: 1090px;
-    top: 420px;
+    position: relative;
+    left: 275px;
+    bottom: 30px;
   }
 
   .product_detail .total_price{
-    position: absolute;
+    
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold; 
-    right: 550px;
-    top: 415px;
+    position: relative;
+    left: 460px;
+    bottom: 75px;
   }
 
  
@@ -138,19 +141,19 @@
 }
 
 .product_buy_button{
-  position: absolute;
-  left: 1010px;
-  top: 500px;
+  position: relative;
+  left: 320px;
+  bottom: 50px;
   background-color :rgb(0, 0, 0);
   color: #ffffff;
-  width: 7%;
+  width: 13%;
   border-radius: 0px;
 }
 .product_cart{
-  position: absolute;
-  left: 1144px;
-  top: 500px;
-  width: 7%;
+  position: relative;
+  left: 330px;
+  bottom: 50px;
+  width: 15%;
   border-radius: 0px;
 }
 
@@ -164,8 +167,8 @@
 
 .product_info_section {
   border-top: 1px solid #ddd;
-  padding-top: 20px;
-  margin-top: 100px;
+  padding-top: 1px;
+  margin-top: 10px;
 }
 
 .info_block h3 {

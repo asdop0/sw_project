@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./Store.css";
 import "../App.css";
 import ProductApiClient from "../services/store/ProductApiClient";
@@ -100,7 +100,11 @@ const ProductDetail = () => {
           <button onClick={increaseQuantity} className="quantity_button_increase">+</button>
         </div>
         <p className="total_price">총 가격: {product.price * quantity} 원</p>
-        <button className="product_buy_button">구매하기</button>
+        {/* <button className="product_buy_button">구매하기</button> */}
+        <Link to={`/product/${product.id}/order`} className="product_buy_button">
+          구매하기
+        </Link>
+
         <button onClick={handleAddCart} className="product_cart">장바구니 등록</button>
 {/*         
         <sapn className="product_description">{product.description}</sapn> <br/> */}
