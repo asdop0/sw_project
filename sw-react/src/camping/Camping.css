@@ -244,7 +244,7 @@ background-color: transparent;
 }
 
 /* 좌표 입력 필드 그룹 */
-.camping_register_coordinates {
+.camping_register_phonenumber {
   display: flex;
   justify-content: space-between;
   gap: 10px;

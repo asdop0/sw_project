@@ -19,7 +19,7 @@ import CampingBookmark from "./mypage/CampingBookmark";
 import UsedDetail from "./used_store/UsedDetail";
 import Order from "./store/Order";
 import CampingRegister from "./camping/CampingRegister";
-
+import BoardRegister from "./used_store/BoardRegister";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -52,6 +52,7 @@ function App() {
         <Route path="/campingbookmark" element={<CampingBookmark />} />
         <Route path="/product/:id/order" element={<Order />} />
         <Route path="/camping/register" element={<CampingRegister />} />
+        <Route path="/board/register" element={<BoardRegister />} />
 
       </Routes>
       <Background /> 

@@ -11,6 +11,7 @@ const MapWithClickableRegions = () => {
 
   const [selectedOption, setSelectedOption] = useState('최신');
   const [pageRefresh, setPageRefresh] = useState(true);
+  const [role, setRole] = useState(null); 
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -35,6 +36,7 @@ const MapWithClickableRegions = () => {
 
   //api 호출
   useEffect(() => {
+    setRole(localStorage.getItem("role"));
     if(selectedRegion === '강원도') {
       CampingApiClient.getCampingList().then(res => {
         if(res.ok) {
@@ -411,7 +413,7 @@ const MapWithClickableRegions = () => {
       {selectedRegion && (
       <div>
          <h3 className="selectCampingList">{selectedRegion}의 캠핑장 리스트</h3>
-         <Link to={`/camping/register`}>
+         {(role === 'ROLE_ADMIN') && (<Link to={`/camping/register`}>
          <button className='camping_plus'>
           <img 
             className='plus'
@@ -419,7 +421,7 @@ const MapWithClickableRegions = () => {
             alt="등록 버튼"
           />
           </button>
-          </Link>
+          </Link>)}
          {selectedRegion !== '강원도' && ( // '강원도'일 때 select 옵션 숨기기
          <select 
             className="category_Latest" 

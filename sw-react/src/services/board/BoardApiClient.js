@@ -26,8 +26,8 @@ class BoardApiClient {
         });
     } 
     //게시글 추가
-    static addBoard(accessToken, board_id, content) {
-        return fetch(BoardApiClient.SERVER_URL + BoardApiClient.API + BoardApiClient.ADD + "?board_id=" + board_id + "&content=" + content, {
+    static addBoard(accessToken, title, content) {
+        return fetch(BoardApiClient.SERVER_URL + BoardApiClient.API + BoardApiClient.ADD + "?title=" + title + "&content=" + content, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
