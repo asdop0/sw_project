@@ -142,9 +142,134 @@ font-size: 14px;
 }
 
 
-.plus{
-width: 30px;
+.camping_plus {
+width: 10px;
 position: relative;
-left: 1350px;
+left: 1300px;
 bottom: 555px;  
+background-color: transparent;
+}
+
+.plus{
+  width: 30px;
+}
+
+.camping_modify_button{
+  background-color: transparent;
+  position: relative;
+  width: 10px;
+  left: 4px;
+  top: 4px;
+}
+.camping_modify{
+  width: 25px;
+    
+}
+/*
+.camping_register{
+  position: relative;
+  top: -130px;
+}
+
+ 
+.camping_register_name{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+
+.camping_register_homepage{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+.camping_register_Latitude{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+.camping_register_longitude{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+.camping_register_Coordinates{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+.camping_register_address{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+}
+
+
+.camping_register_disctrict{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+} */
+
+/* 전체 컨테이너 */
+.camping_register {
+  width: 1000px;
+  height: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* 제목 스타일 */
+.camping_register_title {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 입력 필드 스타일 */
+.camping_register_input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;
+  font-size: 1em;
+}
+
+/* 좌표 입력 필드 그룹 */
+.camping_register_coordinates {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* 좌표 변환 라벨 */
+.camping_register_label {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* 버튼 컨테이너 */
+.camping_register_buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+/* 버튼 스타일 */
+.camping_register_button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

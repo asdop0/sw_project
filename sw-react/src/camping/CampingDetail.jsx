@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import "./Camping.css";
 import "../App.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
@@ -167,7 +167,17 @@ const CampingDetail = () => {
                 alt="Bookmark"
                 className="bookmark_icon"
               />
-            </button>
+          </button>
+          <button 
+              className="camping_modify_button"
+              >
+                <img 
+                  className="camping_modify"
+                  src="/modify.png"
+                  alt="수정버튼"
+                  />
+              </button>
+          
         </h2>
 
         <p className="camping_address">

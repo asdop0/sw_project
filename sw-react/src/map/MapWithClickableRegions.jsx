@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import CampingApiClient from "../services/camping/CampingApiClient";
 import CampingCard from "../camping/CampingCard";
 import "../camping/Camping.css";
@@ -410,6 +411,7 @@ const MapWithClickableRegions = () => {
       {selectedRegion && (
       <div>
          <h3 className="selectCampingList">{selectedRegion}의 캠핑장 리스트</h3>
+         <Link to={`/camping/register`}>
          <button className='camping_plus'>
           <img 
             className='plus'
@@ -417,6 +419,7 @@ const MapWithClickableRegions = () => {
             alt="등록 버튼"
           />
           </button>
+          </Link>
          {selectedRegion !== '강원도' && ( // '강원도'일 때 select 옵션 숨기기
          <select 
             className="category_Latest" 
