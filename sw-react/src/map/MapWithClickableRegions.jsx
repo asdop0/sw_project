@@ -405,10 +405,19 @@ const MapWithClickableRegions = () => {
 
         {/* 다른 지역들도 동일하게 추가 */}
       </map>
+
       {/* 선택된 지역의 캠핑 데이터 출력 */}
       {selectedRegion && (
       <div>
          <h3 className="selectCampingList">{selectedRegion}의 캠핑장 리스트</h3>
+         <button className='camping_plus'>
+          <img 
+            className='plus'
+            src="/plus.png" 
+            alt="등록 버튼"
+          />
+          </button>
+
          {selectedRegion !== '강원도' && ( // '강원도'일 때 select 옵션 숨기기
          <select 
             className="category_Latest" 

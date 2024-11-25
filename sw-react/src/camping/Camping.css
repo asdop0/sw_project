@@ -140,3 +140,11 @@
 .bookmark_count{
   font-size: 14px;
 }
+
+
+.plus{
+  width: 30px;
+  position: relative;
+  left: 1350px;
+  bottom: 555px;  
+}
