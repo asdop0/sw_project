@@ -21,7 +21,6 @@ public class ProductDetailDto {
 	private String name;
 	private String description;
 	private BigDecimal price;
-	private Integer cnt;
 	private String categoryName;
 	private LocalDateTime writeDate;
 	private LocalDateTime updateDate;
@@ -38,7 +37,6 @@ public class ProductDetailDto {
         	product.getName(),
         	product.getDescription(),
         	product.getPrice(),
-        	product.getCnt(),
         	product.getCategory().getName(),
         	product.getWriteDate(),
         	product.getUpdateDate(),

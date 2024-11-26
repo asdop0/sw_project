@@ -34,9 +34,6 @@ public class Product {
 	@Column(nullable = false)
 	private BigDecimal price;
 	
-	@Column(nullable = false)
-	private Integer cnt;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="category_id")
 	private Category category;

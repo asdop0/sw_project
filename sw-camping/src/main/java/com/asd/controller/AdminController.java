@@ -62,10 +62,6 @@ public class AdminController {
 	@PostMapping("/modify")
 	public Map<String, String> modifyCamping(@RequestBody CampingRequestDto campingRequestDto) {
 		Camping camping = new Camping(); //캠핑장 수정 정보 삽입
-		logger.info("수정 데이터 {} / {} / {} / {} / {} / {} / {} / {} / {}", campingRequestDto.getId(),
-				campingRequestDto.getName(), campingRequestDto.getAddress(), campingRequestDto.getDistrict(),
-				campingRequestDto.getHomepage(), campingRequestDto.getLatitude(), campingRequestDto.getLongitude(),
-				campingRequestDto.getPhonenumber());
 		camping.setId(Long.parseLong(campingRequestDto.getId()));	
 		camping.setName(campingRequestDto.getName());
 		camping.setAddress(campingRequestDto.getAddress());

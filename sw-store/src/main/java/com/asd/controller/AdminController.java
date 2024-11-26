@@ -48,7 +48,6 @@ public class AdminController {
 	        throw new IllegalArgumentException("Invalid price format: " + productRequestDto.getPrice(), e);
 	    }
 	    product.setWriteDate(LocalDateTime.now());
-		product.setCnt(Integer.parseInt(productRequestDto.getCnt()));
 		product.setCategory(categoryService.getCategory(Long.parseLong(productRequestDto.getCategory())));
 		product.setTotalSales(0L);
 		
@@ -72,7 +71,6 @@ public class AdminController {
 	    } catch (NumberFormatException e) {
 	        throw new IllegalArgumentException("Invalid price format: " + productRequestDto.getPrice(), e);
 	    }
-		product.setCnt(Integer.parseInt(productRequestDto.getCnt()));
 		product.setCategory(categoryService.getCategory(Long.parseLong(productRequestDto.getCategory())));
 		
 		productService.modifyProduct(product);
