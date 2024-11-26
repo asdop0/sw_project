@@ -159,6 +159,15 @@ const ProductDetail = () => {
         <img className="productImg"
           src={"/category_" + category + ".jpg"} alt="상품 임시 이미지">
         </img>
+        {(role === "ROLE_USER") && (<button 
+              className="camping_modify_button"
+              >
+                <img 
+                  className="camping_modify"
+                  src="/modify.png"
+                  alt="수정버튼"
+                  />
+              </button>)} 
         <h2 className="product_name">{product.name}
           <button className="product_bookmark_button" onClick={handleAddBookmark}>
             <img
@@ -183,15 +192,7 @@ const ProductDetail = () => {
         </button>
 
         <button onClick={handleAddCart} className="product_cart">장바구니 등록</button>
-        {(role === "ROLE_ADMIN") && (<button 
-              className="camping_modify_button"
-              >
-                <img 
-                  className="camping_modify"
-                  src="/modify.png"
-                  alt="수정버튼"
-                  />
-              </button>)}
+       
 {/*         
         <sapn className="product_description">{product.description}</sapn> <br/> */}
         

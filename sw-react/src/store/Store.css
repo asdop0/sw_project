@@ -200,3 +200,11 @@ margin-left: 100px;
   top: 570px;
   right: 1100px;
 }
+
+
+.camping_modify_button{
+  position: relative;
+  width: 30px;
+  top: -45px;
+  left: 390px;
+}
