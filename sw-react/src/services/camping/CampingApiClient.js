@@ -5,6 +5,7 @@ class CampingApiClient {
     static DISTRICT = "/district";
     static SORT = "/sort";
     static VIEW = "/view";
+    static SEARCH = "/search";
 
     //전체 리스트 조회
     static getCampingList() {
@@ -28,6 +29,12 @@ class CampingApiClient {
     static viewCamping(camping_id) {
         return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.VIEW + "?camping_id=" +camping_id,  {
             method: 'GET',
+        });
+    } 
+    //캠핑장 검색
+    static getSearchCampingList(search) {
+        return fetch(CampingApiClient.SERVER_URL + CampingApiClient.API + CampingApiClient.SEARCH + "?search=" + search, {
+            method: 'GET'
         });
     } 
 }

@@ -10,25 +10,25 @@ class AdminApiClient {
     static APPROVAL = "/approval";
 
     //상품 등록
-    static addProduct(accessToken, name, description, price, cnt, category) {
+    static addProduct(accessToken, name, description, price, category) {
         return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.ADD, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
-            body: JSON.stringify({name, description, price, cnt, category})
+            body: JSON.stringify({name, description, price, category})
         });
     } 
     //상품 수정
-    static modifyProduct(accessToken, id, name, description, price, cnt, category) {
+    static modifyProduct(accessToken, id, name, description, price, category) {
         return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.MODIFY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
-            body: JSON.stringify({id, name, description, price, cnt, category})
+            body: JSON.stringify({id, name, description, price, category})
         });
     } 
     //상품 삭제

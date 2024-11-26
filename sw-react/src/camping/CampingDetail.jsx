@@ -43,31 +43,6 @@ const CampingDetail = () => {
       .then((res) => {
         if (res.ok) {
           alert("등록되었습니다.");
-        } else if(res.status === 403) {
-          const refreshToken = localStorage.getItem('refreshToken');
-          SignApiClient.refresh(refreshToken).then(res => {
-            if(json.msg === "Success") {
-              localStorage.setItem('accessToken');
-              AdminApiClient.deleteCamping(token, camping.id).then(res => {
-                if(res.ok) {
-                  res.json().then(json => {
-                    if(json.code === "401") {
-                        //요청 오류
-                        console.log(json.message);
-                    } else {
-                      const timer = setTimeout(() => {
-                        setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
-                      }, 1500);
-                      alert("삭제되었습니다.");
-                      // 컴포넌트 언마운트 시 타이머 정리
-            
-                      return () => clearTimeout(timer);    
-                    }
-                  });
-                }
-              });
-            }
-          })
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));
@@ -170,12 +145,12 @@ const CampingDetail = () => {
           </button>
           {(role === "ROLE_ADMIN") && 
             (<Link to={`/camping/modify/${id}`} className="camping_details_link">
-                <img 
-                  className="camping_modify"
-                  src="/modify.png"
-                  alt="수정버튼"
-                />
-              </Link>)}
+              <img 
+                className="camping_modify"
+                src="/modify.png"
+                alt="수정버튼"
+              />
+            </Link>)}
           
         </h2>
 

@@ -420,7 +420,7 @@ const MapWithClickableRegions = () => {
           alt="검색 이미지"
         ></img>
         </Link>
-         {(role === 'ROLE_USER') && (<Link to={`/camping/register`}>
+         {(role === 'ROLE_ADMIN') && (<Link to={`/camping/register`}>
          <button className='camping_plus'>
           <img 
             className='mapplus'

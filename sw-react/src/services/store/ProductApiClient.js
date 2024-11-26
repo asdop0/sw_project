@@ -5,6 +5,7 @@ class ProductApiClient {
     static CATEGORY = "/category";
     static SORT = "/sort";
     static VIEW = "/view";
+    static SEARCH ="/search";
 
     //전체 상품 조회
     static getProductList() {
@@ -27,6 +28,12 @@ class ProductApiClient {
     //상품 상세 정보
     static viewProduct(product_id) {
         return fetch(ProductApiClient.SERVER_URL + ProductApiClient.API + ProductApiClient.VIEW + "?product_id=" + product_id, {
+            method: 'GET'
+        });
+    } 
+    //상품 검색
+    static getSearchProductList(search) {
+        return fetch(ProductApiClient.SERVER_URL + ProductApiClient.API + ProductApiClient.SEARCH + "?search=" + search, {
             method: 'GET'
         });
     } 

@@ -159,15 +159,14 @@ const ProductDetail = () => {
         <img className="productImg"
           src={"/category_" + category + ".jpg"} alt="상품 임시 이미지">
         </img>
-        {(role === "ROLE_USER") && (<button 
+        {(role === "ROLE_ADMIN") && 
+          (<Link to={`/product/modify/${id}`} className="camping_details_link">
+            <img 
               className="camping_modify_button"
-              >
-                <img 
-                  className="camping_modify"
-                  src="/modify.png"
-                  alt="수정버튼"
-                  />
-              </button>)} 
+              src="/modify.png"
+              alt="수정버튼"
+            />
+          </Link>)} 
         <h2 className="product_name">{product.name}
           <button className="product_bookmark_button" onClick={handleAddBookmark}>
             <img

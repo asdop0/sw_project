@@ -45,7 +45,7 @@ const CampingBookmark = () => {
                 )}
             </div>
 
-            <div className="camping_list">
+            <div>
                 {campings && campings.map((camping) => (
                 <div className="camping_card_wrapper" key={camping.id}>
                 <CampingBookmarkCard key={camping.id} camping={camping} setPageRefresh={setPageRefresh}/>

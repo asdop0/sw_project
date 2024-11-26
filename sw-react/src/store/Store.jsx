@@ -11,12 +11,14 @@ const Store = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [products, setProducts] = useState(null);
   const [pageRefresh, setPageRefresh] = useState(true);
+  const [role, setRole] = useState(null);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
 
   useEffect(() => {
+    setRole(localStorage.getItem('role'));
     if(selectedCategory === 0) {
       ProductApiClient.getProductList().then(res => {
         if(res.ok) {
@@ -63,13 +65,15 @@ const Store = () => {
         <Link to={'/storesearch'}>
         <button>검색</button>
         </Link>
-        <button className='camping_plus'>
+        {(role === 'ROLE_ADMIN') && (<Link to={`/product/register`}>
+         <button className='camping_plus'>
           <img 
             className='plus'
             src="/plus.png" 
             alt="등록 버튼"
           />
           </button>
+          </Link>)}
 
       </div>
 

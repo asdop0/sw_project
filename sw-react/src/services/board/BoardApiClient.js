@@ -6,6 +6,7 @@ class BoardApiClient {
     static VIEW = "/view";
     static ADD = "/add";
     static DELETE = "/delete";
+    static SEARCH = "/search";
 
     //게시글 전체 조회
     static getBoardList() {
@@ -43,6 +44,12 @@ class BoardApiClient {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             }
+        });
+    } 
+    //게시글 검색
+    static getSearchBoardList(search) {
+        return fetch(BoardApiClient.SERVER_URL + BoardApiClient.API + BoardApiClient.SEARCH + "?search=" + search, {
+            method: 'GET'
         });
     } 
 }

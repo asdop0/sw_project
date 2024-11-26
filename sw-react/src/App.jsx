@@ -20,6 +20,8 @@ import UsedDetail from "./used_store/UsedDetail";
 import Order from "./store/Order";
 import CampingRegister from "./camping/CampingRegister";
 import CampingModify from "./camping/CampingModify";
+import ProductRegister from "./store/ProductRegister";
+import ProductModify from "./store/ProductModify";
 import BoardRegister from "./used_store/BoardRegister";
 import CampingSearch from "./camping/CampingSearch";
 import UsedStoreSearch from "./used_store/UsedStoreSearch";
@@ -58,6 +60,8 @@ function App() {
         <Route path="/camping/register" element={<CampingRegister />} />
         <Route path="/camping/modify/:id" element={<CampingModify />} />
         <Route path="/board/register" element={<BoardRegister />} />
+        <Route path="/product/register" element={<ProductRegister />} />
+        <Route path="/product/modify/:id" element={<ProductModify />} />
         <Route path="/campingsearch" element={<CampingSearch />} />
         <Route path="/usedstoresearch" element={<UsedStoreSearch />} />
         <Route path="/storesearch" element={<StoreSearch />} />

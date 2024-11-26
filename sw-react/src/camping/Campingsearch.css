@@ -1,24 +1,23 @@
 .camping_search_input{
-    width: 50%;
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-    box-sizing: border-box;
-    position: relative;
-    bottom: 233px;
-  }
+  width: 50%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 233px;
+}
 
-  .camping_search_container .camping_search_button{
-    position: relative;
-    bottom: 230px;
-    background-color: transparent;
-  }
-  .camping_search_container .searchimg{
-    width: 30px;
-    position: relative;
-    bottom: -6px;
-    left: 1px;
-  }
-  
+.camping_search_container .camping_search_button{
+  position: relative;
+  bottom: 230px;
+  background-color: transparent;
+}
+.camping_search_container .searchimg{
+  width: 30px;
+  position: relative;
+  bottom: -6px;
+  left: 1px;
+}
