@@ -9,27 +9,40 @@ const CampingSearch = () => {
   const [pageRefresh, setPageRefresh] = useState(true);
 
   useEffect(() => {
-    if (searchString) {
-      CampingApiClient.getSearchCampingList(searchString).then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //캠핑장 데이터 불러오기 성공
-              if(json.length < 1) {
-                setCampings(false);
-                setSearchString("");
-              } else {
-                setCampings(json);
-                setSearchString("");
-              }
-            }
-          });
-        }
-      });
-    }
+    // if (searchString) {
+    //   CampingApiClient.getSearchCampingList(searchString).then(res => {
+    //     if(res.ok) {
+    //       res.json().then(json => {
+    //         if(json.code === "401") {
+    //           //요청 오류
+    //           console.log(json.message);
+    //         } else {
+    //           //캠핑장 데이터 불러오기 성공
+    //           if(json.length < 1) {
+    //             setCampings(false);
+    //             setSearchString("");
+    //           } else {
+    //             setCampings(json);
+    //             setSearchString("");
+    //           }
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
+    CampingApiClient.getCampingList().then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //요청 오류
+            console.log(json.message);
+          } else {
+            //캠핑장 데이터 불러오기 성공
+            setCampings(json);
+          }
+        });
+      }
+    });
   }, [pageRefresh]);
 
   return (
@@ -49,9 +62,9 @@ const CampingSearch = () => {
             ></img>
         </button>
       </div>
-      <div >
+      <div className="camping_cards_search_container">
         {campings && campings.map((camping) => (
-          <div className="camping_card_wrapper" key={camping.id}>
+          <div className="search_camping_card_wrapper" key={camping.id}>
           <CampingCard key={camping.id} camping={camping} setPageRefresh={setPageRefresh}/>
           </div>
         ))}

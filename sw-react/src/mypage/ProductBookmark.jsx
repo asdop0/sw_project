@@ -44,7 +44,7 @@ const ProductBookmark = () => {
                 )}
             </div>
 
-            <div className="product_list">
+            <div className="product_cards_container">
                 {products && products.map((product) => (
                 <div className="product_card_wrapper" key={product.id}>
                 <ProductBookMarkCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>
