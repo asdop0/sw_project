@@ -65,7 +65,11 @@ public class AdminController {
 		camping.setId(Long.parseLong(campingRequestDto.getId()));	
 		camping.setName(campingRequestDto.getName());
 		camping.setHomepage(campingRequestDto.getHomepage());
+		camping.setLatitude(Double.parseDouble(campingRequestDto.getLatitude()));
+		camping.setLongitude(Double.parseDouble(campingRequestDto.getLongitude()));
 		camping.setPhonenumber(campingRequestDto.getPhonenumber());
+		camping.setAddress(campingRequestDto.getAddress());
+		camping.setDistrict(campingRequestDto.getDistrict());
 		campingService.modifyCamping(camping);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");

@@ -24,6 +24,7 @@ public class CampingDetailDto {
 	private double longitude;
 	private String phonenumber;
 	private String homepage;
+	private String district;
 	private List<CampingReviewDto> campingReviews;
 	
 	public static CampingDetailDto toDto(Camping camping) {
@@ -40,6 +41,7 @@ public class CampingDetailDto {
         	camping.getLongitude(),
         	camping.getPhonenumber(),
         	camping.getHomepage(),
+        	camping.getDistrict(),
         	campingReviewDtos
         );
     }

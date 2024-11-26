@@ -107,6 +107,10 @@ public class CampingService {
 		camping_.setName(camping.getName());
 		camping_.setHomepage(camping.getHomepage());
 		camping_.setPhonenumber(camping.getPhonenumber());
+		camping_.setLatitude(camping.getLatitude());
+		camping_.setLongitude(camping.getLongitude());
+		camping_.setAddress(camping.getAddress());
+		camping_.setDistrict(camping.getDistrict());
 		
 		campingRepository.save(camping_);		
 	}
