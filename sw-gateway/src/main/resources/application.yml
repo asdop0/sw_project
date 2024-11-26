@@ -24,7 +24,7 @@ spring:
         - id: board_public
           uri: http://board-container:8080/
           predicates:
-            - Path=/board/list, /board/sort, /board/view
+            - Path=/board/list, /board/sort, /board/view, /board/search
         - id: board_user
           uri: http://board-container:8080/
           predicates:
