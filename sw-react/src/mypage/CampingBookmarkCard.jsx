@@ -38,7 +38,7 @@ const CampingBookmarkCard = ({ camping, setPageRefresh }) => {
       <Link to={`/camping/${camping.id}`} className="camping_details_link">
         상세보기
       </Link>
-      <button onClick={handleDeleteBookmark}>찜 삭제</button>
+      <button className="camping_bookmark_delete" onClick={handleDeleteBookmark}>찜 삭제</button>
     </div>
   );
 };
