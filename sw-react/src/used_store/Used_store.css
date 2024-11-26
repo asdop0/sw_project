@@ -89,6 +89,9 @@
   bottom: 70px;
   background-color: transparent;
 }
+.board_plus .plus{
+  width: 30px;
+}
 
 .Used_store .searchimg{
   width: 30px;

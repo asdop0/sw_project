@@ -6,8 +6,6 @@ import UserApiClient from "../services/auth/UserApiClient";
 const Order = () => {
   const { id } = useParams(); // URL에서 product_id 가져오기
   const [productDetail, setProductDetail] = useState(null); // 상품 상세 데이터를 저장하는 상태
-  const [userDetail, setUserDetail] = useState(null); // 사용자 상세 데이터를 저장하는 상태
-
 
   // 상품 데이터를 가져오는 함수
   useEffect(() => {
@@ -24,26 +22,6 @@ const Order = () => {
       })
       .catch((err) => console.error("API 호출 실패:", err));
   }, [id]);
-
-   // 사용자 데이터를 가져오는 함수
-   useEffect(() => {
-    const fetchUserDetail = async () => {
-      try {
-        const accessToken = localStorage.getItem("accessToken"); // 토큰 가져오기
-        const response = await UserApiClient.getUserDetail(accessToken); // 사용자 API 호출
-        if (response.ok) {
-          const data = await response.json();
-          setUserDetail(data);
-        } else {
-          console.error("사용자 정보를 불러오는 데 실패했습니다.");
-        }
-      } catch (err) {
-        console.error("API 호출 실패:", err);
-      }
-    };
-
-    fetchUserDetail();
-  }, []);
 
   if (!productDetail) return <p>로딩 중...</p>; // 데이터가 로드될 때까지 로딩 메시지 표시
 

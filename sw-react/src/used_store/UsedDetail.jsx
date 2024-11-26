@@ -4,6 +4,7 @@ import BoardApiClient from "../services/board/BoardApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
 import CommentApiClient from "../services/board/CommentApiClient";
 import AdminApiClient from "../services/board/AdminApiClient";
+import "./UsedDetail.css"; 
 
 const UsedDetail = () => {
   const { id } = useParams();
@@ -103,21 +104,19 @@ const UsedDetail = () => {
         <img className="boardImg" 
           src="/board.png" alt="중고거래 임시 이미지">
         </img>
-
         <h2>
-          {board.title}
+         제목 : {board.title}
         </h2>
-
-        <p>
-          {board.content}
-        </p>
-        <p>
+        <span className="UsedDetailUserName">
+          사용자 : {board.userName}
+        </span>
+        <span className="UsedDetailDate">
           {board.writeDate.split("T")[0]}
-        </p>
-        <p>
-          {board.userName}
-        </p>
-        
+        </span>
+
+        <div className="content_box">
+          <p>{board.content}</p>
+        </div>        
         
 
         <div className="reviews_section">

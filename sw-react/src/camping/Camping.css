@@ -150,7 +150,7 @@ bottom: 555px;
 background-color: transparent;
 }
 
-.plus{
+.mapplus{
   width: 30px;
 }
 
@@ -187,6 +187,7 @@ background-color: transparent;
 .searchimg{
   width: 30px;
   position: relative;
-  bottom: 555px;
-  left: 520px;
+  bottom: 563px;
+  left: 540px;
 }
+

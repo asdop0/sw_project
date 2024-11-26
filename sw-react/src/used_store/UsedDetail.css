@@ -1,0 +1,45 @@
+.board_detail .boardImg{
+    position: relative;
+    right: 300px;
+    top: 150px;
+    background-color: transparent;
+}
+
+.board_detail h2 {
+    position: relative;
+    bottom: 100px;
+    margin-right: 100px;
+  }
+
+.UsedDetailUserName{
+    position: relative;
+    bottom: 110px;
+}
+
+.UsedDetailDate{
+    position: relative;
+    bottom: 110px;
+    left: 100px;
+}
+
+.content_box {
+    width: 36%;
+    height: 200px;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 16px; 
+    margin: 16px 0; 
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    position: relative;
+    left: 540px;
+    bottom: 100px;
+  }
+  
+  .content_box p {
+    margin: 0;
+    color: #333; 
+    font-size: 16px; 
+    line-height: 1.5; 
+  }
+
