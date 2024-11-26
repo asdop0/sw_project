@@ -131,7 +131,6 @@ public class ProductService {
 		product_.setName(product.getName());
 		product_.setDescription(product.getDescription());
 		product_.setPrice(product.getPrice());
-		product_.setCnt(product.getCnt());
 		product_.setCategory(product.getCategory());
 		product_.setUpdateDate(LocalDateTime.now());
 		
