@@ -72,8 +72,8 @@ const CampingCard = ({ camping, setPageRefresh }) => {
         상세보기
       </Link>
       {/* 조건부로 삭제 버튼 활성화 */}
-      {(role === 'ROLE_USER') && (
-        <button className="delete_product" onClick={handleDeleteCamping}>
+      {(role === 'ROLE_ADMIN') && (
+        <button onClick={handleDeleteCamping}>
           삭제
         </button>
       )}

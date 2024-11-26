@@ -18,14 +18,14 @@ class AdminApiClient {
         });
     } 
     //캠핑장 정보 수정
-    static modifyCamping(accessToken, camping_id, phonenumber, name) {
+    static modifyCamping(accessToken, id, name, address, district, homepage, latitude, longitude, phonenumber) {
         return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.MODIFY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
-            body: JSON.stringify({name, address, district, homepage, latitude, longitude, phonenumber})
+            body: JSON.stringify({id, name, address, district, homepage, latitude, longitude, phonenumber})
         });
     } 
     //캠핑장 삭제

@@ -168,15 +168,14 @@ const CampingDetail = () => {
                 className="bookmark_icon"
               />
           </button>
-          <button 
-              className="camping_modify_button"
-              >
+          {(role === "ROLE_ADMIN") && 
+            (<Link to={`/camping/modify/${id}`} className="camping_details_link">
                 <img 
                   className="camping_modify"
                   src="/modify.png"
                   alt="수정버튼"
-                  />
-              </button>
+                />
+              </Link>)}
           
         </h2>
 

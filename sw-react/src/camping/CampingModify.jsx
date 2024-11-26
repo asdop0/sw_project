@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignApiClient from "../services/auth/SignApiClient";
 import AdminApiClient from "../services/camping/AdminApiClient";
-import { useNavigate } from 'react-router-dom';
-import "./CampingRegister.css";
+import CampingApiClient from "../services/camping/CampingApiClient";
+import { useNavigate, useParams } from 'react-router-dom';
 
-const CampingRegister = () => {
+const CampingModify = () => {
   // 각 입력값을 상태로 관리
   const [name, setName] = useState('');
   const [homepage, setHomepage] = useState('');
@@ -14,17 +14,40 @@ const CampingRegister = () => {
   const [address, setAddress] = useState('');
   const [district, setDistrict] = useState('');
   const navigate = useNavigate(); // useNavigate 사용
+  const { id } = useParams();
 
-  const handleAddCamping = () => {
+  useEffect(() => {
+    CampingApiClient.viewCamping(id).then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //요청 오류
+            console.log(json.message);
+          } else {
+            //캠핑 데이터 불러오기 성공
+            setName(json.name);
+            setHomepage(json.homepage);
+            setLatitude(json.latitude);
+            setLongitude(json.longitude);
+            setPhonenumber(json.phonenumber);
+            setAddress(json.address);
+            setDistrict(json.district);
+          }
+        });
+      }
+    });
+  }, []);
+
+  const handleModifyCamping = () => {
     SignApiClient.loginCheck();
     const accessToken = localStorage.getItem("accessToken"); // 토큰 저장 위치 확인 필요
-    AdminApiClient.addCamping(accessToken, name, address, district, homepage, latitude, longitude, phonenumber)
+    AdminApiClient.modifyCamping(accessToken, id, name, address, district, homepage, latitude, longitude, phonenumber)
       .then((res) => {
         if (res.ok) {
-          alert("등록되었습니다.");
+          alert("수정되었습니다.");
           navigate('/');
         } else {
-          console.error("Failed to add camping.");
+          console.error("Failed to modify camping.");
         }
       })
       .catch((err) => console.error(err));
@@ -33,7 +56,7 @@ const CampingRegister = () => {
 
   return (
     <div className="camping_register">
-      <h2>캠핑장 등록</h2>
+      <h2>캠핑장 수정</h2>
       <input
         className="camping_register_name"
         placeholder="캠핑장 이름"
@@ -83,10 +106,10 @@ const CampingRegister = () => {
         value={district}
         onChange={(e) => setDistrict(e.target.value)}
       /><br/>
-      <button onClick={handleAddCamping}>확인</button>
+      <button onClick={handleModifyCamping}>확인</button>
       <button onClick={() => navigate('/')}>닫기</button>
     </div>
   );
 };
 
-export default CampingRegister;
+export default CampingModify;

@@ -4,7 +4,7 @@ import BoardApiClient from "../services/board/BoardApiClient";
 import { useNavigate } from 'react-router-dom';
 import './BoardRegister.css';
 
-const BoardRegister = ( onClose ) => {
+const BoardRegister = () => {
   // 각 입력값을 상태로 관리
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -44,7 +44,7 @@ const BoardRegister = ( onClose ) => {
         onChange={(e) => setContent(e.target.value)}
       /><br/>
       <button onClick={handleAddBoard}>확인</button>
-      <button onClick={onClose}>닫기</button>
+      <button onClick={() => navigate('/used_store')}>닫기</button>
     </div>
   );
 };

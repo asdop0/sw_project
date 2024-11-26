@@ -21,14 +21,14 @@ class AdminApiClient {
         });
     } 
     //상품 수정
-    static modifyProduct(accessToken, product_id, name, description, price, cnt, category) {
+    static modifyProduct(accessToken, id, name, description, price, cnt, category) {
         return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.MODIFY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
-            body: JSON.stringify({product_id, name, description, price, cnt, category})
+            body: JSON.stringify({id, name, description, price, cnt, category})
         });
     } 
     //상품 삭제
