@@ -1,0 +1,24 @@
+.store_search_input{
+    width: 50%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    bottom: 233px;
+  }
+
+  .store_search_container .store_search_button{
+    position: relative;
+    bottom: 230px;
+    background-color: transparent;
+  }
+  .store_search_container .searchimg{
+    width: 30px;
+    position: relative;
+    bottom: -6  px;
+    left: 0px;
+  }
+  

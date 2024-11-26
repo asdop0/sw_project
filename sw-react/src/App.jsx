@@ -21,6 +21,9 @@ import Order from "./store/Order";
 import CampingRegister from "./camping/CampingRegister";
 import CampingModify from "./camping/CampingModify";
 import BoardRegister from "./used_store/BoardRegister";
+import CampingSearch from "./camping/CampingSearch";
+import UsedStoreSearch from "./used_store/UsedStoreSearch";
+import StoreSearch from "./store/StoreSearch";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -55,6 +58,9 @@ function App() {
         <Route path="/camping/register" element={<CampingRegister />} />
         <Route path="/camping/modify/:id" element={<CampingModify />} />
         <Route path="/board/register" element={<BoardRegister />} />
+        <Route path="/campingsearch" element={<CampingSearch />} />
+        <Route path="/usedstoresearch" element={<UsedStoreSearch />} />
+        <Route path="/storesearch" element={<StoreSearch />} />
 
       </Routes>
       <Background /> 

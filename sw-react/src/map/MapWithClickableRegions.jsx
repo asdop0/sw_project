@@ -413,6 +413,13 @@ const MapWithClickableRegions = () => {
       {selectedRegion && (
       <div>
          <h3 className="selectCampingList">{selectedRegion}의 캠핑장 리스트</h3>
+         <Link to={'/campingsearch'}>
+         <img
+          className='searchimg'
+          src="search.png"
+          alt="검색 이미지"
+        ></img>
+        </Link>
          {(role === 'ROLE_ADMIN') && (<Link to={`/camping/register`}>
          <button className='camping_plus'>
           <img 

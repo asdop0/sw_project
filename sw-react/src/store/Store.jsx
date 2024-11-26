@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import "./Store.css";
 import ImageSlider from "./ImageSlider";
 import ProductApiClient from "../services/store/ProductApiClient";
+import { Link } from "react-router-dom";
 
 const Store = () => {
 
@@ -59,6 +60,17 @@ const Store = () => {
         <button onClick={() => handleCategoryChange(2)}>텐트</button>
         <button onClick={() => handleCategoryChange(3)}>푸드</button>
         <button onClick={() => handleCategoryChange(4)}>DIY</button>
+        <Link to={'/storesearch'}>
+        <button>검색</button>
+        </Link>
+        <button className='camping_plus'>
+          <img 
+            className='plus'
+            src="/plus.png" 
+            alt="등록 버튼"
+          />
+          </button>
+
       </div>
 
       {/* 각 카테고리에서 조회, 찜, 구매(취소 시 -count) 순으로 dropdown 만들고 정렬 */}

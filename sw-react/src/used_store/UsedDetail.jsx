@@ -112,7 +112,7 @@ const UsedDetail = () => {
           {board.content}
         </p>
         <p>
-          {board.writeDate}
+          {board.writeDate.split("T")[0]}
         </p>
         <p>
           {board.userName}
@@ -141,7 +141,7 @@ const UsedDetail = () => {
           <div className="review_input">
             <textarea
               value={newComment}
-              onChange={(e) => setNewReview(e.target.value)}
+              onChange={(e) => setComment(e.target.value)}
               placeholder="댓글를 작성하세요"
             ></textarea>
           </div>
