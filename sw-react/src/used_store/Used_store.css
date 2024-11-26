@@ -82,3 +82,10 @@
   left: 500px;
   background-color: transparent;
 }
+
+.board_plus{
+  position: relative;
+  left: 350px;
+  bottom: 70px;
+  background-color: transparent;
+}

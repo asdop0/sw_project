@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignApiClient from "../services/auth/SignApiClient";
 import AdminApiClient from "../services/camping/AdminApiClient";
 import { useNavigate } from 'react-router-dom';
+import "./CampingRegister.css";
 
 const CampingRegister = ( onClose ) => {
   // 각 입력값을 상태로 관리
@@ -77,7 +78,7 @@ const CampingRegister = ( onClose ) => {
       />
       <input
         className="camping_register_disctrict"
-        placeholder="지역구분"
+        placeholder="지역구분    ex)춘천시"
         type="text"
         value={district}
         onChange={(e) => setDistrict(e.target.value)}

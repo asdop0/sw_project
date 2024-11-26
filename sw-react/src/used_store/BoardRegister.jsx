@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignApiClient from "../services/auth/SignApiClient";
 import BoardApiClient from "../services/board/BoardApiClient";
 import { useNavigate } from 'react-router-dom';
+import './BoardRegister.css';
 
 const BoardRegister = ( onClose ) => {
   // 각 입력값을 상태로 관리
@@ -26,17 +27,17 @@ const BoardRegister = ( onClose ) => {
 
 
   return (
-    <div className="camping_register">
+    <div className="board_register">
       <h2>게시글 등록</h2>
       <input
-        className="camping_register_name"
+        className="board_register_name"
         placeholder="제목"
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="camping_register_homepage"
+        className="board_register_homepage"
         placeholder="내용"
         type="text"
         value={content}
