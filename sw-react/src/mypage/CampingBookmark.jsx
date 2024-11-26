@@ -5,49 +5,30 @@ import SignApiClient from "../services/auth/SignApiClient";
 import BookmarkApiClient from "../services/camping/BookmarkApiClient";
 import CampingBookmarkCard from "./CampingBookmarkCard";
 
-import CampingApiClient from "../services/camping/CampingApiClient"; //삭제
-
 const CampingBookmark = () => {
     const [campings, setCampings] = useState(false);
     const [pageRefresh, setPageRefresh] = useState(false);
     useEffect(() => {
         SignApiClient.loginCheck();
         const accessToken = localStorage.getItem('accessToken');
-        // BookmarkApiClient.getBookmarkList(accessToken).then(res => {
-        //     if(res.ok) {
-        //         res.json().then(json => {
-        //             if(json.code === "401") {
-        //                 //요청 오류
-        //                 console.log(json.message);
-        //             } else {
-        //                 //캠핑장 데이터 불러오기 성공
-        //                 if (Object.keys(json).length === 0) {
-        //                 } else {
-        //                     console.log(json);
-        //                     setCampings(json);
-        //                 }
-        //                 console.log("성공");
-        //             }
-        //         });
-        //     }
-        // });
-
-        //
-        CampingApiClient.getCampingList().then(res => {
-            if(res.ok) {
-              res.json().then(json => {
-                if(json.code === "401") {
-                  //요청 오류
-                  console.log(json.message);
+        BookmarkApiClient.getBookmarkList(accessToken).then(res => {
+        if(res.ok) {
+            res.json().then(json => {
+            if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+            } else {
+                //캠핑장 데이터 불러오기 성공
+                if (Object.keys(json).length === 0) {
                 } else {
-                  //캠핑장 데이터 불러오기 성공
-                  setCampings(json);
+                    console.log(json);
+                    setCampings(json);
                 }
-              });
+                console.log("성공");
             }
-          });
-          //
-
+            });
+        }
+        });
       }, [pageRefresh]);
 
     return (

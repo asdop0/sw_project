@@ -3,7 +3,7 @@ import "./CampingSearch.css";
 import CampingApiClient from "../services/camping/CampingApiClient";
 import CampingCard from "./CampingCard";
 
-const Search = () => {
+const CampingSearch = () => {
   const [searchString, setSearchString] = useState("");
   const [campings, setCampings] = useState(false);
   const [pageRefresh, setPageRefresh] = useState(true);
@@ -64,4 +64,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default CampingSearch;
