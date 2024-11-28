@@ -1,0 +1,69 @@
+/* NoteBoard 스타일 */
+.note_board {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.note_board h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Note 카드 스타일 */
+.note_card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.note_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 제목과 날짜 */
+.note_header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.note_header h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.note_date {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* 게시물 내용 */
+.note_content {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* 버튼 스타일 */
+.note_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.note_edit-btn, .note_delete_btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}

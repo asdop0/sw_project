@@ -31,6 +31,8 @@ const Order = () => {
       <p><strong>상품 이름:</strong> {productDetail.name}</p>
       <p><strong>가격:</strong> {productDetail.price} 원</p>
 
+      <button>결제하기</button>
+
     </div>
   );
 };
