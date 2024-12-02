@@ -4,6 +4,7 @@ import ProductApiClient from "../services/store/ProductApiClient"; // ProductApi
 import AddressApiClient from "../services/store/AddressApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
 import OrderApiClient from "../services/store/OrderApiClient";
+import "./Order.css";
 
 const Order = () => {
   const { id } = useParams(); // URL에서 product_id 가져오기
@@ -69,7 +70,7 @@ const Order = () => {
   if (!productDetail) return <p>로딩 중...</p>; // 데이터가 로드될 때까지 로딩 메시지 표시
 
   return (
-    <div className="product_detail">
+    <div className="order_product_detail">
       <h2>상품 정보</h2>
       <p><strong>상품명:</strong> {productDetail.name}</p>
       <p><strong>가격:</strong> {productDetail.price * quantity} 원</p>
@@ -85,12 +86,16 @@ const Order = () => {
       {!address && (<div>
         <h2>설정된 배송지가 없습니다. 배송지를 추가해주세요.</h2>
         </div>)}
+      
       <button className="save_button" onClick={handleConfirmOrder}>결제하기</button>
       <div className="item-link-9">
         <Link to={`/product/${id}`}>
           <span>취소</span>
         </Link>
       </div>
+      <Link to="/delivery">
+        <button className="delivery_button">배송지 추가</button>
+      </Link>
     </div>
   );
 };

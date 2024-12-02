@@ -12,7 +12,7 @@ const MyPage = () => {
             <div className='MyShopping'>
               <div className='MyShopping_text'>My 쇼핑</div><br/>
                 <li>주문목록/배송조회</li>
-                <li>취소/반품/교환 내역</li><br/>
+                <li>취소 내역</li><br/>
             </div>
             <div className='MyActivity'>
               <div className='MyActivity_text'>My 활동</div>
@@ -39,7 +39,6 @@ const MyPage = () => {
                   배송지 관리
                   </Link>
                 </li>
-                <li>개인정보 확인/수정 </li>
             </div>
           </ul>
       </aside>

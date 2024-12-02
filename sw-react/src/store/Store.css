@@ -113,7 +113,8 @@
 .category_filter button {
   position: relative;
   z-index: 2; /* 슬라이드보다 높은 z-index */
-  margin: 1%;
+  /* margin: 1%; */
+  margin-top: 80px;
 }
 
 
@@ -207,4 +208,20 @@ margin-left: 100px;
   width: 30px;
   top: -45px;
   left: 390px;
+}
+
+.store_category_Latest {
+  position: relative;
+  bottom: -40px;
+  left: -300px;
+  font-size: 16px;
+  width: 100px;
+  height: 25px;
+  background-color: #ffffff;
+  color: rgb(88, 81, 81);
+  border:  rgb(0, 0, 0);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Noto Sans KR", Helvetica, sans-serif;
+  
 }

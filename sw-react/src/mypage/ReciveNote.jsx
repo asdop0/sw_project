@@ -43,6 +43,9 @@ const ReciveNoteBoard = () => {
     return (
         <div className="Recivenote_board">
             <h2>받은 쪽지함</h2>
+            <Link to="/sendmessage">
+                <a className="sendmessage">쪽지 보내기 </a>
+            </Link>
             <Link to="/recivenote">
                 <a className="recive_note">받은 쪽지함 </a>
             </Link>

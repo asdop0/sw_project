@@ -32,9 +32,6 @@ export const Login = ({ setIsLoggedIn }) => {
     setShowModal(false);
   };
 
-  const handleOpenPasswordModal = () => {
-    setShowPasswordModal(true);
-  };
 
   const handleClosePasswordModal = () => {
     setShowPasswordModal(false);
@@ -103,10 +100,7 @@ export const Login = ({ setIsLoggedIn }) => {
         <div className="login_password">비밀번호</div>
         <img className="passwordicon" src="passwordicon.png" />
         <div className="login_signup" onClick={handleOpenSignUpModal} >회원가입</div>
-
         <div className="find_id" onClick={handleOpenModal}>아이디 찾기</div>
-
-        <div className="find_password" onClick={handleOpenPasswordModal}>비밀번호 찾기</div>
 
         {/* //test
         <div className="text-wrapper-7" onClick={handleOpenAdressModal}>우편번호 테스트</div>
@@ -115,17 +109,15 @@ export const Login = ({ setIsLoggedIn }) => {
 
         <div className="rectangle-4" />
 
-        <img
-          className="line"
-          alt="Line"
-          src="https://cdn.animaapp.com/projects/67076c11d0f0ae73b3d7d93c/releases/67188008e1c7a2ddf5e2b0f2/img/line-1.svg"
-        />
-
+        
         <img
           className="img"
           alt="Line"
           src="https://cdn.animaapp.com/projects/67076c11d0f0ae73b3d7d93c/releases/67188008e1c7a2ddf5e2b0f2/img/line-1.svg"
         />
+
+       
+        
       </div>
       {/* Id모달 컴포넌트 삽입 */}
       <Id_Modal show={showModal} onClose={handleCloseModal} />

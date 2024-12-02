@@ -442,7 +442,7 @@
   font-family: "ABeeZee", Helvetica;
   font-size: 14px;
   font-weight: 400;
-  left: 510px;
+  left: 580px;
   letter-spacing: 0;
   line-height: 16px;
   position: absolute;
@@ -456,7 +456,7 @@
   font-family: "ABeeZee", Helvetica;
   font-size: 14px;
   font-weight: 400;
-  left: 645px;
+  left: 735px;
   letter-spacing: 0;
   line-height: 16px;
   position: absolute;
@@ -499,23 +499,15 @@
 
 
 
-.login .line {
+.login .img {
   height: 40px;
-  left: 630px;
+  left: 704px;
   object-fit: cover;
   position: absolute;
   top: 740px;
   width: 1px;
 }
 
-.login .img {
-  height: 40px;
-  left: 764px;
-  object-fit: cover;
-  position: absolute;
-  top: 740px;
-  width: 1px;
-}
 
 /* login */
 
@@ -732,7 +724,7 @@
   font-size: 18px;
   font-weight: 700;
   font-family: "Noto Sans KR", Helvetica, sans-serif;
-  top: -11px;
+  top: -32px;
   right: 180px;
   width: 120px;
   background-color: transparent;

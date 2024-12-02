@@ -114,8 +114,9 @@ const Store = () => {
         <Link to={'/storesearch'}>
         <button>검색</button>
         </Link>
+
         {(selectedCategory != 0) && (<select 
-          className="category_Latest" 
+          className="store_category_Latest" 
           value={sortBy} 
           onChange={handleSortByChange}
         >
@@ -124,6 +125,7 @@ const Store = () => {
           <option value="즐겨찾기순">즐겨찾기순</option>
           <option value="판매량순">판매량순</option>
         </select>)}
+
         {(role === 'ROLE_ADMIN') && (<Link to={`/product/register`}>
          <button className='camping_plus'>
           <img 
