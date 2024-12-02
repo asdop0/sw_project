@@ -17,7 +17,7 @@ public class AddressDto {
 	private String addr;
 	private String phonenumber;
 	private String req;
-	private boolean choice;
+	private String choice;
 	
 	public static AddressDto toDto(Address address) {
 		return new AddressDto(
@@ -26,7 +26,7 @@ public class AddressDto {
 			address.getAddr(),
 			address.getPhonenumber(),
 			address.getReq(),
-			address.isChoice()
+			address.getChoice()
 		);
 	}
 }

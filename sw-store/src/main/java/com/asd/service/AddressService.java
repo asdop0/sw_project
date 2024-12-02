@@ -20,13 +20,14 @@ public class AddressService {
 	private final AddressRepository addressRepository;
 	
 	//전달받은 배송지 저장
+	@Transactional
 	public void addAddress(Address address, User user) {
 		try {
-			Optional<Address> preAddress = addressRepository.findByUserAndChoiceTrue(user);
+			Optional<Address> preAddress = addressRepository.findByUserAndChoice(user, "O");
 			Address preAddress_ = null;
 			if(preAddress.isPresent()) {
 				preAddress_ = preAddress.get();
-				preAddress_.setChoice(false);
+				preAddress_.setChoice("X");
 				addressRepository.save(preAddress_);
 			}
 		}catch(Exception e) {
@@ -74,7 +75,7 @@ public class AddressService {
 	
 	//기본 배송지 출력
 	public Address getAddress(User user) {
-		Address address = addressRepository.findByUserAndChoiceTrue(user).orElseThrow(() -> 
+		Address address = addressRepository.findByUserAndChoice(user, "O").orElseThrow(() -> 
     		new IllegalArgumentException("[getAddress] 배송지를 찾을 수 없습니다.")
 		);
 		return address;
@@ -83,15 +84,15 @@ public class AddressService {
 	//기본 배송지 변경
 	@Transactional
 	public void choiceAddress(User user, Long id) {
-		Address address = addressRepository.findByUserAndChoiceTrue(user).orElseThrow(() -> 
+		Address address = addressRepository.findByUserAndChoice(user, "O").orElseThrow(() -> 
 			new IllegalArgumentException("[choiceAddress] 기존 배송지를 찾을 수 없습니다.")
 		);
-		address.setChoice(false);
+		address.setChoice("X");
 		
 		Address newAddress = addressRepository.findById(id).orElseThrow(() -> 
 			new IllegalArgumentException("[choiceAddress] 새로운 배송지를 찾을 수 없습니다.")
 		);
-		newAddress.setChoice(true);
+		newAddress.setChoice("O");
 		addressRepository.save(address);
 		addressRepository.save(newAddress);
 	}

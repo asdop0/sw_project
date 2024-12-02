@@ -74,6 +74,7 @@ public class CartService {
 			order.setOrderDetail(orderDetail);
 			
 			orderService.addOrder(order);
+			cartRepository.deleteById(cart.getId());
 		}
 	}
 }

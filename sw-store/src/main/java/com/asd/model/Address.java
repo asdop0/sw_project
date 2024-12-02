@@ -34,7 +34,7 @@ public class Address {
 	private String req;
 	
 	@Column(nullable = false)
-	private boolean choice;
+	private String choice;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
