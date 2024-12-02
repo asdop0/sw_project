@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.asd.DTO.MessageDto;
 import com.asd.model.Message;
@@ -51,13 +52,15 @@ public class MessageService {
     }
 
   //받은 쪽지 삭제
+    @Transactional
     public void deleteMessageByReceiver(Long id, User user) {
         Message message = messageRepository.findById(id).orElseThrow(() ->
             new IllegalArgumentException("[deleteMessageByReceiver] 메시지를 찾을 수 없습니다.")
         );
 
-        if(user.equals(message.getSender())) {
+        if(user.equals(message.getReceiver())) {
             message.deleteByReceiver(); //받은 사람의 메시지 삭제
+            messageRepository.save(message);
             if (message.isDeleted()) {
                 //받은 사람과 보낸 사람 모두 삭제했으면 삭제
                 messageRepository.delete(message);
@@ -68,6 +71,7 @@ public class MessageService {
     }
 
     //보낸 쪽지 삭제
+    @Transactional
     public void deleteMessageBySender(Long id, User user) {
         Message message = messageRepository.findById(id).orElseThrow(() -> 
         	new IllegalArgumentException("[deleteMessageBySender] 메시지를 찾을 수 없습니다.")
@@ -75,6 +79,7 @@ public class MessageService {
 
         if(user.equals(message.getSender())) {
             message.deleteBySender(); //보낸 사람의 메시지 삭제
+            messageRepository.save(message);
             if (message.isDeleted()) {
                 //받은 사람과 보낸 사람 모두 삭제했으면 삭제
                 messageRepository.delete(message);
