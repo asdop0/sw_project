@@ -12,9 +12,14 @@ const Store = () => {
   const [products, setProducts] = useState(null);
   const [pageRefresh, setPageRefresh] = useState(true);
   const [role, setRole] = useState(null);
+  const [sortBy, setSortBy] = useState('최신');
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleSortByChange = (event) => {
+    setSortBy(event.target.value);
   };
 
   useEffect(() => {
@@ -34,21 +39,65 @@ const Store = () => {
         }
       });
     } else {
-      ProductApiClient.getCategoryList(selectedCategory).then(res => {
-        if(res.ok) {
-          res.json().then(json => {
-            if(json.code === "401") {
-              //요청 오류
-              console.log(json.message);
-            } else {
-              //상품 데이터 불러오기 성공
-              setProducts(json);
-            }
-          });
-        }
-      });
+      if (sortBy === '최신'){
+        ProductApiClient.getCategoryList(selectedCategory).then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //상품 데이터 불러오기 성공
+                setProducts(json);
+              }
+            });
+          }
+        });
+      } else if (sortBy === "후기순"){
+        ProductApiClient.getSortList(selectedCategory, "review").then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //상품 데이터 불러오기 성공
+                setProducts(json);
+              }
+            });
+          }
+        });
+      } else if (sortBy === "즐겨찾기순"){
+        ProductApiClient.getSortList(selectedCategory, "bookmart").then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //상품 데이터 불러오기 성공
+                setProducts(json);
+              }
+            });
+          }
+        });
+      } else if (sortBy === "판매량순"){
+        ProductApiClient.getSortList(selectedCategory, "totalSales").then(res => {
+          if(res.ok) {
+            res.json().then(json => {
+              if(json.code === "401") {
+                //요청 오류
+                console.log(json.message);
+              } else {
+                //상품 데이터 불러오기 성공
+                setProducts(json);
+              }
+            });
+          }
+        });
+      }
     }
-  }, [selectedCategory, pageRefresh]);
+  }, [selectedCategory, pageRefresh, sortBy]);
 
   return (
     <div className="store_container">
@@ -65,6 +114,16 @@ const Store = () => {
         <Link to={'/storesearch'}>
         <button>검색</button>
         </Link>
+        {(selectedCategory != 0) && (<select 
+          className="category_Latest" 
+          value={sortBy} 
+          onChange={handleSortByChange}
+        >
+          <option value="최신">최신</option>
+          <option value="후기순">후기순</option>
+          <option value="즐겨찾기순">즐겨찾기순</option>
+          <option value="판매량순">판매량순</option>
+        </select>)}
         {(role === 'ROLE_ADMIN') && (<Link to={`/product/register`}>
          <button className='camping_plus'>
           <img 

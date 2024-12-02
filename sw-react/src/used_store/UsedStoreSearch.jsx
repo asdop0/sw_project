@@ -49,9 +49,9 @@ const UsedStoreSearch = () => {
             ></img>
         </button>
       </div>
-      <div className="Used_cards_search_container">
+      <div >
         {boards && boards.map((board) => (
-          <div className="Used_card_wrapper" key={board.id}>
+          <div className="board_card_wrapper" key={board.id}>
           <UsedCard key={board.id} board={board} setPageRefresh={setPageRefresh}/>
           </div>
         ))}

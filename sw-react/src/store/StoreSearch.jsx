@@ -49,9 +49,9 @@ const StoreSearch = () => {
             ></img>
         </button>
       </div>
-      <div className="store_cards_search_container">
+      <div >
         {products && products.map((product) => (
-          <div className="store_product_card_wrapper" key={product.id}>
+          <div className="product_card_wrapper" key={product.id}>
           <ProductCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>
           </div>
         ))}

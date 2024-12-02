@@ -11,9 +11,6 @@ import MyPage from "./mypage/MyPage";
 import ProductDetail from "./store/ProductDetail";
 import Used_store from "./used_store/Used_store";
 import Delivery from "./mypage/Delivery";
-// import AddAddress_Modal from "./modal/AddAdress_Modal";
-import ReciveNote from "./mypage/ReciveNote";
-import SendNote from "./mypage/Sendnote";
 import CampingDetail from "./camping/CampingDetail";
 import ProductBookmark from "./mypage/ProductBookmark";
 import CampingBookmark from "./mypage/CampingBookmark";
@@ -27,6 +24,8 @@ import BoardRegister from "./used_store/BoardRegister";
 import CampingSearch from "./camping/CampingSearch";
 import UsedStoreSearch from "./used_store/UsedStoreSearch";
 import StoreSearch from "./store/StoreSearch";
+import ReciveNote from "./mypage/ReciveNote";
+import SendNote from "./mypage/Sendnote";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -52,13 +51,10 @@ function App() {
         <Route path="/used_store" element={<Used_store />} />
         <Route path="/board/:id" element={<UsedDetail />} />
         <Route path="/delivery" element={<Delivery />} />
-        {/* <Route path="/adddelivery" element={<AddAddress_Modal/>}/> */}
-        <Route path="/recivenote" element={<ReciveNote />} />
-        <Route path="/sendnote" element={<SendNote />} />
         <Route path="/camping/:id" element={<CampingDetail />} />
         <Route path="/productbookmark" element={<ProductBookmark />} />
         <Route path="/campingbookmark" element={<CampingBookmark />} />
-        <Route path="/product/:id/order" element={<Order />} />
+        <Route path="/product/:id/order/:quantity" element={<Order />} />
         <Route path="/camping/register" element={<CampingRegister />} />
         <Route path="/camping/modify/:id" element={<CampingModify />} />
         <Route path="/board/register" element={<BoardRegister />} />
@@ -67,6 +63,8 @@ function App() {
         <Route path="/campingsearch" element={<CampingSearch />} />
         <Route path="/usedstoresearch" element={<UsedStoreSearch />} />
         <Route path="/storesearch" element={<StoreSearch />} />
+        <Route path="/recivenote" element={<ReciveNote />} />
+        <Route path="/sendnote" element={<SendNote />} />
 
       </Routes>
       <Background /> 

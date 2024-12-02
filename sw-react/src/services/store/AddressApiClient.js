@@ -1,6 +1,6 @@
 class AddressApiClient {
     static SERVER_URL = "http://localhost:8000";
-    static API = "/category";
+    static API = "/address";
     static ADD = "/add";
     static MODIFY = "/modify";
     static DELETE = "/delete";

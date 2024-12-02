@@ -1,10 +1,33 @@
 import React,{useState} from "react";
 import "/src/App.css";
 import Adress_Modal from "../modal/Adress_Modal"; // Adress_Modal 불러오기
+import SignApiClient from "../services/auth/SignApiClient";
+import AddressApiClient from "../services/store/AddressApiClient";
 
 const Input_information = ({ show, onClose }) => {
- const [showAdressModal, setShowAdressModal] = useState(false);
- const [address, setAddress] = useState(''); // 주소 상태 추가
+  const [showAdressModal, setShowAdressModal] = useState(false);
+  const [address, setAddress] = useState(''); // 주소 상태 추가
+  const [name, setName] = useState(null);
+  const [phonenumber, setPhonenumber] = useState(null);
+  const [req, setReq] = useState(null);
+
+  const handleAddAddress = () => {
+    SignApiClient.loginCheck();
+    const accessToken = localStorage.getItem("accessToken");
+    AddressApiClient.addAddress(accessToken, name, address, phonenumber, req).then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            console.log(json.message);
+          } else {
+            onClose();
+          }
+        });
+      }
+    }).catch(error => {
+        console.error("Error checking ID:", error);
+      });
+  };
 
   if (!show) {
     return null;
@@ -25,14 +48,14 @@ const Input_information = ({ show, onClose }) => {
       <div className="Input_information-content">
         <h2>배송지 입력</h2>
         <button className="adressSearch" onClick={handleOpenAdressModal}>우편번호 찾기</button>
-        <input placeholder="받는 사람" />
+        <input placeholder="받는분 성함" value={name} onChange={(e) => setName(e.target.value)}/>
         <input placeholder="우편번호 찾기"
         value={address} // 입력된 주소를 표시
         readOnly 
          />
-        <input placeholder="상세주소" />    
-        <input placeholder="전화번호" />
-        <button onClick={onClose}>확인</button>
+        <input placeholder="휴대폰 번호 입력" value={phonenumber} onChange={(e) => setPhonenumber(e.target.value)}/> 
+        <input placeholder="상세주소 및 요청사항 입력" value={req} onChange={(e) => setReq(e.target.value)}/>
+        <button onClick={handleAddAddress}>확인</button>
         <button onClick={onClose}>닫기</button> 
 
         <Adress_Modal show={showAdressModal}  onAddressSelect={handleAddressSelect} />

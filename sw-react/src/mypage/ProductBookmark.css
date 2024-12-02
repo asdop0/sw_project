@@ -51,16 +51,3 @@ h3 {
     border-radius: 8px; 
     overflow: hidden; /* 내용 넘침 방지 */
   }
-
-  .product_cards_container {
-    display: flex; /* 가로 정렬 */
-    flex-wrap: wrap; /* 요소를 줄 바꿈 가능하게 설정 */
-    gap: 20px; /* 카드 간격 설정 */
-    margin-top: 50px;
-  }
-  
- .product_cards_container .product_card_wrapper {
-    width: 300px;
-    border-radius: 8px; 
-    overflow: hidden; /* 내용 넘침 방지 */
-  }
