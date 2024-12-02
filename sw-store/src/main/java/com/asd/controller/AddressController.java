@@ -38,7 +38,7 @@ public class AddressController {
 		address.setPhonenumber(phonenumber);
 		address.setReq(req);
 		address.setUser(user);
-		address.setChoice(true); //기본 배송지로 설정
+		address.setChoice("true"); //기본 배송지로 설정
 		addressService.addAddress(address, user);
 		
 		Map<String, String> response = new HashMap<>();
