@@ -11,8 +11,9 @@ import MyPage from "./mypage/MyPage";
 import ProductDetail from "./store/ProductDetail";
 import Used_store from "./used_store/Used_store";
 import Delivery from "./mypage/Delivery";
-import AddAddress_Modal from "./modal/AddAdress_Modal";
-import Note from "./mypage/Note";
+// import AddAddress_Modal from "./modal/AddAdress_Modal";
+import ReciveNote from "./mypage/ReciveNote";
+import SendNote from "./mypage/Sendnote";
 import CampingDetail from "./camping/CampingDetail";
 import ProductBookmark from "./mypage/ProductBookmark";
 import CampingBookmark from "./mypage/CampingBookmark";
@@ -51,8 +52,9 @@ function App() {
         <Route path="/used_store" element={<Used_store />} />
         <Route path="/board/:id" element={<UsedDetail />} />
         <Route path="/delivery" element={<Delivery />} />
-        <Route path="/adddelivery" element={<AddAddress_Modal/>}/>
-        <Route path="/note" element={<Note />} />
+        {/* <Route path="/adddelivery" element={<AddAddress_Modal/>}/> */}
+        <Route path="/recivenote" element={<ReciveNote />} />
+        <Route path="/sendnote" element={<SendNote />} />
         <Route path="/camping/:id" element={<CampingDetail />} />
         <Route path="/productbookmark" element={<ProductBookmark />} />
         <Route path="/campingbookmark" element={<CampingBookmark />} />

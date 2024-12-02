@@ -15,7 +15,12 @@ const MyPage = () => {
                 <li>취소/반품/교환 내역</li><br/>
             </div>
             <div className='MyActivity'>
-              <div className='MyActivity_text'>My 활동</div><br/>
+              <div className='MyActivity_text'>My 활동</div>
+                <li>
+                  <Link to="/cart">
+                  장바구니
+                  </Link>
+                </li>
                 <li>
                   <Link to="/campingbookmark">
                   나의 캠핑장

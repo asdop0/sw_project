@@ -110,7 +110,7 @@ const Background = () => {
                         <div className="dropdown-item" onClick={handleLinkClick}>나의 정보</div>
                       </Link>
 
-                      <Link to="/note">
+                      <Link to="/recivenote">
                         <div className="dropdown-item" onClick={handleLinkClick}>쪽지함</div>
                       </Link>
             
