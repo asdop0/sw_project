@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "./Store.css";
 import "../App.css";
 import ProductApiClient from "../services/store/ProductApiClient";
@@ -18,6 +18,7 @@ const ProductDetail = () => {
   const [pageRefresh, setPageRefresh] = useState(true);
   const [role, setRole] = useState(null);
   const [nickname, setNickname] = useState(null);
+  const navigate = useNavigate();
   
   //api 호출
   useEffect(() => {
@@ -58,6 +59,13 @@ const ProductDetail = () => {
     CartApiClient.addCart(accessToken, id, quantity)
       .then((res) => {
         if (res.ok) {
+          alert("등록되었습니다.");navigate
+          const timer = setTimeout(() => {
+            navigate('/cart');
+          }, 1500);
+          // 컴포넌트 언마운트 시 타이머 정리
+
+          return () => clearTimeout(timer);
         }
       })
       .catch((err) => console.error("Failed to add bookmark:", err));

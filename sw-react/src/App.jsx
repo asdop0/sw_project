@@ -27,6 +27,7 @@ import StoreSearch from "./store/StoreSearch";
 import ReciveNote from "./mypage/ReciveNote";
 import SendNote from "./mypage/Sendnote";
 import SendMessage from "./mypage/SendMeassage";
+import Cart from "./mypage/Cart";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -67,6 +68,7 @@ function App() {
         <Route path="/recivenote" element={<ReciveNote />} />
         <Route path="/sendnote" element={<SendNote />} />
         <Route path="/sendmessage" element={<SendMessage />} />
+        <Route path="/cart" element={<Cart />} />
 
       </Routes>
       <Background /> 

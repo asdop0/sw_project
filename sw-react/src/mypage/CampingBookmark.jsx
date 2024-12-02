@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ProductBookmark.css'; 
+import './CampingBookmark.css'; 
 import MyPage from './MyPage';
 import SignApiClient from "../services/auth/SignApiClient";
 import BookmarkApiClient from "../services/camping/BookmarkApiClient";
@@ -39,7 +39,7 @@ const CampingBookmark = () => {
             <div className="camping_empty_state">
                 {!campings && (
                     <>
-                        <p>찜한 상품이 없습니다.</p>
+                        <p>찜한 캠핑장이 없습니다.</p>
                         <p>캠핑장 페이지에서 추가해 보세요.</p>
                     </>
                 )}

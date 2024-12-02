@@ -1,15 +1,15 @@
 class MessageApiClient {
     static SERVER_URL = "http://localhost:8000";
     static API = "/message";
-    static ADD = "/add";
+    static WRITE = "/write";
     static RECEIVED = "/received";
     static SENT = "/sent";
-    static RECEIVED_DELETE = "/sent";
-    static SENT_DELETE = "/sent";
+    static RECEIVED_DELETE = "/received/delete";
+    static SENT_DELETE = "/sent/delete";
 
     //쪽지 작성
     static writeMessage(accessToken, title, content, receive) {
-        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.ADD + "?title=" + title + "&content=" + content + "&receive=" + receive, {
+        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.WRITE + "?title=" + title + "&content=" + content + "&receive=" + receive, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

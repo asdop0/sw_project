@@ -1,45 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SendNote.css';
+import MessageApiClient from "../services/board/MessageApiClient";
+import SignApiClient from '../services/auth/SignApiClient';
 
-const SendNote = ({ note, onDelete}) => {
-    const { id, title, content, date } = note;
+const SendNote = ({ note, setPageRefresh}) => {
+    const handleDeleteNote = (id) => {
+        SignApiClient.loginCheck();
+        const accessToken = localStorage.getItem('accessToken');
+        MessageApiClient.deleteSentMessage(accessToken, id).then(res => {
+            if(res.ok) {
+              res.json().then(json => {
+                if(json.code === "401") {
+                  console.log(json.message);
+                } else {
+                    const timer = setTimeout(() => {
+                        setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+                      }, 1500);
+                      alert("삭제되었습니다.");
+                      // 컴포넌트 언마운트 시 타이머 정리
+          
+                      return () => clearTimeout(timer);
+                }
+              });
+            }
+          }).catch(error => {
+              console.error("Error checking ID:", error);
+            });
+    }
 
     return (
         <div className="Send_note_card">
             <div className="Send_note_header">
-                <h2>{title}</h2>
-                {/* <h3>{id}</h3> */}
-                <span className="Send_note_date">{date}</span>
+                <h2>{note.title}</h2>
+                {/* <h3>{note.receiverName}</h3> */}
+                <span className="Send_note_date">{note.writeDate}</span>
             </div>
-            <p className="Send_note_content">{content}</p>
+            <p className="Send_note_content">{note.content}</p>
             <div className="Send_note_buttons">
-                <button className="Send_note_delete_btn" onClick={() => onDelete(id)}>삭제</button>
+                <button className="Send_note_delete_btn" onClick={() => handleDeleteNote(note.id)}>삭제</button>
             </div>
         </div>
     );
 };
 
 const SendNoteBoard = () => {
-    const [notes, setNotes] = useState([
-        { id: 1, title: '제목 1', content: '쪽지 내용 1', date: '2024-11-28' },
-        { id: 2, title: '제목 2', content: '쪽지 내용 2', date: '2024-11-27' },
-        { id: 3, title: '제목 3', content: '쪽지 내용 3', date: '2024-11-26' }
-    ]);
+    const [notes, setNotes] = useState(null);
+    const [pageRefresh, setPageRefresh] = useState(true);
 
-    const handleDelete = (id) => {
-        setNotes(notes.filter(note => note.id !== id));
-    };
+    useEffect(() => {
+        SignApiClient.loginCheck();
+        const accessToken = localStorage.getItem('accessToken');
+        MessageApiClient.getSentMessage(accessToken).then(res => {
+            if(res.ok) {
+              res.json().then(json => {
+                if(json.code === "401") {
+                  console.log(json.message);
+                } else {
+                    if(json.length > 0) {
+                        setNotes(json);                        
+                    } else {
+                        setNotes(null);
+                    }
+                }
+              });
+            }
+          }).catch(error => {
+              console.error("Error checking ID:", error);
+            });
 
-    const handleEdit = (id) => {
-        const newTitle = prompt('새 제목을 입력하세요');
-        const newContent = prompt('새 내용을 입력하세요');
-        if (newTitle && newContent) {
-            setNotes(notes.map(note =>
-                note.id === id ? { ...note, title: newTitle, content: newContent } : note
-            ));
-        }
-    };
+    }, [pageRefresh]);
 
     return (
         <div className="Send_note_board">
@@ -54,14 +84,16 @@ const SendNoteBoard = () => {
                 <a className="send_note">보낸 쪽지함</a>
             </Link>
             <div className="Send_note_list">
-                {notes.map(note => (
+                {notes && (notes.map(note => (
                     <SendNote
                         key={note.id}
                         note={note}
-                        onDelete={handleDelete}
-                        onEdit={handleEdit}
+                        setPageRefresh={setPageRefresh}
                     />
-                ))}
+                )))}
+                {!notes && (
+                    <p>보낸 쪽지가 없습니다.</p>
+                )}
             </div>
         </div>
     );
