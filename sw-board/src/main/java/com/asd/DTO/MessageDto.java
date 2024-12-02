@@ -1,5 +1,7 @@
 package com.asd.DTO;
 
+import java.time.LocalDateTime;
+
 import com.asd.model.Message;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ public class MessageDto {
     private String content;
     private String senderName;
     private String receiverName;
+    private LocalDateTime writeDate;
 
     public static MessageDto toDto(Message message) {
         return new MessageDto(
@@ -24,7 +27,8 @@ public class MessageDto {
             message.getTitle(),
             message.getContent(),
             message.getSender().getName(),
-            message.getReceiver().getName()
+            message.getReceiver().getName(),
+            message.getWriteDate()
         );
     }
 }
