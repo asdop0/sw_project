@@ -28,12 +28,12 @@ const MyPage = () => {
                 </li>
                 <li>
                   <Link to="/productbookmark">
-                  나의 상품
+                  나의 상품<br/>
                   </Link>
-                </li>
+                </li><br/>
             </div>
             <div className='MyInformation'>
-              <div className='MyInformation_text'>My 정보</div><br/>
+              <div className='MyInformation_text'>My 정보</div>
                 <li>
                   <Link to="/delivery">
                   배송지 관리

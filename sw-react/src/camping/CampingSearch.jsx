@@ -50,11 +50,13 @@ const CampingSearch = () => {
         </button>
       </div>
       <div >
+      <div className="search_camping_list">
         {campings && campings.map((camping) => (
-          <div className="camping_card_wrapper" key={camping.id}>
+          <div className="search_camping_card_wrapper" key={camping.id}>
           <CampingCard key={camping.id} camping={camping} setPageRefresh={setPageRefresh}/>
           </div>
         ))}
+      </div>
         {!campings && (
           <p>검색 결과가 없습니다.</p>
         )}

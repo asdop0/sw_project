@@ -50,11 +50,14 @@ const StoreSearch = () => {
         </button>
       </div>
       <div >
+        <div className="search_product_list">
         {products && products.map((product) => (
-          <div className="product_card_wrapper" key={product.id}>
-          <ProductCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>
+          <div className="search_product_card_wrapper" key={product.id}>
+            <ProductCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>
           </div>
+          
         ))}
+        </div>
         {!products && (
           <p>검색 결과가 없습니다.</p>
         )}

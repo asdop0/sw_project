@@ -6,13 +6,15 @@
     font-size: 1rem;
     transition: border-color 0.3s;
     box-sizing: border-box;
-    position: relative;
-    bottom: 233px;
+    position:  absolute;
+    top: 140px;
+    right: 500px;
   }
 
   .Used_search_container .Used_search_button{
-    position: relative;
-    bottom: 230px;
+    position: absolute;
+    top: 130px;
+    right: 440px;
     background-color: transparent;
   }
   .Used_search_container .searchimg{
@@ -20,4 +22,17 @@
     position: relative;
     bottom: -6px;
     left: 0px;
+  }
+
+  
+.search_usedstore_list {
+  display: flex;
+  flex-wrap: wrap; /* 한 줄에 4개씩 표시되도록 wrap 설정 */
+  justify-content: space-around;
+  margin-top: 200px;
+}
+
+.search_board_card_wrapper {
+  flex: 0 0 23%; /* 한 줄에 4개가 들어가도록 크기 조정 */
+  margin: 1%; /* 카드 사이의 간격을 위한 마진 */
   }

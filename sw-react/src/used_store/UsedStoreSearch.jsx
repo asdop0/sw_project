@@ -49,15 +49,17 @@ const UsedStoreSearch = () => {
             ></img>
         </button>
       </div>
-      <div >
+      <div>
+      <div className="search_usedstore_list">
         {boards && boards.map((board) => (
-          <div className="board_card_wrapper" key={board.id}>
+          <div className="search_board_card_wrapper" key={board.id}>
           <UsedCard key={board.id} board={board} setPageRefresh={setPageRefresh}/>
           </div>
         ))}
         {!boards && (
           <p>검색 결과가 없습니다.</p>
         )}
+      </div>
       </div>
     </div>
   );
