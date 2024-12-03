@@ -45,7 +45,7 @@ spring:
         - id: store_user
           uri: http://store-container:8080/
           predicates:
-            - Path=/category/**, /productBookmark/**, /productReview/**, /address/**, /cart/**, /order/**
+            - Path=/productBookmark/**, /productReview/**, /address/**, /cart/**, /order/**
           filters:
             - JwtAuthenticationFilter
         - id: store_admin
