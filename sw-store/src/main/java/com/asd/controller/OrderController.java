@@ -76,8 +76,8 @@ public class OrderController {
 	
 	//주문 취소(환불 개념)
 	@PostMapping("/cancel")
-	public Map<String, String> cancelOrder(@RequestParam String order_id) {
-		orderService.cancelOrder(Long.parseLong(order_id));
+	public Map<String, String> cancelOrder(@RequestParam String order_id, @RequestParam String reason) {
+		orderService.cancelOrder(Long.parseLong(order_id), reason);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
 		logger.info("[cancelOrder] {} 주문이 취소되었습니다.", order_id);

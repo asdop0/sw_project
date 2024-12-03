@@ -31,7 +31,7 @@ public class CanceledOrderDto {
 			canceledOrder.getStatus().toString(),
 			canceledOrder.getWriteDate(),
 			canceledOrder.getApprovalDate(),
-			canceledOrder.getOrderTable().getTotalPrice()
+			canceledOrder.getTotalPrice()
 		);
 	}
 }
