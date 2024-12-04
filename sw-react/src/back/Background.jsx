@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from "react";
 import "/src/App.css";
 import {Link, useNavigate} from 'react-router-dom';
 import SignApiClient from "../services/auth/SignApiClient";
+import AddressApiClient from "../services/store/AddressApiClient";
 
 const Background = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -26,6 +27,21 @@ const Background = () => {
   const handleLinkClick = () => {
     setShowDropdown(false); // 드롭다운 닫기
   };
+
+  //토큰 재발급 과정 시연용
+  const handleRefreshToken = () => {
+    AddressApiClient.tokenTest().then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //아이디나 비밀번호가 틀렸음
+          } else {
+            console.log(json);
+          }
+        });
+      }
+    });
+  }
 
   const handleSignOut= () => {
     const refreshToken = localStorage.getItem('refreshToken');
@@ -147,6 +163,9 @@ const Background = () => {
               </>
             )}
           </div>
+         {/*<div>
+            <button onClick={handleRefreshToken}>토큰 재발급 시연용</button>
+          </div>*/}
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import SignApiClient from "../auth/SignApiClient";
+
 class AdminApiClient {
     static SERVER_URL = "http://localhost:8000";
     static API = "/boardAdmin";

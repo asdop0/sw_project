@@ -28,6 +28,11 @@ import ReciveNote from "./mypage/ReciveNote";
 import SendNote from "./mypage/Sendnote";
 import SendMessage from "./mypage/SendMeassage";
 import Cart from "./mypage/Cart";
+import MyOrders from "./mypage/MyOrders";
+import OrderDetail from "./mypage/OrderDetail";
+import MyCancelOrder from "./mypage/MyCancelOrder";
+import CancelOrderDetail from "./mypage/CancelOrderDetail";
+import CancelOrder from "./mypage/CancelOrder";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -69,6 +74,11 @@ function App() {
         <Route path="/sendnote" element={<SendNote />} />
         <Route path="/sendmessage" element={<SendMessage />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/myorder" element={<MyOrders />} />
+        <Route path="/order/detail/:id" element={<OrderDetail />} />
+        <Route path="/mycancelorder" element={<MyCancelOrder />} />
+        <Route path="/cancelorder/detail/:id" element={<CancelOrderDetail />} />
+        <Route path="/cancelorder/:id" element={<CancelOrder />} />
 
       </Routes>
       <Background /> 

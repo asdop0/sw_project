@@ -1,3 +1,5 @@
+import SignApiClient from "../auth/SignApiClient";
+
 class AddressApiClient {
     static SERVER_URL = "http://localhost:8000";
     static API = "/address";
@@ -8,6 +10,7 @@ class AddressApiClient {
     static VIEW = "/view";
     static CHOICE = "/choice";
     static GET_ADDRESS = "/get";
+    static TEST = '/test';
 
     //배송지 추가
     static addAddress(accessToken, name, addr, phonenumber, req) {
@@ -79,6 +82,39 @@ class AddressApiClient {
             },
         });
     } 
+    //엑세스 토큰 재발급 시연용
+    static tokenTest() {
+        console.log("함수 실행");
+        return fetch(AddressApiClient.SERVER_URL + AddressApiClient.API + AddressApiClient.TEST, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMiIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MzI0OTU3MDcsImV4cCI6MTczMjQ5OTMwN30.J0-8OEXHZNf8yC0OG6sXHm5S45N6IFLDJTCeG8T7_WKj60S3fG7uqzVjKms-1oss"
+            },
+        }).then(response => {
+            if (response.status === 403) {
+                console.log("accessToken 만료");
+                const refreshToken = localStorage.getItem('refreshToken');
+                return SignApiClient.refresh(refreshToken)
+                    .then(newAccessToken => {
+                        return fetch(AddressApiClient.SERVER_URL + AddressApiClient.API + AddressApiClient.TEST, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-AUTH-TOKEN': newAccessToken.accessToken
+                            }
+                        });
+                    });
+                }
+            if (!response.ok) {
+                return Promise.reject('재발급 실패');
+            }
+            return response.json();
+        }).catch(error => {
+            console.error("에러 발생:", error);
+            throw error;
+        });
+    }
 }
 
 export default AddressApiClient;

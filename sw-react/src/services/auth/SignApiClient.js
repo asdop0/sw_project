@@ -60,6 +60,31 @@ class SignApiClient {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': refreshToken
             }
+        }).then(response => {
+            if (!response.ok) {
+                console.error("리프레시 토큰 갱신 실패, 로그인 페이지로 이동합니다.");
+                localStorage.setItem('login', 'false');
+                localStorage.setItem('accessToken', null);
+                localStorage.setItem('refreshToken', null);
+                localStorage.setItem('role', null);
+                localStorage.setItem('nickname', null);
+                window.location.replace("/login");
+                return Promise.reject('리프레시 토큰 갱신 실패'); 
+            }
+            return response.json();  // 응답 JSON을 반환
+        })
+        .then(data => {
+            const accessToken = data;
+            if (!accessToken) {
+                return Promise.reject('엑세스 토큰이 없습니다.');
+            }
+            console.log("accessToken 재발급 성공"); 
+            console.log(accessToken);
+            return accessToken;
+        })
+        .catch(error => {
+            console.error("리프레시 토큰 처리 중 오류:", error);
+            throw error;
         });
     }
 

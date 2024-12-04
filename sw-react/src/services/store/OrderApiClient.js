@@ -20,8 +20,8 @@ class OrderApiClient {
         });
     } 
     //주문 취소
-    static cancelOrder(accessToken, order_id) {
-        return fetch(OrderApiClient.SERVER_URL + OrderApiClient.API + OrderApiClient.CANCLE + "?order_id=" + order_id, {
+    static cancelOrder(accessToken, order_id, reason) {
+        return fetch(OrderApiClient.SERVER_URL + OrderApiClient.API + OrderApiClient.CANCLE + "?order_id=" + order_id + "&reason" + reason, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ class OrderApiClient {
             },
         });
     } 
-    //전체 주문 내역 출력
+    //주문 내역 출력
     static getOrderList(accessToken) {
         return fetch(OrderApiClient.SERVER_URL + OrderApiClient.API + OrderApiClient.LIST, {
             method: 'GET',

@@ -34,7 +34,7 @@ const SendNote = ({ note, setPageRefresh}) => {
             <div className="Send_note_header">
                 <h2>{note.title}</h2>
                 {/* <h3>{note.receiverName}</h3> */}
-                <span className="Send_note_date">{note.writeDate}</span>
+                <span className="Send_note_date">{note.writeDate.split("T")[0]}</span>
             </div>
             <p className="Send_note_content">{note.content}</p>
             <div className="Send_note_buttons">
