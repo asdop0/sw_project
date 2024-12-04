@@ -23,8 +23,12 @@ const MyPage = () => {
             <br/><br/><br/>
             <div className='MyShopping'>
               <div className='MyShopping_text'>My 쇼핑</div><br/>
-                <li>주문목록/배송조회</li>
-                <li>취소 내역</li><br/>
+                <Link to="/myorder">
+                  <li>주문목록/배송조회</li>
+                </Link>
+                <Link to="/mycancelorder">
+                  <li>취소 내역</li><br/>
+                </Link>
             </div>
             <div className='MyActivity'>
               <div className='MyActivity_text'>My 활동</div>

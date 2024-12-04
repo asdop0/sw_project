@@ -5,10 +5,44 @@ import CartApiClient from '../services/store/CartApiClient';
 import { Link } from "react-router-dom";
 import "./Cart.css";
 
+import AddressApiClient from "../services/store/AddressApiClient";
+import Delivery_Modal from "../modal/Delivery_Modal";
+
 const Cart = () => {
     const [carts, setCarts] = useState(null);
     const [pageRefresh, setPageRefresh] = useState(false);
     const [total, setTotal] = useState(0);
+
+    const [address, setAddress] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+
+    const openModal = () => setIsModalOpen(true); // 모달 열기
+    const closeModal = () => setIsModalOpen(false); // 모달 닫기
+
+
+    const handleConfirmOrder = () => {
+        if(address === null) {
+          alert("기본 배송지를 설정해주세요.");
+        } else {
+          SignApiClient.loginCheck();
+          const accessToken = localStorage.getItem("accessToken");
+          OrderApiClient.addOrder(accessToken, id, quantity)
+            .then((res) => {
+              if (res.ok) {
+                res.json().then((data) => {
+                  if(data.check === "true") {
+                    alert("주문되었습니다.");
+                    navigate("/");
+                  }
+                });
+              } else {
+                console.error("주문 등록 하는 데 실패했습니다.");
+              }
+            })
+            .catch((err) => console.error("API 호출 실패:", err));
+        }
+      }
+
     useEffect(() => {
         SignApiClient.loginCheck();
         const accessToken = localStorage.getItem('accessToken');
@@ -61,11 +95,24 @@ const Cart = () => {
             <div className='camping_cards_container2'>
                 <h3 className='Cart_total_price'>총 가격: {total}</h3>
                 <Link to={`/`} className="camping_details_link">
-                    <button>구매하기</button>
+                    <button >구매하기</button>
                 </Link>
-            </div>
-            
-        </div>
+                {address && (<div>
+            <h2>배송지 정보</h2>
+            <p><strong>받는분 성함:</strong> {address.name}</p>
+            <p><strong>주소:</strong> {address.addr}</p>
+            <p><strong>받는분 전화번호:</strong> {address.phonenumber}</p>
+            <p><strong>요청사항:</strong> {address.req}</p>
+            </div>)}
+            {!address && (<div>
+            <h3 className="cart_delivery">설정된 배송지가 없습니다. 배송지를 추가해주세요.</h3>
+            <button className="cart_delivery_button" onClick={openModal}>
+                배송지 추가
+            </button>
+            {isModalOpen && <Delivery_Modal onClose={closeModal} />}
+            </div>)}
+        </div>   
+    </div>
     );
 };
 

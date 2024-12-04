@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Delivery.css'; // 같은 폴더 내 CSS 파일을 가져옴
 import Adress_Modal from '../modal/Adress_Modal';
-import Input_information from '../modal/Input_information';
 import MyPage from "./MyPage";
 import AddressApiClient from '../services/store/AddressApiClient';
 import SignApiClient from '../services/auth/SignApiClient';
