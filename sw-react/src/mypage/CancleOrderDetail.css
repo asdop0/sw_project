@@ -1,0 +1,52 @@
+.order_detail_container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 700px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+
+  }
+  
+  .cancle_order_detail_title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .order_item_info{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .order_item_status{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .order_item_payment{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .order_item_status_title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order_item_payment_title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order_item_info_title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }

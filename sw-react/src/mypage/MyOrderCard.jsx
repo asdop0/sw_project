@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SignApiClient from "../services/auth/SignApiClient";
 import OrderApiClient from "../services/store/OrderApiClient";
 import { Link } from "react-router-dom";
+import "./MyPage.css";
 
 const CartCard = ({ order, setPageRefresh }) => {
   const [status, setStatus] = useState(null);
@@ -53,14 +54,14 @@ const CartCard = ({ order, setPageRefresh }) => {
   return (
     
     <div className="Send_note_card">
-        <p className="product_price">{order.productName}</p>
+        <p className="myorder_card_product_name">{order.productName}</p>
         <p className="product_price">{order.totalPrice}원</p>
         <p className="product_price">{status}</p>
         <p className="product_price">{order.writeDate.split('T')[0]}</p>
         <Link to={`/order/detail/${order.id}/${status === "주문 취소" ? 0 : 1}`} className="camping_details_link">
-            <button>상세보기</button>
+            <button className="order_card_detail">상세보기</button>
         </Link>
-        <button onClick={handleDeleteOrder}>삭제</button>
+        <button className="order_card_delete" onClick={handleDeleteOrder}>삭제</button>
     </div>
   );
 };

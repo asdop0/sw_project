@@ -103,7 +103,7 @@ const Delivery_Modal = ({ onClose }) => {
           </div>
           {add_Address.choice === 'X' && (
           <div className="modal_button_group">
-            <button className="delete_button" onClick={() => handleChoiceAddress(add_Address.id)}>기본 배송지 변경</button>
+            <button className="delevery_change" onClick={() => handleChoiceAddress(add_Address.id)}>기본 배송지 변경</button>
           </div>)}
           </>))}
           {!addressList && (

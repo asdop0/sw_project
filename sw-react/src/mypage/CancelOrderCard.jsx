@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./MyPage.css";
 
 const CancelOrderCard = ({ order }) => {
   const [status, setStatus] = useState(null);
@@ -28,12 +29,12 @@ const CancelOrderCard = ({ order }) => {
 
   return (    
     <div className="Send_note_card">
-        <p className="product_price">{order.productName}</p>
+        <p className="cancle_product_name">{order.productName}</p>
         <p className="product_price">{order.totalPrice}원</p>
         <p className="product_price">{status}</p>
         <p className="product_price">{order.writeDate.split('T')[0]}</p>
         <Link to={`/cancelorder/detail/${order.id}`} className="camping_details_link">
-            <button>상세보기</button>
+            <button className="product_cancle_detail">상세보기</button>
         </Link>
     </div>
   );

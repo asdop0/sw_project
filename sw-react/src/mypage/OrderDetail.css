@@ -1,0 +1,93 @@
+.order_detail_container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 700px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-top: 100px;
+  }
+  
+  .order_detail_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order_section_reciver{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order_section_payment{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+
+
+  .product_info{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .recipient_info{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .payment_info{
+    text-align: left;
+    margin-left: 100px;
+  }
+
+  .order_section {
+    padding: 10px;
+  }
+  
+  .order_item {
+    margin-bottom: 20px;
+  }
+  
+  .order_item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .order_item p {
+    margin: 5px 0;
+  }
+  
+  .divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+  
+  .cancel_button {
+    background-color: transparent;
+    color: red;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel_button:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  .cancel_link {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+  }
+  

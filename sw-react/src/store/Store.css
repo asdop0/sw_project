@@ -51,7 +51,7 @@
 }
 
 .product_detail .product_name {
-  font-size: 1px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
   word-break: break-word; /* 단어를 강제로 나눠 다음 줄로 넘김 */
