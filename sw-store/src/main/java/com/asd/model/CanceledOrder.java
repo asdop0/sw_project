@@ -33,6 +33,10 @@ public class CanceledOrder {
 	private User user;
 	
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="OrderTable_id")
+	private OrderTable orderTable;
+	
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="Product_id")
 	private Product product;
 	
