@@ -5,6 +5,7 @@ import AddressApiClient from "../services/store/AddressApiClient";
 import SignApiClient from "../services/auth/SignApiClient";
 import OrderApiClient from "../services/store/OrderApiClient";
 import "./Order.css";
+import Delivery_Modal from "../modal/Delivery_Modal";
 
 const Order = () => {
   const { id } = useParams(); // URL에서 product_id 가져오기
@@ -12,6 +13,7 @@ const Order = () => {
   const navigate = useNavigate(); // useNavigate 사용
   const [productDetail, setProductDetail] = useState(null); // 상품 상세 데이터를 저장하는 상태
   const [address, setAddress] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
 
   const handleConfirmOrder = () => {
     if(address === null) {
@@ -35,6 +37,9 @@ const Order = () => {
         .catch((err) => console.error("API 호출 실패:", err));
     }
   }
+
+  const openModal = () => setIsModalOpen(true); // 모달 열기
+  const closeModal = () => setIsModalOpen(false); // 모달 닫기
 
   // 상품 데이터를 가져오는 함수
   useEffect(() => {
@@ -93,9 +98,12 @@ const Order = () => {
           <span>취소</span>
         </Link>
       </div>
-      <Link to="/delivery">
-        <button className="delivery_button">배송지 추가</button>
-      </Link>
+      <button className="delivery_button" onClick={openModal}>
+        배송지 추가
+      </button>
+
+      {/* 모달 컴포넌트 렌더링 */}
+      {isModalOpen && <Delivery_Modal onClose={closeModal} />}
     </div>
   );
 };

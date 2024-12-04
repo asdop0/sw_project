@@ -31,8 +31,8 @@ const CartCard = ({ cart, setPageRefresh }) => {
     
     <div className="Send_note_card">
         <p className="product_price">받는분 성함: {cart.productName}</p>
-        <p className="product_price">주소: {cart.cnt}개</p>
-        <p className="product_price">전화번호: {cart.price}원</p>
+        <p className="product_price">갯수 : {cart.cnt}개</p>
+        <p className="product_price">가격: {cart.price}원</p>
         <button onClick={handleDeleteCart}>삭제</button>
     </div>
   );

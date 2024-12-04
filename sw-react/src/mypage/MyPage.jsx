@@ -1,9 +1,21 @@
 // src/mypage/MyPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './MyPage.css'; // 스타일을 적용하려면 별도의 CSS 파일 생성
 import { Link } from 'react-router-dom';
+import Delivery_Modal from '../modal/Delivery_Modal';
 
 const MyPage = () => {
+   const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+
+  // 모달 열기
+  const openDeliveryModal = () => {
+    setIsDeliveryModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeDeliveryModal = () => {
+    setIsDeliveryModalOpen(false);
+  };
   return (
     <div className="mypage_container">
       <aside className="mypage_sidebar">
@@ -35,13 +47,14 @@ const MyPage = () => {
             <div className='MyInformation'>
               <div className='MyInformation_text'>My 정보</div>
                 <li>
-                  <Link to="/delivery">
-                  배송지 관리
-                  </Link>
+                <button onClick={openDeliveryModal} className="delivery_manage_button">
+                배송지 관리
+              </button>
                 </li>
             </div>
           </ul>
       </aside>
+      {isDeliveryModalOpen && <Delivery_Modal onClose={closeDeliveryModal} />}
     </div>
   );
 };

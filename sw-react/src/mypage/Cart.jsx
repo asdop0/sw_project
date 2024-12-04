@@ -3,6 +3,7 @@ import SignApiClient from "../services/auth/SignApiClient";
 import CartCard from './CartCard';
 import CartApiClient from '../services/store/CartApiClient';
 import { Link } from "react-router-dom";
+import "./Cart.css";
 
 const Cart = () => {
     const [carts, setCarts] = useState(null);
@@ -42,25 +43,28 @@ const Cart = () => {
 
     return (
         <div className="camping_bookmark_container">
-            <h3>장바구니</h3>
-            <h3>총 가격: {total}</h3>
-            <Link to={`/`} className="camping_details_link">
-                <button>구매하기</button>
-            </Link>
-
+            <h3 className="cart_text">장바구니</h3>
             <div className="camping_empty_state">
                 {!carts && (
                     <p>등록된 상품이 없습니다.</p>
                 )}
             </div>
-
+          
             <div className='camping_cards_container'>
                 {carts && carts.map((cart) => (
                 <div className="camping_card_wrapper" key={cart.id}>
-                <CartCard key={cart.id} cart={cart} setPageRefresh={setPageRefresh}/>
+                    <CartCard key={cart.id} cart={cart} setPageRefresh={setPageRefresh}/>
                 </div>
                 ))}
             </div>
+
+            <div className='camping_cards_container2'>
+                <h3 className='Cart_total_price'>총 가격: {total}</h3>
+                <Link to={`/`} className="camping_details_link">
+                    <button>구매하기</button>
+                </Link>
+            </div>
+            
         </div>
     );
 };

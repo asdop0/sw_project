@@ -65,9 +65,9 @@ const Delivery = () => {
         {/* <div className="delivery_button_container">
           <button className="add_delivery_button"  onClick={handleOpenAdressModal}>배송지 추가</button>
         </div> */}
-        <div className="delivery2_button_container">
+        {/* <div className="delivery2_button_container">
           <button className= "add_delivery_button2"onClick={handleOpenInputModal}>배송지 추가</button>
-        </div>
+        </div> */}
         
         {/* /배송지 저장 test  */}
         {selectedAddress && (

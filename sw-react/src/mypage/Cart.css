@@ -1,0 +1,43 @@
+
+.camping_bookmark_container {
+    display: flex; /* 메인 컨테이너를 flex로 설정 */
+    justify-content: space-between; /* 왼쪽과 오른쪽을 양쪽 끝으로 배치 */
+    align-items: flex-start; 
+    gap: 20px;
+}
+
+.camping_cards_container {
+    width: 70%; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 100px;
+}
+
+.camping_cards_container2 {
+    width: 30%;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: flex-start; 
+    margin-top: 20px;
+    gap: 10px;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+
+.camping_card_wrapper {
+    flex: 0 0 calc(50% - 10px);
+    margin: 5px; 
+}
+
+.cart_text{
+    width: 10%;
+    position: relative;
+    left: 500px;
+}
+
+.camping_empty_state{
+    position: relative;
+    top: 200px ;
+    left: 380px;
+}
