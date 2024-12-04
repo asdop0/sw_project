@@ -1,54 +1,54 @@
 .mypage_container {
-    display: flex;
-    background-color: #f9f9f9;
-    height: 100vh;
-    margin-left: 0; /* 왼쪽에 완전히 붙임 */
-    position: absolute; /* 절대 위치 설정 */
-    left: 0; /* 화면의 가장 왼쪽으로 이동 */
-    top:  100px;
-  }
-  
-  .mypage_sidebar {
-    width: 170px;
-    background-color: #e4e7e931;
-    padding: 20px;
-  }
-  
-  .sidebar_menu {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar_menu li {
-    font-size: 18px;
-    margin: 15px 0;
-  }
-  
-  .sub_menu {
-    list-style: none;
-    padding-left: 15px;
-  }
-  
-  .sub_menu li {
-    font-size: 16px;
-    margin: 10px 0;
-  }
+  display: flex;
+  background-color: #f9f9f9;
+  height: 100vh;
+  margin-left: 0; /* 왼쪽에 완전히 붙임 */
+  position: absolute; /* 절대 위치 설정 */
+  left: 0; /* 화면의 가장 왼쪽으로 이동 */
+  top:  100px;
+}
 
-  .MyShopping_text{
-    font-size: 20px;
-    font-weight: 700;
-  }
+.mypage_sidebar {
+  width: 170px;
+  background-color: #e4e7e931;
+  padding: 20px;
+}
 
-  .MyActivity_text{
-    font-size: 20px;
-    font-weight: 700;
-  }
+.sidebar_menu {
+  list-style: none;
+  padding: 0;
+}
 
-  .MyInformation_text{
-    font-size: 20px;
-    font-weight: 700;
-  }
-  
-  .delivery_manage_button{
-    background-color: transparent;
-  }
+.sidebar_menu li {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.sub_menu {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.sub_menu li {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.MyShopping_text{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.MyActivity_text{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.MyInformation_text{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.delivery_manage_button{
+  background-color: transparent;
+}

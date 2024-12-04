@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import SignApiClient from "../services/auth/SignApiClient";
 import CartCard from './CartCard';
 import CartApiClient from '../services/store/CartApiClient';
-import { Link } from "react-router-dom";
 import "./Cart.css";
+import AddressApiClient from '../services/store/AddressApiClient';
 import MyPage from "./MyPage";
-
 import Delivery_Modal from "../modal/Delivery_Modal";
 
 const Cart = () => {
@@ -15,24 +15,29 @@ const Cart = () => {
 
     const [address, setAddress] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+    const navigate = useNavigate();
 
     const openModal = () => setIsModalOpen(true); // 모달 열기
-    const closeModal = () => setIsModalOpen(false); // 모달 닫기
+    const closeModal = () => {
+        setPageRefresh((prev) => !prev);
+        setIsModalOpen(false);} // 모달 닫기
 
 
     const handleConfirmOrder = () => {
         if(address === null) {
           alert("기본 배송지를 설정해주세요.");
+        } else if(carts === null){
+            alert("장바구니에 상품이 없습니다.");
         } else {
           SignApiClient.loginCheck();
           const accessToken = localStorage.getItem("accessToken");
-          OrderApiClient.addOrder(accessToken, id, quantity)
+          CartApiClient.paymentCart(accessToken)
             .then((res) => {
               if (res.ok) {
                 res.json().then((data) => {
                   if(data.check === "true") {
                     alert("주문되었습니다.");
-                    navigate("/");
+                    navigate("/store");
                   }
                 });
               } else {
@@ -53,7 +58,6 @@ const Cart = () => {
                 //요청 오류
                 console.log(json.message);
             } else {
-                //캠핑장 데이터 불러오기 성공
                 if (Object.keys(json).length === 0) {
                     setCarts(null);
                     setTotal(0);
@@ -64,6 +68,21 @@ const Cart = () => {
             });
         }
         });
+        AddressApiClient.getAddress(accessToken)
+            .then((res) => {
+            if (res.ok) {
+                res.json().then((data) => {
+                if(data.code === '401') {
+                    setAddress(null);
+                } else {
+                    setAddress(data);
+                }
+                });
+            } else {
+                console.error("기본배송지를 불러오는 데 실패했습니다.");
+            }
+            })
+            .catch((err) => console.error("API 호출 실패:", err));
       }, [pageRefresh]);
 
     useEffect(() => {
@@ -95,9 +114,7 @@ const Cart = () => {
 
             <div className='camping_cards_container2'>
                 <h3 className='Cart_total_price'>총 가격: {total}</h3>
-                <Link to="/store" className="camping_details_link">
-                    <button className="cart_buy_button" >구매하기</button>
-                </Link>
+                <button className="cart_buy_button" onClick={handleConfirmOrder}>구매하기</button>
                 {address && (<div>
             <h2>배송지 정보</h2>
             <p><strong>받는분 성함:</strong> {address.name}</p>
@@ -106,12 +123,14 @@ const Cart = () => {
             <p><strong>요청사항:</strong> {address.req}</p>
             </div>)}
             {!address && (<div>
-            <h3 className="cart_delivery">설정된 배송지가 없습니다. 배송지를 추가해주세요.</h3>
+                <h3>설정된 배송지가 없습니다. 배송지를 설정해주세요.</h3>
+            </div>)}
+            <div>
             <button className="cart_delivery_button" onClick={openModal}>
                 + 배송지 추가
             </button>
             {isModalOpen && <Delivery_Modal onClose={closeModal} />}
-            </div>)}
+            </div>
         </div>   
     </div>
     );

@@ -14,6 +14,7 @@ const Order = () => {
   const [productDetail, setProductDetail] = useState(null); // 상품 상세 데이터를 저장하는 상태
   const [address, setAddress] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+  const [pageRefresh, setPageRefresh] = useState(true);
 
   const handleConfirmOrder = () => {
     if(address === null) {
@@ -39,7 +40,9 @@ const Order = () => {
   }
 
   const openModal = () => setIsModalOpen(true); // 모달 열기
-  const closeModal = () => setIsModalOpen(false); // 모달 닫기
+  const closeModal = () => {
+    setPageRefresh((prev) => !prev);
+    setIsModalOpen(false);} // 모달 닫기
 
   // 상품 데이터를 가져오는 함수
   useEffect(() => {
@@ -70,7 +73,7 @@ const Order = () => {
       }
     })
     .catch((err) => console.error("API 호출 실패:", err));
-  }, [id]);
+  }, [id, pageRefresh]);
 
   if (!productDetail) return <p>로딩 중...</p>; // 데이터가 로드될 때까지 로딩 메시지 표시
 
@@ -89,7 +92,7 @@ const Order = () => {
         <p><strong>요청사항:</strong> {address.req}</p>
       </div>)}
       {!address && (<div>
-        <h2>설정된 배송지가 없습니다. 배송지를 추가해주세요.</h2>
+        <h2>설정된 배송지가 없습니다. 배송지를 설정해주세요.</h2>
         </div>)}
       
       <button className="save_button" onClick={handleConfirmOrder}>결제하기</button>

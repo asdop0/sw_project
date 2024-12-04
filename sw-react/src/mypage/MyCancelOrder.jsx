@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SignApiClient from "../services/auth/SignApiClient";
 import CancelOrderCard from './CancelOrderCard';
-import OrderApiClinet from '../services/store/OrderApiClient';  
+import OrderApiClinet from '../services/store/OrderApiClient';
 import MyPage from "./MyPage";
 
 const MyCancelOrder = () => {

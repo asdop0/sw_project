@@ -75,9 +75,8 @@ function App() {
         <Route path="/sendmessage" element={<SendMessage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/myorder" element={<MyOrders />} />
-        <Route path="/order/detail/:id" element={<OrderDetail />} />
+        <Route path="/order/detail/:id/:cancel" element={<OrderDetail />} />
         <Route path="/mycancelorder" element={<MyCancelOrder />} />
-
         <Route path="/cancelorder/detail/:id" element={<CancelOrderDetail />} />
         <Route path="/cancelorder/:id" element={<CancelOrder />} />
 

@@ -57,7 +57,7 @@ const CartCard = ({ order, setPageRefresh }) => {
         <p className="product_price">{order.totalPrice}원</p>
         <p className="product_price">{status}</p>
         <p className="product_price">{order.writeDate.split('T')[0]}</p>
-        <Link to={`/order/detail/${order.id}`} className="camping_details_link">
+        <Link to={`/order/detail/${order.id}/${status === "주문 취소" ? 0 : 1}`} className="camping_details_link">
             <button>상세보기</button>
         </Link>
         <button onClick={handleDeleteOrder}>삭제</button>

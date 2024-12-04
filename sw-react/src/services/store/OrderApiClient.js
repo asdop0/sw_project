@@ -21,7 +21,7 @@ class OrderApiClient {
     } 
     //주문 취소
     static cancelOrder(accessToken, order_id, reason) {
-        return fetch(OrderApiClient.SERVER_URL + OrderApiClient.API + OrderApiClient.CANCLE + "?order_id=" + order_id + "&reason" + reason, {
+        return fetch(OrderApiClient.SERVER_URL + OrderApiClient.API + OrderApiClient.CANCLE + "?order_id=" + order_id + "&reason=" + reason, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

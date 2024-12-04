@@ -20,39 +20,38 @@ const OrderDetail = () => {
             console.log(json.message);
           } else {
             setOrder(json);
+            switch (json.status) {
+              case 'REQUESTED':
+                setStatus("취소 대기 중");
+                break;
+              case 'APPROVED':
+                setStatus("취소 승인");
+                break;
+              case 'REJECTED':
+                setStatus("취소 거부");
+                break;
+              case 'COMPLETED':
+                setStatus("취소 완료");
+                break;
+              default:
+                setStatus('Unknown');
+            }
           }
         });
       }
     });
-
-    switch (order.status) {
-      case 'REQUESTED':
-        setStatus("취소 대기 중");
-        break;
-      case 'APPROVED':
-        setStatus("취소 승인");
-        break;
-      case 'REJECTED':
-        setStatus("취소 거부");
-        break;
-      case 'COMPLETED':
-        setStatus("취소 완료");
-        break;
-      default:
-        console.log('Unknown');
-    }
   });
 
   return (
     order ? (
       <div className="board_detail">
-        <p className="product_price">{order.productName}</p>
-        <p className="product_price">{order.reason}</p>
+        <p className="product_price">상품명: {order.productName}</p>
+        <p className="product_price">사유: {order.reason}</p>
         <p className="product_price">{status}</p>
-        <p className="product_price">{order.writeDate.split('T')[0]}</p>
-        {order.approvalDate && (<p className="product_price">{order.approvalDate.split('T')[0]}</p>)}
-        {!order.approvalDate && (<p>취소 대기 중</p>)}
-        <p className="product_price">{order.totalPrice}원</p>
+        <p className="product_price">신청 날짜: {order.writeDate.split('T')[0]}</p>
+        {order.approvalDate && (<p className="product_price">승인 날짜: {order.approvalDate.split('T')[0]}</p>)}
+        {!order.approvalDate && (<p>승인 날짜: 취소 대기 중</p>)}
+        <p className="product_price">취소 금액: {order.totalPrice}원</p>
       </div>
     ) : null
   );
