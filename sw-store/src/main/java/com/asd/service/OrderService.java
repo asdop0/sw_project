@@ -58,6 +58,7 @@ public class OrderService {
 		canceledOrder.setReason(reason);
 		canceledOrder.setStatus(OrderCancelStatus.REQUESTED);
 		canceledOrder.setTotalPrice(order.getTotalPrice());
+		canceledOrder.setOrderTable(order);
 		canceledOrderRepository.save(canceledOrder);
 	}
 	
