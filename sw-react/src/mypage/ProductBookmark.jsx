@@ -33,7 +33,7 @@ const ProductBookmark = () => {
     return (
         <div className="product_bookmark_container">
              <MyPage />
-            <h3>상품 찜 리스트</h3>
+            <h3 className="product_bookmark_text" >상품 찜 리스트</h3>
 
             <div className="product_empty_state">
                 {!products && (
@@ -44,7 +44,7 @@ const ProductBookmark = () => {
                 )}
             </div>
 
-            <div className="product_list">
+            <div className="product_cards_container">
                 {products && products.map((product) => (
                 <div className="product_card_wrapper" key={product.id}>
                 <ProductBookMarkCard key={product.id} product={product} setPageRefresh={setPageRefresh}/>

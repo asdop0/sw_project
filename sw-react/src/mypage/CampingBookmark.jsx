@@ -34,7 +34,7 @@ const CampingBookmark = () => {
     return (
         <div className="camping_bookmark_container">
              <MyPage />
-            <h3>캠핑장 찜 리스트</h3>
+            <h3 className="camping_bookmark_text" >캠핑장 찜 리스트 </h3>
 
             <div className="camping_empty_state">
                 {!campings && (

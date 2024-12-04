@@ -4,6 +4,7 @@ import CartCard from './CartCard';
 import CartApiClient from '../services/store/CartApiClient';
 import { Link } from "react-router-dom";
 import "./Cart.css";
+import MyPage from "./MyPage";
 
 import Delivery_Modal from "../modal/Delivery_Modal";
 
@@ -76,6 +77,7 @@ const Cart = () => {
 
     return (
         <div className="camping_bookmark_container">
+            <MyPage />
             <h3 className="cart_text">장바구니</h3>
             <div className="camping_empty_state">
                 {!carts && (

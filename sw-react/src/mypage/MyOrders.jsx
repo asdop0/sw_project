@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SignApiClient from "../services/auth/SignApiClient";
 import MyOrderCard from './MyOrderCard';
 import OrderApiClinet from '../services/store/OrderApiClient';
+import MyPage from "./MyPage";
 
 const MyOrders = () => {
     const [orders, setOrders] = useState(null);
@@ -29,6 +30,7 @@ const MyOrders = () => {
 
     return (
         <div className="camping_bookmark_container">
+            <MyPage />
             <h3>주문내역</h3>
 
             <div className="camping_empty_state">

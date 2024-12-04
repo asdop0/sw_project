@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SignApiClient from "../services/auth/SignApiClient";
 import CancelOrderCard from './CancelOrderCard';
-import OrderApiClinet from '../services/store/OrderApiClient';
+import OrderApiClinet from '../services/store/OrderApiClient';  
+import MyPage from "./MyPage";
 
 const MyCancelOrder = () => {
     const [orders, setOrders] = useState(null);
@@ -28,6 +29,7 @@ const MyCancelOrder = () => {
 
     return (
         <div className="camping_bookmark_container">
+            <MyPage />
             <h3>취소내역</h3>
 
             <div className="camping_empty_state">

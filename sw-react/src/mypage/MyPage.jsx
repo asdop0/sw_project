@@ -54,7 +54,10 @@ const MyPage = () => {
                 <button onClick={openDeliveryModal} className="delivery_manage_button">
                 배송지 관리
               </button>
-                </li>
+                </li><br/><br/>
+            </div>
+            <div className='Root'>
+              관리자 페이지
             </div>
           </ul>
       </aside>
