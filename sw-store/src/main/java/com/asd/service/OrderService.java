@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.asd.DTO.CanceledOrderDto;
 import com.asd.DTO.OrderDetailDto;
 import com.asd.DTO.OrderDto;
+import com.asd.common.OrderCancelStatus;
 import com.asd.common.OrderStatus;
 import com.asd.model.CanceledOrder;
-import com.asd.model.OrderTable;
 import com.asd.model.OrderDetail;
+import com.asd.model.OrderTable;
 import com.asd.model.Product;
 import com.asd.model.User;
 import com.asd.repository.CanceledOrderRepository;
@@ -40,14 +41,24 @@ public class OrderService {
 	
 	//주문 취소
 	@Transactional
-	public void cancelOrder(Long id) {
+	public void cancelOrder(Long id, String reason) {
 		OrderTable order = orderRepository.findById(id).orElseThrow(() -> 
         	new IllegalArgumentException("[cancelOrder] 주문을 찾을 수 없습니다.")
 		);
-		order.setStatus(OrderStatus.CANCELLED);
-		//결제 관련 로직 필요
+		order.setStatus(OrderStatus.CANCELLED);		
+		orderRepository.save(order);	
 		
-		orderRepository.save(order);		
+		Product product = order.getOrderDetail().getProduct();
+		product.setTotalSales(product.getTotalSales() - 1);
+		productRepository.save(product);
+		
+		CanceledOrder canceledOrder = new CanceledOrder();
+		canceledOrder.setUser(order.getUser());
+		canceledOrder.setProduct(order.getOrderDetail().getProduct());
+		canceledOrder.setReason(reason);
+		canceledOrder.setStatus(OrderCancelStatus.REQUESTED);
+		canceledOrder.setTotalPrice(order.getTotalPrice());
+		canceledOrderRepository.save(canceledOrder);
 	}
 	
 	//주문 삭제

@@ -36,10 +36,6 @@ public class CanceledOrder {
 	@JoinColumn(name="Product_id")
 	private Product product;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="OrderTable_id")
-	private OrderTable orderTable;
-	
 	private String reason;
 	
 	@Enumerated(EnumType.STRING)

@@ -100,4 +100,12 @@ public class AddressController {
 		User user = userService.findUser(request);
 		return AddressDto.toDto(addressService.getAddress(user));
 	}
+	
+	//엑세스 토큰 재발급 시연용 기능
+	@PostMapping("test")
+	public Map<String, String> tokenTest() {
+		Map<String, String> response = new HashMap<>();
+		response.put("check", "true");
+    	return response;
+	}
 }
