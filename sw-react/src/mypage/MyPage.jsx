@@ -1,11 +1,12 @@
 // src/mypage/MyPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MyPage.css'; // 스타일을 적용하려면 별도의 CSS 파일 생성
 import { Link } from 'react-router-dom';
 import Delivery_Modal from '../modal/Delivery_Modal';
 
 const MyPage = () => {
    const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+   const [role, setRole] = useState(null);
 
   // 모달 열기
   const openDeliveryModal = () => {
@@ -16,6 +17,11 @@ const MyPage = () => {
   const closeDeliveryModal = () => {
     setIsDeliveryModalOpen(false);
   };
+
+  useEffect(() => {
+    setRole(localStorage.getItem('role'));
+  })
+
   return (
     <div className="mypage_container">
       <aside className="mypage_sidebar">
@@ -56,9 +62,19 @@ const MyPage = () => {
               </button>
                 </li><br/><br/>
             </div>
-            <div className='Root'>
+            {(role === "ROLE_ADMIN") && (<div className='Root'>
               관리자 페이지
-            </div>
+              <li>
+                  <Link to="/user/orders">
+                  주문 내역
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/payment">
+                  결제 대기 목록<br/>
+                  </Link>
+                </li><br/>
+            </div>)}
           </ul>
       </aside>
       {isDeliveryModalOpen && <Delivery_Modal onClose={closeDeliveryModal} />}

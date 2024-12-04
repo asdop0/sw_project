@@ -8,25 +8,55 @@ const CartCard = ({ order, setPageRefresh }) => {
   const [status, setStatus] = useState(null);
   const handleDeleteOrder = () => {
       SignApiClient.loginCheck();
-      const accessToken = localStorage.getItem('accessToken');
-      OrderApiClient.deleteOrder(accessToken, order.id).then(res => {
-        if(res.ok) {
-            res.json().then(json => {
-            if(json.code === "401") {
-                //요청 오류
-                console.log(json.message);
-            } else {
-              const timer = setTimeout(() => {
-                setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
-              }, 1500);
-              alert("삭제되었습니다.");
-              // 컴포넌트 언마운트 시 타이머 정리
-  
-              return () => clearTimeout(timer); 
+      if(status === "결제 대기 중") {
+        alert("결제 대기 중에는 주문 내역을 삭제할 수 없습니다.");
+      } else if (status === "결제 완료") {
+        const userConfirmed = window.confirm("주문 내역 삭제 시 주문 취소가 불가능합니다.");
+
+        if (userConfirmed) {
+          const accessToken = localStorage.getItem('accessToken');
+          OrderApiClient.deleteOrder(accessToken, order.id).then(res => {
+            if(res.ok) {
+                res.json().then(json => {
+                if(json.code === "401") {
+                    //요청 오류
+                    console.log(json.message);
+                } else {
+                  const timer = setTimeout(() => {
+                    setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+                  }, 1500);
+                  alert("삭제되었습니다.");
+                  // 컴포넌트 언마운트 시 타이머 정리
+      
+                  return () => clearTimeout(timer); 
+                }
+              });
             }
           });
+          } else {
+            alert("취소되었습니다.");
         }
-    });
+      } else {
+        OrderApiClient.deleteOrder(accessToken, order.id).then(res => {
+          if(res.ok) {
+              res.json().then(json => {
+              if(json.code === "401") {
+                  //요청 오류
+                  console.log(json.message);
+              } else {
+                const timer = setTimeout(() => {
+                  setPageRefresh((prev) => !prev); // 상태 값을 반전시킴
+                }, 1500);
+                alert("삭제되었습니다.");
+                // 컴포넌트 언마운트 시 타이머 정리
+    
+                return () => clearTimeout(timer); 
+              }
+            });
+          }
+        });
+      }
+      
   }
 
   useEffect(() => {

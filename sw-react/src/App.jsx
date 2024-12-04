@@ -33,6 +33,8 @@ import OrderDetail from "./mypage/OrderDetail";
 import MyCancelOrder from "./mypage/MyCancelOrder";
 import CancelOrderDetail from "./mypage/CancelOrderDetail";
 import CancelOrder from "./mypage/CancelOrder";
+import PendingPayments from "./mypage/PendingPayments";
+import UserOrders from "./mypage/UserOrders";
 
 function App() {
   // const [selectedRegion, setSelectedRegion] = useState('강원도');
@@ -79,6 +81,8 @@ function App() {
         <Route path="/mycancelorder" element={<MyCancelOrder />} />
         <Route path="/cancelorder/detail/:id" element={<CancelOrderDetail />} />
         <Route path="/cancelorder/:id" element={<CancelOrder />} />
+        <Route path="/payment" element={<PendingPayments />} />
+        <Route path="/user/orders" element={<UserOrders />} />
 
       </Routes>
       <Background /> 

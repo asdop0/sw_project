@@ -53,19 +53,10 @@
 
 .cart_delivery_button{
     background-color: transparent;
-    margin-left: 33px;
 }
 
 .cart_buy_button{
     background-color: transparent;
     color: #6bc9ff;
     margin-left: 30px;
-}
-
-.Cart_total_price{
-    margin-left: 14px ;
-}
-
-.cart_buy_button{
-    margin-left: 42px;
 }

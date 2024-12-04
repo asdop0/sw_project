@@ -9,32 +9,33 @@ const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [status, setStatus] = useState(null);
 
-  // API 호출
+  //api 호출
   useEffect(() => {
     SignApiClient.loginCheck();
-    const accessToken = localStorage.getItem("accessToken");
-    OrderApiClient.viewCencelDetail(accessToken, id).then((res) => {
-      if (res.ok) {
-        res.json().then((json) => {
-          if (json.code === "401") {
+    const accessToken = localStorage.getItem('accessToken');
+    OrderApiClient.viewCencelDetail(accessToken, id).then(res => {
+      if(res.ok) {
+        res.json().then(json => {
+          if(json.code === "401") {
+            //요청 오류
             console.log(json.message);
           } else {
             setOrder(json);
             switch (json.status) {
-              case "REQUESTED":
+              case 'REQUESTED':
                 setStatus("취소 대기 중");
                 break;
-              case "APPROVED":
+              case 'APPROVED':
                 setStatus("취소 승인");
                 break;
-              case "REJECTED":
+              case 'REJECTED':
                 setStatus("취소 거부");
                 break;
-              case "COMPLETED":
+              case 'COMPLETED':
                 setStatus("취소 완료");
                 break;
               default:
-                setStatus("Unknown");
+                setStatus('Unknown');
             }
           }
         });
