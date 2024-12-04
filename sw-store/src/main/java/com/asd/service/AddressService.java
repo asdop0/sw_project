@@ -84,16 +84,18 @@ public class AddressService {
 	//기본 배송지 변경
 	@Transactional
 	public void choiceAddress(User user, Long id) {
-		Address address = addressRepository.findByUserAndChoice(user, "O").orElseThrow(() -> 
-			new IllegalArgumentException("[choiceAddress] 기존 배송지를 찾을 수 없습니다.")
-		);
-		address.setChoice("X");
+		Optional<Address> optionalAddress = addressRepository.findByUserAndChoice(user, "O");
+
+		if (optionalAddress.isPresent()) {
+		    Address address = optionalAddress.get();
+		    address.setChoice("X");
+		    addressRepository.save(address);
+		}
 		
 		Address newAddress = addressRepository.findById(id).orElseThrow(() -> 
 			new IllegalArgumentException("[choiceAddress] 새로운 배송지를 찾을 수 없습니다.")
 		);
 		newAddress.setChoice("O");
-		addressRepository.save(address);
 		addressRepository.save(newAddress);
 	}
 }
