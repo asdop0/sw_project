@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignApiClient from "../services/auth/SignApiClient";
 import CartApiClient from "../services/store/CartApiClient";
+import "./Cart.css";
 
 const CartCard = ({ cart, setPageRefresh }) => {
     const handleDeleteCart = () => {
@@ -33,7 +34,7 @@ const CartCard = ({ cart, setPageRefresh }) => {
         <p className="product_price">받는분 성함: {cart.productName}</p>
         <p className="product_price">갯수 : {cart.cnt}개</p>
         <p className="product_price">가격: {cart.price}원</p>
-        <button onClick={handleDeleteCart}>삭제</button>
+        <button className="cart_delete_button"onClick={handleDeleteCart}>삭제</button>
     </div>
   );
 };

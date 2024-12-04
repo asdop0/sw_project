@@ -5,7 +5,6 @@ import CartApiClient from '../services/store/CartApiClient';
 import { Link } from "react-router-dom";
 import "./Cart.css";
 
-import AddressApiClient from "../services/store/AddressApiClient";
 import Delivery_Modal from "../modal/Delivery_Modal";
 
 const Cart = () => {
@@ -94,8 +93,8 @@ const Cart = () => {
 
             <div className='camping_cards_container2'>
                 <h3 className='Cart_total_price'>총 가격: {total}</h3>
-                <Link to={`/`} className="camping_details_link">
-                    <button >구매하기</button>
+                <Link to="/store" className="camping_details_link">
+                    <button className="cart_buy_button" >구매하기</button>
                 </Link>
                 {address && (<div>
             <h2>배송지 정보</h2>
@@ -107,7 +106,7 @@ const Cart = () => {
             {!address && (<div>
             <h3 className="cart_delivery">설정된 배송지가 없습니다. 배송지를 추가해주세요.</h3>
             <button className="cart_delivery_button" onClick={openModal}>
-                배송지 추가
+                + 배송지 추가
             </button>
             {isModalOpen && <Delivery_Modal onClose={closeModal} />}
             </div>)}

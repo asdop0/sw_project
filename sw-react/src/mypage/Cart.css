@@ -45,3 +45,18 @@
 .cart_delivery{
     margin-top: 100px;
 }
+
+.cart_delete_button{
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.cart_delivery_button{
+    background-color: transparent;
+}
+
+.cart_buy_button{
+    background-color: transparent;
+    color: #6bc9ff;
+    margin-left: 30px;
+}
