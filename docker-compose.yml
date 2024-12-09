@@ -8,6 +8,8 @@ services:
       - /home/sw/work/logs:/app/logs
     networks:
       - backend
+    extra_hosts:
+      - "host.docker.internal:10.0.2.2"
 
   board:
     image: cmuname/sw-docker:board
@@ -18,6 +20,8 @@ services:
       - /home/sw/work/logs:/app/logs
     networks:
       - backend
+    extra_hosts:
+      - "host.docker.internal:10.0.2.2"
 
   store:
     image: cmuname/sw-docker:store
@@ -28,6 +32,8 @@ services:
       - /home/sw/work/logs:/app/logs
     networks:
       - backend
+    extra_hosts:
+      - "host.docker.internal:10.0.2.2"
 
   auth:
     image: cmuname/sw-docker:auth
@@ -38,6 +44,8 @@ services:
         - /home/sw/work/logs:/app/logs
     networks:
       - backend
+    extra_hosts:
+      - "host.docker.internal:10.0.2.2"
 
   gateway:
     image: cmuname/sw-docker:gateway
