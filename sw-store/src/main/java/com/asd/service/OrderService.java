@@ -134,7 +134,7 @@ public class OrderService {
 		LocalDateTime startOfDay = date.atStartOfDay();
 		LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
 		
-		List<OrderTable> orders = orderRepository.findByOrderDateBetween(startOfDay, endOfDay);
+		List<OrderTable> orders = orderRepository.findByWriteDateBetween(startOfDay, endOfDay);
 		List<OrderDto> orderDtos = new ArrayList<>();
 		for(OrderTable order : orders) {
             orderDtos.add(OrderDto.toDto(order));

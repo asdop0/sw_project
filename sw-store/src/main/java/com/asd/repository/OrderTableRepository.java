@@ -13,5 +13,5 @@ public interface OrderTableRepository extends JpaRepository<OrderTable, Long>{
 	List<OrderTable> findAllByUserAndRemoveFalse(User user);
 	List<OrderTable> findAllByUserAndRemoveFalseAndStatus(User user, OrderStatus status);
 	List<OrderTable> findByStatus(OrderStatus status);
-	List<OrderTable> findByOrderDateBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
+	List<OrderTable> findByWriteDateBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
 }
