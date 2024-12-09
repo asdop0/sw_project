@@ -54,7 +54,7 @@ pipeline {
             steps{
                 script {
                     try {
-                        def pid = sh(script: "sudo lsof -t -i:5173", returnStdout: true).trim()
+                        def pid = sh(script: "sudo lsof -t -i:5173 | head -n 1", returnStdout: true).trim()
                         echo "Port 5173 is in use by process ID: ${pid}"
                         sh "sudo kill ${pid}"
                         echo "Process on port 5173 killed."
