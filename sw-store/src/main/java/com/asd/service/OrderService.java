@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.asd.DTO.CanceledOrderDto;
 import com.asd.DTO.OrderDetailDto;
 import com.asd.DTO.OrderDto;
+import com.asd.DTO.UserOrderDto;
 import com.asd.common.OrderCancelStatus;
 import com.asd.common.OrderStatus;
 import com.asd.model.CanceledOrder;
@@ -129,17 +130,17 @@ public class OrderService {
 	}
 	
 	//날짜별 주문 내역 출력
-	public List<OrderDto> ordersByDate(String dateString) {
+	public List<UserOrderDto> ordersByDate(String dateString) {
 		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDateTime startOfDay = date.atStartOfDay();
 		LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
 		
 		List<OrderTable> orders = orderRepository.findByWriteDateBetween(startOfDay, endOfDay);
-		List<OrderDto> orderDtos = new ArrayList<>();
+		List<UserOrderDto> userOrderDtos = new ArrayList<>();
 		for(OrderTable order : orders) {
-            orderDtos.add(OrderDto.toDto(order));
+			userOrderDtos.add(UserOrderDto.toDto(order));
         }
-        return orderDtos;
+        return userOrderDtos;
 	}
 	
 	//결제 대기 목록 출력

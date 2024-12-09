@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.asd.DTO.OrderDto;
 import com.asd.DTO.ProductRequestDto;
+import com.asd.DTO.UserOrderDto;
 import com.asd.model.Product;
 import com.asd.service.CategoryService;
 import com.asd.service.OrderService;
@@ -108,7 +109,7 @@ public class AdminController {
 	
 	//날짜별 주문 내역 출력
 	@GetMapping("/ordersByDate")
-	public List<OrderDto> getOrdersByDate(@RequestParam String dateString) {
+	public List<UserOrderDto> getOrdersByDate(@RequestParam String dateString) {
 		return orderService.ordersByDate(dateString);
 	}
 	
