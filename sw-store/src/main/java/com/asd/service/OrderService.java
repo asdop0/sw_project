@@ -120,13 +120,13 @@ public class OrderService {
 	}
 	
 	//전체 주문 내역 출력
-	public List<OrderDto> fullOrderList() {
+	public List<UserOrderDto> fullOrderList() {
 		List<OrderTable> orders = orderRepository.findAll();
-		List<OrderDto> orderDtos = new ArrayList<>();
+		List<UserOrderDto> userOrderDtos = new ArrayList<>();
 		for(OrderTable order : orders) {
-            orderDtos.add(OrderDto.toDto(order));
+			userOrderDtos.add(UserOrderDto.toDto(order));
         }
-        return orderDtos;
+        return userOrderDtos;
 	}
 	
 	//날짜별 주문 내역 출력

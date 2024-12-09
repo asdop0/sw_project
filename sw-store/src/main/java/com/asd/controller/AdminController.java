@@ -103,7 +103,7 @@ public class AdminController {
 	
 	//전체 주문 내역 출력
 	@GetMapping("/orderList")
-	public List<OrderDto> getFullOrderList() {
+	public List<UserOrderDto> getFullOrderList() {
 		return orderService.fullOrderList();
 	}
 	
