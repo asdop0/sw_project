@@ -5,6 +5,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/asdop0/sw_project.git'
+                sh 'git fetch --all'
+                sh 'git reset --hard origin/main'
+            
             }
         }
 
