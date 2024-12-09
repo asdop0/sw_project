@@ -1,5 +1,8 @@
 package com.asd.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,6 +121,20 @@ public class OrderService {
 	//전체 주문 내역 출력
 	public List<OrderDto> fullOrderList() {
 		List<OrderTable> orders = orderRepository.findAll();
+		List<OrderDto> orderDtos = new ArrayList<>();
+		for(OrderTable order : orders) {
+            orderDtos.add(OrderDto.toDto(order));
+        }
+        return orderDtos;
+	}
+	
+	//날짜별 주문 내역 출력
+	public List<OrderDto> ordersByDate(String dateString) {
+		LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDateTime startOfDay = date.atStartOfDay();
+		LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
+		
+		List<OrderTable> orders = orderRepository.findByOrderDateBetween(startOfDay, endOfDay);
 		List<OrderDto> orderDtos = new ArrayList<>();
 		for(OrderTable order : orders) {
             orderDtos.add(OrderDto.toDto(order));

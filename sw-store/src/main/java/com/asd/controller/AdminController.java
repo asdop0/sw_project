@@ -106,6 +106,12 @@ public class AdminController {
 		return orderService.fullOrderList();
 	}
 	
+	//날짜별 주문 내역 출력
+	@GetMapping("/ordersByDate")
+	public List<OrderDto> getOrdersByDate(@RequestParam String dateString) {
+		return orderService.ordersByDate(dateString);
+	}
+	
 	//결제 대기 목록 출력
 	@GetMapping("/pendingList")
 	public List<OrderDto> getPendingList() {

@@ -22,6 +22,10 @@ public class AddressService {
 	//전달받은 배송지 저장
 	@Transactional
 	public void addAddress(Address address, User user) {
+		if(addressRepository.countAddress() == 3) {
+			new IllegalArgumentException("배송지를 추가할 수 없습니다.");
+		}
+		
 		try {
 			Optional<Address> preAddress = addressRepository.findByUserAndChoice(user, "O");
 			Address preAddress_ = null;
