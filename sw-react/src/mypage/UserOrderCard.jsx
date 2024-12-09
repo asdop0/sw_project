@@ -7,7 +7,7 @@ const UserOrderCard = ({ order }) => {
 
   useEffect(() => {
     SignApiClient.loginCheck();
-    switch (order.status) {
+    switch (order.orderDto.status) {
       case 'PENDING':
         setStatus("결제 대기 중");
         break;
@@ -31,10 +31,11 @@ const UserOrderCard = ({ order }) => {
   return (
     
     <div className="Send_note_card">
-        <p className="product_price">{order.productName}</p>
-        <p className="product_price">{order.totalPrice}원</p>
+        <p className="product_price">{order.orderDto.productName}</p>
+        <p className="product_price">{order.orderDto.totalPrice}원</p>
         <p className="product_price">{status}</p>
-        <p className="product_price">{order.writeDate.split('T')[0]}</p>
+        <p className="product_price">{order.orderDto.writeDate.split('T')[0]}</p>
+        <p className="product_price">{order.userId}</p>
         <Link to={`/order/detail/${order.id}/0`} className="camping_details_link">
             <button>상세보기</button>
         </Link>

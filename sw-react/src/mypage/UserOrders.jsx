@@ -56,31 +56,45 @@ const UserOrders = ({value}) => {
         setNowDate(moment(selectedDate).format("YYYY-MM-DD"));
     };
 
-    useEffect (() =>{
-        console.log(nowDate);
-    },[nowDate])
-
-
     useEffect(() => {
         SignApiClient.loginCheck();
         const accessToken = localStorage.getItem('accessToken');
-        AdminApiClient.getFullOrderList(accessToken).then(res => {
-        if(res.ok) {
-            res.json().then(json => {
-            if(json.code === "401") {
-                //요청 오류
-                console.log(json.message);
-            } else {
-                if (Object.keys(json).length === 0) {
-                    setOrders(null);
+        if(nowDate === '전체') {
+            AdminApiClient.getFullOrderList(accessToken).then(res => {
+            if(res.ok) {
+                res.json().then(json => {
+                if(json.code === "401") {
+                    //요청 오류
+                    console.log(json.message);
                 } else {
-                    setOrders(json);
+                    if (Object.keys(json).length === 0) {
+                        setOrders(null);
+                    } else {
+                        setOrders(json);
+                    }
                 }
+                });
             }
             });
+        } else {
+            AdminApiClient.getOrdersByDate(accessToken, nowDate).then(res => {
+                if(res.ok) {
+                    res.json().then(json => {
+                    if(json.code === "401") {
+                        //요청 오류
+                        console.log(json.message);
+                    } else {
+                        if (Object.keys(json).length === 0) {
+                            setOrders(null);
+                        } else {
+                            setOrders(json);
+                        }
+                    }
+                    });
+                }
+            });
         }
-        });
-      }, [pageRefresh]);
+      }, [pageRefresh, nowDate]);
 
     return (
         <div className="camping_bookmark_container">

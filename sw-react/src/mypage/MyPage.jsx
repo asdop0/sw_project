@@ -19,8 +19,7 @@ const MyPage = () => {
   };
 
   useEffect(() => {
-    // setRole(localStorage.getItem('role'));
-    setRole("ROLE_ADMIN");
+    setRole(localStorage.getItem('role'));
   })
 
   return (

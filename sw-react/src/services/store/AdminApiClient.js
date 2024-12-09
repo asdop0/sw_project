@@ -6,6 +6,7 @@ class AdminApiClient {
     static DELETE = "/delete";
     static REVIEW = "/delete/review";
     static ORDERLIST = "/orderList";
+    static ORDERSBYDATE = "/ordersByDate";
     static PENDINGLIST = "/pendingList";
     static APPROVAL = "/approval";
 
@@ -54,6 +55,16 @@ class AdminApiClient {
     //모든 사용자 주문 내역 출력
     static getFullOrderList(accessToken) {
         return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.ORDERLIST, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-AUTH-TOKEN': accessToken
+            }
+        });
+    } 
+    //날짜별 모든 사용자 주문 내역 출력
+    static getOrdersByDate(accessToken, dateString) {
+        return fetch(AdminApiClient.SERVER_URL + AdminApiClient.API + AdminApiClient.ORDERSBYDATE + "?dateString=" + dateString, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
