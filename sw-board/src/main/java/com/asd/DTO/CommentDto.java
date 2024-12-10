@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommentDto {
 	private Long id;
-	private String userName;
+	private String nickName;
 	private String comment;
 	private LocalDateTime writeDate;
 	
