@@ -142,7 +142,7 @@ public class CampingService {
 			        importance = 2;
 			    }
 			    
-			    if (camping.getAddress().contains(keyword)) {
+			    if ((camping.getAddress() != null) && camping.getAddress().contains(keyword)) {
 			        importance = Math.max(importance, 1);
 			    }
 
