@@ -17,7 +17,7 @@ public class BoardListDto {
 	private Long id;
 	private String title;
 	private LocalDateTime writeDate;
-	private String userName;
+	private String nickName;
 	private Long count;
 	
 	public static BoardListDto toDto(Board board) {
@@ -25,7 +25,7 @@ public class BoardListDto {
             board.getId(),
             board.getTitle(),
             board.getWriteDate(),
-            board.getUser().getName(),
+            board.getUser().getNickname(),
             board.getCount()
         );
 	}
