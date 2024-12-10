@@ -12,12 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserOrderDto {
-	OrderDto orderDto;
-	String userId;
+	private Long id;
+	private OrderDto orderDto;
+	private String userId;
 	
 	public static UserOrderDto toDto(OrderTable order) {
         return new UserOrderDto(
-        		OrderDto.toDto(order),
+		order.getId(),
+        	OrderDto.toDto(order),
                 order.getUser().getUid()
         );
     }
