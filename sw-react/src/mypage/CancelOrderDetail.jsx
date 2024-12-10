@@ -45,7 +45,6 @@ const OrderDetail = () => {
 
   return order ? (
     <div className="order_detail_container">
-      <h1 className="cancle_order_detail_title">취소 주문 상세</h1>
       <div className="order_section">
       <h3 className="order_item_info_title" >상품 정보</h3>
         <div className="order_item_info">

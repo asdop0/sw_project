@@ -110,7 +110,7 @@ const Store = () => {
         <button onClick={() => handleCategoryChange(1)}>캠핑가구</button>
         <button onClick={() => handleCategoryChange(2)}>텐트</button>
         <button onClick={() => handleCategoryChange(3)}>푸드</button>
-        <button onClick={() => handleCategoryChange(4)}>DIY</button>
+        <button onClick={() => handleCategoryChange(4)}>보조장비</button>
         <Link to={'/storesearch'}>
         <button>검색</button>
         </Link>

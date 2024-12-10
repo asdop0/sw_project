@@ -64,8 +64,10 @@ const Order = () => {
       if (res.ok) {
         res.json().then((data) => {
           if(data.code === '401') {
+            setAddress(null);
           } else {
             setAddress(data);
+            
           }
         });
       } else {

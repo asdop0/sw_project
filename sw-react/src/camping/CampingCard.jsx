@@ -67,7 +67,8 @@ const CampingCard = ({ camping, setPageRefresh }) => {
     <div className="camping_card">
       <img src="/camping.png" alt="캠핑장 임시 이미지" className="camping_image"/>
       <h3 className="camping_name">{camping.name}</h3>
-      <p className="camping_address">{camping.address}</p>
+      {camping.address && (<p className="camping_address">{camping.address}</p>)}
+      {!camping.address && <p className="camping_address">등록된 주소가 없습니다.</p>}
       <Link to={`/camping/${camping.id}`} className="camping_details_link">
         상세보기
       </Link>

@@ -72,8 +72,8 @@ const SendNoteBoard = () => {
     }, [pageRefresh]);
 
     return (
-        <div className="Send_note_board">
-            <h3>보낸 쪽지함</h3>
+        <div className="Recivenote_board">
+            <h2>보낸 쪽지함</h2>
             <Link to="/sendmessage">
                 <a className="sendmessage">쪽지 보내기 </a>
             </Link>

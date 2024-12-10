@@ -18,7 +18,7 @@ const Id_Modal = ({ show, onClose }) => {
         res.json().then(json => {
           if(json.code === "401") {
             //아이디나 비밀번호가 틀렸음 json.message를 통해 오류가 뭔지 확인 가능 
-            console.log(json.message);
+            setId(json.message);
           } else {
             //아이디 찾기 성공
             setId(json.id);
@@ -43,7 +43,7 @@ const Id_Modal = ({ show, onClose }) => {
         {id && (
           <div>
             <p>{id}</p>
-            <button onClick={onClose}>닫기</button>
+            <button onClick={() => {setId(null); setName(''); setNickname(''); onClose()}}>닫기</button>
           </div>
         )}
       </div>

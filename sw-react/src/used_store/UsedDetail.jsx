@@ -124,11 +124,11 @@ const UsedDetail = () => {
           <ul className="reviews_list">
             {board.comments.map((comment) => (
               <li key={comment.id} className="review_item">
-              {comment.userName}<span> : </span>
+              {comment.nickName}<span> : </span>
               {comment.comment}<span> / </span>
               {comment.writeDate.split("T")[0]}
               {/* 조건부로 삭제 버튼 활성화 */}
-              {(comment.nickname === nickname || role === 'ROLE_ADMIN') && (
+              {(comment.nickName === nickname || role === 'ROLE_ADMIN') && (
                   <button onClick={() => handleDeleteComment(comment.id)}>
                     삭제
                   </button>

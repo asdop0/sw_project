@@ -37,6 +37,7 @@ const CartCard = ({ order, setPageRefresh }) => {
             alert("취소되었습니다.");
         }
       } else {
+        const accessToken = localStorage.getItem('accessToken');
         OrderApiClient.deleteOrder(accessToken, order.id).then(res => {
           if(res.ok) {
               res.json().then(json => {

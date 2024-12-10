@@ -27,22 +27,31 @@ const SignUp_Modal = ({ show, onClose }) => {
 
   //회원가입
   let handleSignUp = () => {
-    SignApiClient.signUp(id, password, name, nickname, email).then(res => {
-      if(res.ok) {
-        res.json().then(json => {
-          if(json.code === "401") {
-            //아이디나 비밀번호가 틀렸음 json.message를 통해 오류가 뭔지 확인 가능
-            console.log(json.message);
-          } else {
-            //회원가입 성공
-            const value = localStorage.getItem('refreshToken');
-            console.log(value);
-            //페이지 이동
-            onClose();
-          }
-        });
-      }
-    });
+    if(idOK === true && nicknameOK === true) {
+      SignApiClient.signUp(id, password, name, nickname, email).then(res => {
+        if(res.ok) {
+          res.json().then(json => {
+            if(json.code === "401") {
+            } else {
+              //페이지 이동
+              setId('');
+              setPassword('');
+              setName('');
+              setNickname('');
+              setEmail('');
+              setIdMessage('');
+              setIdOk('');
+              setNicknameMessage('');
+              setNicknameOk('');
+              setNicknamePositionChanged(false);
+              onClose();
+            }
+          });
+        }
+      });
+    } else {
+      alert('아이디와 닉네임 중복 확인을 해주세요.');
+    }
   };
   // 아이디 중복 확인 함수
   const checkIdDuplication = () => {
@@ -133,7 +142,19 @@ const SignUp_Modal = ({ show, onClose }) => {
 
         <input placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)}/>
         <button onClick={handleSignUp}>확인</button>
-        <button onClick={onClose}>닫기</button>
+        <button onClick={() => {
+          setId('');
+          setPassword('');
+          setName('');
+          setNickname('');
+          setEmail('');
+          setIdMessage('');
+          setIdOk('');
+          setNicknameMessage('');
+          setNicknameOk('');
+          setNicknamePositionChanged(false);
+          onClose();
+        }}>닫기</button>
       </div>
     </div>
   );

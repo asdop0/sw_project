@@ -156,12 +156,14 @@ const CampingDetail = () => {
 
         <p className="camping_address">
           <img  className="marker" src="/marker.png"></img>
-          {camping.address}
+          {camping.address && <>{camping.address}</>}
+          {!camping.address && <>등록된 주소가 없습니다.</>}
         </p>
         
         <p className="camping_number">
           <img className="call" src="/call.png"></img>
-          {camping.phonenumber}
+          {camping.phonenumber && <>{camping.phonenumber}</>}
+          {!camping.phonenumber && <>등록된 번호가 없습니다.</>}
         </p>
 
         <p className="korea_gocamping">

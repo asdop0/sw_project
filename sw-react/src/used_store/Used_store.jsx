@@ -63,7 +63,7 @@ const Used_store = () => {
 
   return (
     <div className="Used_store">
-      <h3 className="recommand" style={{ textAlign: 'left', paddingLeft: '10px', marginBottom: '20px' }}>추천상품</h3>
+      <h3 className="recommand" style={{ textAlign: 'left', paddingLeft: '10px', marginBottom: '20px' }}>중고장터</h3>
       <Link to={'/usedstoresearch'}>
          <img
           className='searchimg'
