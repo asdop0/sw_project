@@ -7,6 +7,7 @@ import AdminApiClient from '../services/store/AdminApiClient';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from "moment";
+import "./UserOrders.css";
 
 const CalendarContainer = styled.div`
   position: relative;
@@ -99,7 +100,7 @@ const UserOrders = ({value}) => {
     return (
         <div className="camping_bookmark_container">
             <MyPage />
-            <h3>주문내역</h3>
+            <h3 className="User_order">주문내역</h3>
             <CalendarContainer>
             <DropdownButton onClick={handleToggleCalendar}>{nowDate}</DropdownButton>
             <CalendarWrapper isOpen={isOpen}>
