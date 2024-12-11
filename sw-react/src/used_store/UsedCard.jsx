@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Used_store.css";
 import AdminApiClient from "../services/board/AdminApiClient";
 import BoardApiClient from "../services/board/BoardApiClient";
+import SignApiClient from "../services/auth/SignApiClient";
 
 const UsedCard = ({ board, setPageRefresh }) => {
   const [role, setRole] = useState(null);
