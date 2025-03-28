@@ -55,7 +55,17 @@ pipeline {
 
         stage('Pull Docker Image') {
             steps{
-                script {
+                sh "docker pull cmuname/sw-docker:camping"
+                sh "docker pull cmuname/sw-docker:board"
+                sh "docker pull cmuname/sw-docker:store"
+                sh "docker pull cmuname/sw-docker:auth"
+                sh "docker pull cmuname/sw-docker:gateway"
+            }
+        }
+
+        stage('Restart') {
+            steps {
+               script {
                     try {
                         def pid = sh(script: "sudo lsof -t -i:5173 | head -n 1", returnStdout: true).trim()
                         echo "Port 5173 is in use by process ID: ${pid}"
@@ -65,20 +75,10 @@ pipeline {
                         echo "Port 5173 is not in use."
                     }
                 }
+                sh "docker-compose down"
                 dir('sw-react') { 
                     sh 'sudo npm run dev &'
                 }
-                sh "docker pull cmuname/sw-docker:camping"
-                sh "docker pull cmuname/sw-docker:board"
-                sh "docker pull cmuname/sw-docker:store"
-                sh "docker pull cmuname/sw-docker:auth"
-                sh "docker pull cmuname/sw-docker:gateway"
-            }
-        }
-
-        stage('Run Docker Compose') {
-            steps {
-                sh "docker-compose down"
                 sh "docker-compose up -d"
             }
         }
