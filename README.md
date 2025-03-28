@@ -15,10 +15,40 @@
   **안민석** - REST API 개발, 게이트웨이 구축, Docker 컨테이너화, CI/CD 구축, 사용자 인증
 ## 기술 스택 (Tech Stack)
 
+### **🔹 Frontend**
+- JavaScript (ES6+)
+- React (UI 개발)
+- React Router (페이지 이동 관리)
+- fetch API (REST API 통신)
+- Daum Postcode API (주소 검색)
+- Kakao Maps API (지도 연동)
+
+### **🔹 Backend**
+- Java 21
+- Spring Boot (REST API 개발)
+- Spring Security + JWT (인증/인가)
+- Spring Data JPA (ORM)
+
+### **🔹 API Gateway**
+- Spring Cloud Gateway (API 라우팅 및 필터 적용)
+
+### **🔹 Database**
+- MySQL (데이터 저장)
+
+### **🔹 DevOps & Deployment**
+- Docker & Docker Compose (컨테이너 관리)
+- Jenkins (CI/CD 자동화)
+- ngrok (로컬 서버 외부 노출)
+- VirtualBox (로컬 서버 환경 구축 및 애플리케이션 실행)
+
+### **🔹 Collaboration & Tools**
+- Git & GitHub (형상 관리)
+- Postman (API 테스트)
+
 ## 주요 기능 (Key Features)
 **캠핑장, 중고거래, 쇼핑몰** <br>
 - 사용자는 각 페이지에서 원하는 항목을 검색 및 조회 할 수 있습니다. <br>
-- 관리자 계정을 통해 캠핑장 정보나 상품 정보 등을 삽입, 수정, 삭제 할 수 있습니다. <br><br>
+- 관리자 계정을 통해 캠핑장 정보나 상품 정보 등을 삽입, 수정, 삭제 할 수 있습니다. <br>
 <img width="295" alt="KakaoTalk_20250327_164050947" src="https://github.com/user-attachments/assets/e2e1c712-2fb7-48f3-aee9-f99ccacb9a39" />
 
 **로그인** <br>
