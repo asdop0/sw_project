@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Board {
+public class Post {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -47,11 +47,11 @@ public class Board {
 	
 	private Long count;
 	
-	@OneToMany(mappedBy="board", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="post", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
 	public void addComment(Comment comment) {
 	    comments.add(comment);
-	    comment.setBoard(this);
+	    comment.setPost(this);
 	}
 }

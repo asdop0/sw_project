@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sign-api")
+@RequestMapping("/auth/sign")
 public class SignController {
     private final SignService signService;
     private Logger logger = LoggerFactory.getLogger(SignController.class);
@@ -91,7 +91,7 @@ public class SignController {
     }
     
     //로그아웃
-    @PostMapping("/sign-out")
+    @DeleteMapping("/sign-out")
     public Map<String, String> signOut(HttpServletRequest request) {
     	Map<String, String> response = new HashMap<>();
     	signService.signOut(request);
@@ -100,7 +100,7 @@ public class SignController {
     }
     
     //회원탈퇴
-    @DeleteMapping("/delete")
+    @DeleteMapping("/users")
     public Map<String, String> delete(HttpServletRequest request) {
     	Map<String, String> response = new HashMap<>();
     	signService.delete(request);
@@ -109,7 +109,7 @@ public class SignController {
     }
     
     //아이디 중복 체크
-    @PostMapping("/uidCheck") //중복된 아이디가 있으면 false 반환, 없으면 true 반환
+    @GetMapping("/users/check-id") //중복된 아이디가 있으면 false 반환, 없으면 true 반환
     public Map<String, String> uidCheck(@RequestParam String uid) {
     	Map<String, String> response = new HashMap<>();
     	boolean bool = signService.uidCheck(uid);
@@ -118,7 +118,7 @@ public class SignController {
     }
     
     //닉네임 중복 체크
-    @PostMapping("/nicknameCheck") //중복된 닉네임이 있으면 false 반환, 없으면 true 반환
+    @GetMapping("/users/check-nickname") //중복된 닉네임이 있으면 false 반환, 없으면 true 반환
     public Map<String, String> nicknameCheck(@RequestParam String nickname) {
     	Map<String, String> response = new HashMap<>();
     	if (isInvalidName(nickname)) {

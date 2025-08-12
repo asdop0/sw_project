@@ -41,6 +41,6 @@ public class Comment {
 	private LocalDateTime writeDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="Board_id")
-	private Board board;
+	@JoinColumn(name="Post_id")
+	private Post post;
 }

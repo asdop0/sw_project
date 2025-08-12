@@ -6,27 +6,27 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.asd.service.BoardService;
 import com.asd.service.CommentService;
+import com.asd.service.PostService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/boardAdmin")
+@RequestMapping("/board/admin")
 public class AdminController {
-	private final BoardService boardService;
+	private final PostService postService;
 	private final CommentService commentService;
 	private Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	//게시글 삭제
-	@DeleteMapping("/deleteBoard")
-	public Map<String, String> deleteBoard(@RequestParam String board_id) {
-		boardService.deleteBoard(Long.parseLong(board_id));
+	@DeleteMapping("/posts/{post_id}")
+	public Map<String, String> deletePost(@PathVariable String post_id) {
+		postService.deletePost(Long.parseLong(post_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
 		logger.info("[deleteBoard] 관리자가 게시글을 삭제했습니다.");
@@ -34,8 +34,8 @@ public class AdminController {
 	}
 	
 	//댓글 삭제
-	@DeleteMapping("/deleteComment")
-	public Map<String, String> deleteComment(@RequestParam String comment_id) {
+	@DeleteMapping("/comments/{comment_id}")
+	public Map<String, String> deleteComment(@PathVariable String comment_id) {
 		commentService.deleteComment(Long.parseLong(comment_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");

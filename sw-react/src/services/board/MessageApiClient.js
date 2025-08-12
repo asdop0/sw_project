@@ -1,20 +1,18 @@
 class MessageApiClient {
     static SERVER_URL = "http://localhost:8000";
-    static API = "/message";
-    static WRITE = "/write";
+    static API = "/board/messages";
     static RECEIVED = "/received";
     static SENT = "/sent";
-    static RECEIVED_DELETE = "/received/delete";
-    static SENT_DELETE = "/sent/delete";
 
     //쪽지 작성
     static writeMessage(accessToken, title, content, receive) {
-        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.WRITE + "?title=" + title + "&content=" + content + "&receive=" + receive, {
+        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
-            }
+            },
+            body: JSON.stringify({title, content, receive})
         });
     } 
     //받은 쪽지함 조회
@@ -39,7 +37,7 @@ class MessageApiClient {
     } 
     //받은 쪽지 삭제
     static deleteReceivedMessage(accessToken, message_id) {
-        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.RECEIVED_DELETE + "?message_id=" + message_id, {
+        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.RECEIVED + "/" + message_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +47,7 @@ class MessageApiClient {
     } 
     //보낸 쪽지 삭제
     static deleteSentMessage(accessToken, message_id) {
-        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.SENT_DELETE + "?message_id=" + message_id, {
+        return fetch(MessageApiClient.SERVER_URL + MessageApiClient.API + MessageApiClient.SENT + "/" + message_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

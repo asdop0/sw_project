@@ -8,12 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asd.DTO.MessageDto;
+import com.asd.DTO.MessageWriteRequestDto;
 import com.asd.model.Message;
 import com.asd.model.User;
 import com.asd.service.MessageService;
@@ -24,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/message")
+@RequestMapping("/board/messages")
 public class MessageController {
 
     private final MessageService messageService;
@@ -32,14 +34,13 @@ public class MessageController {
     private Logger logger = LoggerFactory.getLogger(MessageController.class);
 
     //쪽지 작성
-    @PostMapping("/write")
-    public Map<String, String> writeMessage(HttpServletRequest request, @RequestParam String title, 
-    		@RequestParam String content, @RequestParam String receive) {
+    @PostMapping
+    public Map<String, String> writeMessage(HttpServletRequest request, @RequestBody MessageWriteRequestDto dto) {
     	User sender = userService.findUser(request); //보낸 유저 정보 추출
-        User receiver = userService.findByNickname(receive); //받을 유저 정보 추출
+        User receiver = userService.findByNickname(dto.getReceive()); //받을 유저 정보 추출
         Message message = new Message(); //쪽지 정보 삽입
-        message.setTitle(title);
-        message.setContent(content);
+        message.setTitle(dto.getTitle());
+        message.setContent(dto.getContent());
         message.setSender(sender);
         message.setReceiver(receiver);
         message.setDeletedByReceiver(false);
@@ -70,8 +71,8 @@ public class MessageController {
     }
 
     //받은 쪽지 삭제
-    @DeleteMapping("/received/delete")
-    public Map<String, String> deleteReceivedMessage(HttpServletRequest request, @RequestParam String message_id) {
+    @DeleteMapping("/received/{message_id}")
+    public Map<String, String> deleteReceivedMessage(HttpServletRequest request, @PathVariable String message_id) {
     	User user = userService.findUser(request); //유저 정보 추출
     	messageService.deleteMessageByReceiver(Long.parseLong(message_id), user);
     	
@@ -81,8 +82,8 @@ public class MessageController {
     }
     
     //보낸 쪽지 삭제
-    @DeleteMapping("/sent/delete")
-    public Map<String, String> deleteSentMessage(HttpServletRequest request, @RequestParam String message_id) {
+    @DeleteMapping("/sent/{message_id}")
+    public Map<String, String> deleteSentMessage(HttpServletRequest request, @PathVariable String message_id) {
     	User user = userService.findUser(request); //유저 정보 추출
     	messageService.deleteMessageBySender(Long.parseLong(message_id), user);
 

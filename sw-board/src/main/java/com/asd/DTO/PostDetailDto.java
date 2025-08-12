@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.asd.model.Board;
+import com.asd.model.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDetailDto {
+public class PostDetailDto {
 	private Long id;
 	private String title;
 	private String content;
@@ -24,18 +24,18 @@ public class BoardDetailDto {
 	private Long count;
 	private List<CommentDto> comments;
 	
-	public static BoardDetailDto toDto(Board board) {
-        List<CommentDto> commentDtos = board.getComments().stream()
+	public static PostDetailDto toDto(Post post) {
+        List<CommentDto> commentDtos = post.getComments().stream()
                 .map(CommentDto::toDto)
                 .collect(Collectors.toList());
         
-        return new BoardDetailDto(
-            board.getId(),
-            board.getTitle(),
-            board.getContent(),
-            board.getWriteDate(),
-            board.getUser().getName(),
-            board.getCount(),
+        return new PostDetailDto(
+        	post.getId(),
+        	post.getTitle(),
+        	post.getContent(),
+        	post.getWriteDate(),
+        	post.getUser().getName(),
+        	post.getCount(),
             commentDtos
         );
     }

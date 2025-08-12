@@ -1,13 +1,13 @@
 class SignApiClient {
     static SERVER_URL = "http://localhost:8000";
-    static API = "/sign-api";
+    static API = "/auth/sign";
     static IN = "/sign-in";
     static UP = "/sign-up";
     static OUT = "/sign-out";
-    static DELETE = "/delete";
+    static DELETE = "/users";
     static REFRESH = "/refresh";
-    static UID = "/uidCheck";
-    static NICKNAME = "/nicknameCheck";
+    static UID = "/users/check-id";
+    static NICKNAME = "/users/check-nickname";
 
     //로그인
     static signIn(id, password) {
@@ -33,7 +33,7 @@ class SignApiClient {
     //로그아웃
     static signOut(refreshToken) {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.OUT, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': refreshToken
@@ -44,7 +44,7 @@ class SignApiClient {
     //회원탈퇴
     static delete(refreshToken) {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.DELETE, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': refreshToken
@@ -91,14 +91,14 @@ class SignApiClient {
     //아이디 중복 체크
     static uidCheck(uid) {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.UID + "?uid=" + uid, {
-            method: 'POST'
+            method: 'GET'
         });
     }
 
     //닉네임 중복 체크
     static nicknameCheck(nickname) {
         return fetch(SignApiClient.SERVER_URL + SignApiClient.API + SignApiClient.NICKNAME + "?nickname=" + nickname, {
-            method: 'POST'
+            method: 'GET'
         });
     }
 

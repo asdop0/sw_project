@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,20 +20,20 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/auth/users")
 public class UserController {
     private final UserService userService;
     private final SignService signService;
     
 	//유저 정보 조회
-    @GetMapping("/info")
+    @GetMapping("/information")
     public UserDto getUserInfo(HttpServletRequest request) {
     	UserDto userDto = userService.getUserInfo(request);
     	return userDto;
     }
     
     //닉네임 변경
-    @PostMapping("/modify")
+    @PatchMapping("/nickname")
     public Map<String, String> modifyUserInfo(HttpServletRequest request, @RequestParam String nickname) {
     	Map<String, String> response = new HashMap<>();
     	if(!signService.nicknameCheck(nickname)) {
@@ -48,7 +48,7 @@ public class UserController {
     }
     
     //아이디 찾기
-    @GetMapping("/find")
+    @GetMapping("/id")
     public Map<String, String> findById(@RequestParam String nickname, @RequestParam String name) throws IllegalArgumentException{
     	String id = userService.findById(nickname, name);
     	Map<String, String> response = new HashMap<>();
@@ -57,7 +57,7 @@ public class UserController {
     }
     
     //비밀번호 변경
-    @PostMapping("/modify/password")
+    @PatchMapping("/password")
     public Map<String, String> modifyPassword(HttpServletRequest request, @RequestBody Map<String, String> requestData) {
     	Map<String, String> response = new HashMap<>();
     	boolean bool = userService.modifyPassword(request, requestData.get("password"), requestData.get("newPassword"));

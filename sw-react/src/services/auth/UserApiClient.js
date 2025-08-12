@@ -1,10 +1,10 @@
 class UserApiClient {   
     static SERVER_URL = "http://localhost:8000";
-    static API = "/user";
-    static INFO = "/info";
-    static MODIFY = "/modify";
-    static FIND = "/find";
-    static PASSWORD = "/modify/password";
+    static API = "/auth/users";
+    static INFO = "/information";
+    static MODIFY = "/nickname";
+    static FIND = "/id";
+    static PASSWORD = "/password";
     
     //유저 정보 조회
     static getUserInfo(accessToken) {
@@ -20,7 +20,7 @@ class UserApiClient {
     //닉네임 변경
     static modifyNickname(accessToken, nickname) {
         return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.MODIFY + "?nickname=" + nickname, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
@@ -38,7 +38,7 @@ class UserApiClient {
     //비밀번호 변경
     static modifyPassword(refreshToken, password, newPassword) {
         return fetch(UserApiClient.SERVER_URL + UserApiClient.API + UserApiClient.PASSWORD, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': refreshToken

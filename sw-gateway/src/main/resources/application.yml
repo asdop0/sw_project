@@ -21,23 +21,33 @@ spring:
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
+
         - id: board_public
           uri: http://board-container:8080/
           predicates:
-            - Path=/board/list, /board/sort, /board/view, /board/search
+            - Path=/board/posts/**
+            - Method=GET
+        - id: board_post_user
+          uri: http://board-container:8080/
+          predicates:
+            - Path=/board/posts/**
+            - Method=POST,DELETE
+          filters:
+            - JwtAuthenticationFilter
         - id: board_user
           uri: http://board-container:8080/
           predicates:
-            - Path=/board/add, /board/delete, /comment/**, /message/**
+            - Path=/board/comments/**, /board/messages/**
           filters:
             - JwtAuthenticationFilter
         - id: board_admin
           uri: http://board-container:8080/
           predicates:
-            - Path=/boardAdmin/**
+            - Path=/board/admin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
+
         - id: store_public
           uri: http://store-container:8080/
           predicates:
@@ -55,10 +65,11 @@ spring:
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
+
         - id: auth
           uri: http://auth-container:8080/
           predicates:
-          - Path=/sign-api/**, /user/**
+          - Path=/auth/**
       globalcors:
         cors-configurations:
           '[/**]':
@@ -72,6 +83,7 @@ spring:
               - "POST"
               - "DELETE"
               - "OPTIONS"
+              - "PATCH"
       default-filters:
         - name: Retry
           args:
