@@ -1,34 +1,32 @@
 class CategoryApiClient {
     static SERVER_URL = "http://localhost:8000";
-    static API = "/category";
-    static ADD = "/add";
-    static MODIFY = "/modify";
-    static DELETE = "/delete";
-    static LIST = "/list";
+    static API = "/store/category/admin";
 
     //카테고리 추가
     static addCategory(accessToken, name) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.ADD + "?name=" + name, {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
+            body: JSON.stringify({name})
         });
     } 
     //카테고리 수정
     static modifyCategory(accessToken, category_id, name) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.MODIFY + "?category_id=" + category_id + "&name=" + name, {
-            method: 'POST',
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + "/" + category_id, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'X-AUTH-TOKEN': accessToken
             },
+            body: JSON.stringify({name})
         });
     } 
     //카테고리 삭제
     static deleteCategory(accessToken, category_id) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.DELETE + "?category_id=" + category_id, {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + "/" + category_id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +36,7 @@ class CategoryApiClient {
     } 
     //카테고리 리스트 조회
     static getCategoryList(accessToken) {
-        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API + CategoryApiClient.LIST, {
+        return fetch(CategoryApiClient.SERVER_URL + CategoryApiClient.API, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

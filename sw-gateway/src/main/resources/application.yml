@@ -7,17 +7,17 @@ spring:
         - id: camping_public
           uri: http://camping-container:8080/
           predicates:
-            - Path=/camping/**
+            - Path=/campings/**
         - id: camping_user
           uri: http://camping-container:8080/
           predicates:
-            - Path=/campingBookmark/**, /campingReview/**
+            - Path=/camping/bookmarks/**, /camping/reviews/**
           filters:
             - JwtAuthenticationFilter
         - id: camping_admin
           uri: http://camping-container:8080/
           predicates:
-            - Path=/campingAdmin/**
+            - Path=/camping/admin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
@@ -51,17 +51,17 @@ spring:
         - id: store_public
           uri: http://store-container:8080/
           predicates:
-            - Path=/product/**
+            - Path=/store/products/**
         - id: store_user
           uri: http://store-container:8080/
           predicates:
-            - Path=/productBookmark/**, /productReview/**, /address/**, /cart/**, /order/**
+            - Path=/store/bookmark/**, /store/reviews/**, /store/address/**, /store/carts/**, /store/orders/**
           filters:
             - JwtAuthenticationFilter
         - id: store_admin
           uri: http://store-container:8080/
           predicates:
-            - Path=/category/**, /productAdmin/**
+            - Path=/store/category/admin/**, /store/admin/**
           filters:
             - JwtAuthenticationFilter
             - JwtAuthorizationFilter
@@ -88,7 +88,7 @@ spring:
         - name: Retry
           args:
             retries: 3
-            methods: GET,POST, DELETE
+            methods: GET,POST, DELETE, PATCH
 
 jwt:
   secret: 5asf46g8asg56hesh8j65j4g23agw874rq564asg56h48ry47sd65g4ag8q

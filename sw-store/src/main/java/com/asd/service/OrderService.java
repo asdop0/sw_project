@@ -98,7 +98,7 @@ public class OrderService {
 	}
 	
 	//해당 유저의 취소 내역 조회
-	public List<OrderDto> cencelList(User user) {
+	public List<OrderDto> cancelList(User user) {
 		List<OrderTable> orders = orderRepository.findAllByUserAndRemoveFalseAndStatus(user, OrderStatus.CANCELLED);
 		List<OrderDto> orderDtos = new ArrayList<>();
 		for(OrderTable order : orders) {
@@ -108,7 +108,7 @@ public class OrderService {
 	}
 	
 	//지정된 취소 상세정보를 출력
-	public CanceledOrderDto viewCencelDetail(Long id) {
+	public CanceledOrderDto viewCancelDetail(Long id) {
 		OrderTable order = orderRepository.findById(id).orElseThrow(() -> 
     		new IllegalArgumentException("[viewCencelDetail] 주문을 찾을 수 없습니다.")
 		);

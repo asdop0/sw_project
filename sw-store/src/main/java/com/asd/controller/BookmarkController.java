@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/productBookmark")
+@RequestMapping("/store/bookmarks")
 public class BookmarkController {
 	private final UserService userService;
 	private final ProductService productService;
@@ -34,7 +35,7 @@ public class BookmarkController {
 	private Logger logger = LoggerFactory.getLogger(BookmarkController.class);
 	
 	//즐겨찾기 리스트 조회
-	@GetMapping("/list")
+	@GetMapping
 	public List<ProductListDto> bookmarkList(HttpServletRequest request) {
 		User user = userService.findUser(request); //유저 정보 추출
 		logger.info("[getBookmarkList] 즐겨찾기 기능을 수행합니다.");
@@ -42,10 +43,10 @@ public class BookmarkController {
 	}
 	
 	//즐겨찾기 추가
-	@PostMapping("/add")
-	public Map<String, String> addBookmark(HttpServletRequest request, @RequestParam String product_id) {
+	@PostMapping("/{product_id}")
+	public Map<String, String> addBookmark(HttpServletRequest request, @PathVariable Long product_id) {
 		User user = userService.findUser(request); //유저 정보 추출
-		Product product = productService.getProduct(Long.parseLong(product_id)); //해당 상품 추출
+		Product product = productService.getProduct(product_id); //해당 상품 추출
 		
 		if(bookmarkService.getBookmark(user, product).isPresent()) {
 			Map<String, String> response = new HashMap<>();
@@ -57,17 +58,17 @@ public class BookmarkController {
 		
 		product.addProductBookmark(productBookmark);
 		
-		productService.addProduct(product); //cascade를 통한 즐겨찾기 저장
+		productService.addProduct(product); 
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
     	return response;
 	}
 	
 	//즐겨찾기 삭제
-	@DeleteMapping("/delete")
-	public Map<String, String> deleteBookmark(HttpServletRequest request, @RequestParam String product_id) {
+	@DeleteMapping("/{product_id}")
+	public Map<String, String> deleteBookmark(HttpServletRequest request, @PathVariable Long product_id) {
 		User user = userService.findUser(request); //유저 정보 추출
-		bookmarkService.deleteBookmark(user, productService.getProduct(Long.parseLong(product_id)));
+		bookmarkService.deleteBookmark(user, productService.getProduct(product_id));
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
     	return response;

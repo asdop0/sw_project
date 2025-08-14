@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/productAdmin")
+@RequestMapping("/store/admin")
 public class AdminController {
 	private final ProductService productService;
 	private final ReviewService reviewService;
@@ -38,7 +40,7 @@ public class AdminController {
 	private Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	//상품 등록
-	@PostMapping("/add")
+	@PostMapping
 	public Map<String, String> addProduct(@RequestBody ProductRequestDto productRequestDto) {
 		Product product = new Product(); //상품 정보 삽입
 		product.setName(productRequestDto.getName());
@@ -61,10 +63,10 @@ public class AdminController {
 	}
 	
 	//상품 정보 수정
-	@PostMapping("/modify")
-	public Map<String, String> modifyProduct(@RequestBody ProductRequestDto productRequestDto) {
+	@PatchMapping("/{product_id}")
+	public Map<String, String> modifyProduct(@PathVariable Long product_id, @RequestBody ProductRequestDto productRequestDto) {
 		Product product = new Product(); //상품 수정 정보 삽입
-		product.setId(Long.parseLong(productRequestDto.getId()));
+		product.setId(product_id);
 		product.setName(productRequestDto.getName());
 		product.setDescription(productRequestDto.getDescription());
 		try {
@@ -82,9 +84,9 @@ public class AdminController {
 	}
 	
 	//상품 삭제
-	@DeleteMapping("/delete")
-	public Map<String, String> deleteProduct(@RequestParam String product_id) {
-		productService.deleteProduct(Long.parseLong(product_id));
+	@DeleteMapping("/{product_id}")
+	public Map<String, String> deleteProduct(@PathVariable Long product_id) {
+		productService.deleteProduct(product_id);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
 		logger.info("[deleteProduct] 관리자가 {} 상품을 삭제했습니다.", product_id);
@@ -92,37 +94,33 @@ public class AdminController {
 	}
 	
 	//후기 삭제
-	@DeleteMapping("/delete/review")
-	public Map<String, String> deleteReview(@RequestParam String review_id) {
-		reviewService.deleteReview(Long.parseLong(review_id));
+	@DeleteMapping("/reviews/{review_id}")
+	public Map<String, String> deleteReview(@PathVariable Long review_id) {
+		reviewService.deleteReview(review_id);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
 		logger.info("[deleteReview] 관리자가 {} 후기를 삭제했습니다.", review_id);
     	return response;
 	}
 	
-	//전체 주문 내역 출력
-	@GetMapping("/orderList")
-	public List<UserOrderDto> getFullOrderList() {
-		return orderService.fullOrderList();
-	}
-	
-	//날짜별 주문 내역 출력
-	@GetMapping("/ordersByDate")
-	public List<UserOrderDto> getOrdersByDate(@RequestParam String dateString) {
-		return orderService.ordersByDate(dateString);
+	@GetMapping("/orders")
+	public List<UserOrderDto> getOrders(@RequestParam(required = false) String date) {
+	    if (date != null) {
+	        return orderService.ordersByDate(date);
+	    }
+	    return orderService.fullOrderList();
 	}
 	
 	//결제 대기 목록 출력
-	@GetMapping("/pendingList")
+	@GetMapping("/orders/pending")
 	public List<OrderDto> getPendingList() {
 		return orderService.PendingList();
 	}
 	
 	//결제 완료 
-	@PostMapping("/approval")
-	public Map<String, String> approvalOrder(@RequestParam String order_id) {
-		orderService.approvalOrder(Long.parseLong(order_id));
+	@PatchMapping("/orders/{order_id}")
+	public Map<String, String> approvalOrder(@PathVariable Long order_id) {
+		orderService.approvalOrder(order_id);
 		Map<String, String> response = new HashMap<>();
 		response.put("check", "true");
 		logger.info("[approvalOrder] 관리자가 {} 주문을 승인했습니다.", order_id);
